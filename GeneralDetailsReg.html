@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/GeneralDetailsReg.css" />
+  <title>Hostel Management System</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Hostel Management System</h1>
+    <p>Enter your details to apply for hostel</p>
+    <div class="step-container">
+        <div class="step">
+          <div class="step-circle">1</div>
+          <div class="step-label">General Details</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Academic Details</div>
+
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Payment Details</div>
+        </div>
+      </div>
+    <form>
+      <div>
+        <div class="form-group">
+          <label for="prn">PRN*</label>
+          <input type="text" id="prn" name="prn">
+        </div>
+        <div class="form-group">
+          <label for="fullName">Full Name*</label>
+          <input type="text" id="fullName" name="fullName">
+        </div>
+        <div class="form-group">
+          <label for="mothersName">Mother's Name</label>
+          <input type="text" id="mothersName" name="mothersName">
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth &amp; Place</label>
+          <input type="text" id="dob" name="dob" placeholder="Date of Birth">
+        </div>
+        <div class="form-group">
+          <label for="permanentAddress1">Permanent Address</label>
+          <input type="text" id="permanentAddress1" name="permanentAddress1">
+        </div>
+        <div class="form-group">
+          <label for="city1">City:</label>
+          <input type="text" id="city1" name="city1">
+          <label for="state1">State:</label>
+          <input type="text" id="state1" name="state1">
+        </div>
+        <div class="form-group">
+          <label for="pincode1">Pincode:</label>
+          <input type="text" id="pincode1" name="pincode1">
+          <label for="contactNo1">Contact No:</label>
+          <input type="tel" id="contactNo1" name="contactNo1">
+        </div>
+        <div class="form-group">
+          <label for="emailID">Email ID</label>
+          <input type="email" id="emailID" name="emailID">
+        </div>
+      </div>
+      <div>
+        
+        <div class="form-group">
+          <label for="permanentAddress2">Permanent Address</label>
+          <input type="text" id="permanentAddress2" name="permanentAddress2">
+        </div>
+        <div class="form-group">
+          <label for="city2">City:</label>
+          <input type="text" id="city2" name="city2">
+          <label for="state2">State:</label>
+          <input type="text" id="state2" name="state2">
+        </div>
+        <div class="form-group">
+          <label for="pincode2">Pincode:</label>
+          <input type="text" id="pincode2" name="pincode2">
+          <label for="contactNo2">Contact No:</label>
+          <input type="tel" id="contactNo2" name="contactNo2">
+        </div>
+        <div class="form-group">
+          <label for="fatherMobile">Parent's Mobile No.</label>
+          <input type="tel" id="fatherMobile" name="fatherMobile">
+          <label for="motherMobile">Mother</label>
+          <input type="tel" id="motherMobile" name="motherMobile">
+        </div>
+        <div class="form-group">
+          <label for="category">Category <span style="font-size: 10px;">(attach certificate if applicable)</span></label>
+          <select id="category" name="category">
+            <option value="">Select Category</option>
+            <!-- Add options here -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="">Select Gender</option>
+            <!-- Add options here -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bloodGroup">Blood Group</label>
+          <input type="text" id="bloodGroup" name="bloodGroup">
+        </div>
+        <div class="form-group">
+          <label for="nationality">Nationality</label>
+          <input type="text" id="nationality" name="nationality">
+        </div>
+        <div class="form-group">
+          <label for="religion">Religion</label>
+          <input type="text" id="religion" name="religion">
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label for="profilePhoto">Profile Photo</label>
+        <input type="file" id="profilePhoto" name="profilePhoto">
+      </div>
+      <div class="form-group">
+        <label for="casteCertificate">Caste Certificate (if applicable)</label>
+        <input type="file" id="casteCertificate" name="casteCertificate">
+      </div>
+      <div class="button-group">
+        <button type="button">Back</button>
+        <a href="AcadmicDetails.html"><button type="submit">Proceed</button></a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
