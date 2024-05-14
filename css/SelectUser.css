@@ -1,0 +1,74 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.select-user-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #ffe6e6;
+}
+
+.centraldiv {
+    position: relative;
+    width: 70vw; /* Adjusted as specified */
+    height: 70vh; /* Adjusted as specified */
+    background: linear-gradient(109.89deg, rgba(255, 255, 255, 0.85), #fff 47.5%, rgba(255, 255, 255, 0.75));
+    border-radius: 16px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    display: block;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.b1,
+.b2 {
+    position: absolute;
+    width: 15%; /* Relative to centraldiv's width */
+    aspect-ratio: 1; /* Keep a square shape */
+    border-radius: 10px;
+    transform: translate(-50%, -50%); /* Correctly center blocks at the reference points */
+    background-color: darkslateblue;
+    z-index: 0;
+}
+
+.b1 {
+    top: 0; /* Center of b1 aligned with the top-left corner of centraldiv */
+    left: 0;
+    background: linear-gradient(to top left, rgba(226, 219, 228, 0), rgba(95, 24, 149, 0.5)); /* Increasing transparency from top left to bottom right */
+}
+
+.b2 {
+    top: 100%; /* Center of b2 aligned with the bottom-right corner of centraldiv */
+    left: 100%;
+ /* Increasing transparency from top right to bottom left */
+    background: linear-gradient(to bottom right, rgba(226, 219, 228, 0), rgba(95, 24, 149, 0.5));
+}
+
+/* .centraldiv .container .logins{ */
+        /* padding-top: 20px; */
+/* } */
+
+/* Yaha pr frame ka code khatam hota hai iske niche ka centradiv ke andar ka hai usse copy mat karna Samjhe!!!! */
+
+
+.centraldiv .container .row .col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dotlottie-player {
+    width: 80%; /* Adjust the width as per your preference */
+    height: auto; /* Let the height adjust according to the aspect ratio */
+    border: 2px solid black; /* Black colored outline */
+    border-radius: 20px; /* Border radius of 20 */
+    margin: 10px; /* Adjust spacing between the elements */
+}
