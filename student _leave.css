@@ -1,3 +1,105 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #6a4cf8;
+    color: #fff;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+
+.sidebar h1 {
+    margin-bottom: 20px;
+}
+
+.sidebar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.sidebar nav a.active {
+    background-color: #4c35b5;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.date-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-input {
+    width: 48%;
+}
+
+button[type="submit"] {
+    background-color: #6a4cf8;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.date-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-input {
+    width: 48%;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -585,6 +687,3 @@ a.article:hover {
     border-radius: 10px;
 
 }
-
-
-
