@@ -61,7 +61,7 @@ body {
 
 .form-group input,
 .form-group textarea {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -97,7 +97,7 @@ button[type="submit"] {
 }
 
 .date-input {
-    width: 48%;
+    width: 30%;
 }
 
 body {
