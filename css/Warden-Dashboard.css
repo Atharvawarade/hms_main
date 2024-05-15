@@ -88,8 +88,9 @@ body {
     position: relative;
 }
 
-#sidebar .sidebar-header .header-title {
+#sidebar .sidebar-header {
     text-align: center;
+
 }
 
 #sidebar .sidebar-header .profile-photo {
@@ -278,6 +279,23 @@ a.article:hover {
 
 }
 
+.box {
+    background: #FFFFFF;
+    box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16);
+    border-radius: 10px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-image {
+    max-width: 100%;
+    max-height: 80%;
+    display: block;
+    margin: auto;
+}
+
 
 
 
@@ -303,4 +321,51 @@ span {
     transition: all 0.3s;
 }
 
+.below-navbar{
+    height: 75%;
+}
 
+.below-navbar-row{
+    height: 100%;
+}
+
+.below-navbar-row .left-column{
+    height:100; 
+    width: 58%;  
+    padding: 1%; 
+    margin-right: 2%;
+}
+
+.below-navbar-row .left-column p{
+    font-size: 2vw;
+}
+
+
+.dashboard-row{
+    margin-right: 0; 
+    margin-left: 0; 
+    display: flex; 
+    justify-content: space-between;
+}
+
+.below-navbar-row .right-column{
+    height: 100; 
+    width: 40%; 
+    background: rgba(169, 128, 232, 0.16); 
+    border-radius: 20px;
+    padding: 1%; 
+ }
+
+.below-navbar-row .right-column .heading{
+    display: flex;
+
+}
+
+.below-navbar-row .right-column .heading p{
+    font-size: 2vw;
+ }
+
+ .below-navbar-row .right-column .heading img{
+    height: 100%;
+    vertical-align: middle;
+ }
