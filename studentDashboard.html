@@ -19,18 +19,18 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h5 style="text-align: center;">Hostel Management System</h5>
-                    <div class="profile-photo" id="profilePhoto">
-                        <img src="/assets/Anu.jpg" alt="Profile Photo" id="photoImg">
-                        <div class="photo-actions" id="photoActions">
-                            <span id="viewBtn">View</span>
-                            <span id="editBtn">Edit</span>
-                            <span id="removeBtn">Remove</span>
-                        </div>
+                    
+                </div>
+                <div class="profile-photo" id="profilePhoto">
+                <img src="/assets/Anu.jpg" alt="Profile Photo" id="photoImg">
+                    <div class="photo-actions" id="photoActions">
+                        <span id="viewBtn">View</span>
+                        <span id="editBtn">Edit</span>
+                        <span id="removeBtn">Remove</span>
                     </div>
                     <input type="file" accept="image/*" id="fileInput" style="display: none;">
-
                 </div>
-
+                
                 <ul class="list-unstyled components">
                     <li>
                         <a href="#">
@@ -61,78 +61,43 @@
 
             <div id="content">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
-                            <span>Toggle Sidebar</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
-                            data-toggle="collapse" data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <div class="new-container">
+               
+                <nav class="top-container">
                      <div class="left-column">
-                        
-                            <br>
                             <div class="text-container">
                                 <div class="left-column" id="currentDate">
-                                   
-                                </div>   
+                                </div> 
                             </div>
                             <div class="text-container">
-                              
                                 <div id="welcomeMessage"></div>   
-                            </div>
-                             <div class="text-container">
-                                    <p>Always stay updated in your dashboard</p>
+                            
+                                <p>Always stay updated in your dashboard</p>
                             </div>
                         </div>
                         <div class="right-column">
                             <div class="image-container">
-                                <img src="assets/Group 80 (2).png" alt="Your Image">
+                                <img src="assets/Group 80 (2).png" alt="Student">
                             </div>
                         </div>
                         
-                    </div>
-                <br>
-                <div>
+                    </nav>
+                <div class="bottom-container">
                     <div class="column1">
                        
-                        <div class="row"><div class="icon-box col-md-4">
+                        <div class="row" style="justify-content: space-between;">
+                            <div class="icon-box col-md-3">
                           <img src="assets/leave.png" alt="Your Image">
                           <span>Apply for leave</span>
                         </div>
-                        <div class="icon-box col-md-4">
+                        <div class="icon-box col-md-3">
                           <img src="assets/left.png" alt="Your Image">
                           <span>Apply for room left</span>
                         </div>
-                        <div class="icon-box col-md-4">
+                        <div class="icon-box col-md-3">
                           <img src="assets/leave.png" alt="Your Image">
                           <span>Apply for room change</span>
                         </div>
-                      <div class="icon-box col-md-4">
+                      <div class="icon-box col-md-3">
                           <img src="assets/graviance.png" alt="Your Image">
                         <span>Raise Grievances</span>
                       </div></div>
@@ -147,11 +112,11 @@
                           <span>Total Fees</span>
                           <p>20000</p>
                         </div>       
-                        <br>
+                        
                         <div class="fee-box">
                           <span>Paid Fees</span>
                           <p>10000</p>
-                          <br>
+                        
                         </div>
                         <div class="fee-box">
                           <span>Balance Fees</span>
