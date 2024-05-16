@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="../css/Warden-Dashboard.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-  </head>
 
-  <body>
-    <div class="Student_Dashboard">
-      <div class="centraldiv">
-        <nav id="sidebar">
-          <div class="sidebar-header">
-            <h5 class="header-title">Hostel Management System</h5>
-            <!-- <div class="profile-photo" id="profilePhoto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="../css/Warden-Dashboard.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="Student_Dashboard">
+    <div class="centraldiv">
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <p class="header-title">Hostel Management System</p>
+          <!-- <div class="profile-photo" id="profilePhoto">
                         <img src="/assets/Anu.jpg" alt="Profile Photo" id="photoImg">
                         <div class="photo-actions" id="photoActions">
                             <span id="viewBtn">View</span>
@@ -28,198 +25,141 @@
                         </div>
                     </div>
                     <input type="file" accept="image/*" id="fileInput" style="display: none;"> -->
-          </div>
+        </div>
 
-          <ul class="list-unstyled components">
-            <li>
-              <a href="#">
-                <i class="fas fa-briefcase"></i>
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-image"></i>
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-question"></i>
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-paper-plane"></i>
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <ul class="list-unstyled components">
+          <li>
+            <a href="#">
+              <i class="fas fa-briefcase"></i>
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-image"></i>
+              Portfolio
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-question"></i>
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-paper-plane"></i>
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <div id="content">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid" style="display: flex">
-              <button
-                type="button"
-                id="sidebarCollapse"
-                class="btn btn-info"
-                style="
+      <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid" style="display: flex">
+            <button type="button" id="sidebarCollapse" class="btn btn-info" style="
                   background-color: inherit !important;
                   border-color: #925fe2 !important;
-                "
-              >
-                <i class="fas fa-align-left"></i>
-                <img src="../assets/Menu.png" alt="Toggle Sidebar" />
-              </button>
-              <button
-                class="btn btn-dark d-inline-block d-lg-none ml-auto"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <i class="fas fa-align-justify"></i>
-              </button>
+                ">
+              <i class="fas fa-align-left"></i>
+              <img src="../assets/Menu.png" alt="Toggle Sidebar" />
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <i class="fas fa-align-justify"></i>
+            </button>
 
-<<<<<<< HEAD
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="#">Total Students</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Hostelers</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">On Leave</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Removed</a>
-                  </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Total Students</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Hostelers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">On Leave</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Removed</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+
+        
+        <div class="container-fluid below-navbar">
+          <div class="row below-navbar-row">
+
+
+            <div class="col-md-8 col-sm-12 left-column">
+              <p>Dashboard</p>
+              <div class="row dashboard-row">
+                <div class="col-md-3 col-sm-6 box align-items-center">
+                  <img src="../assets/checkRooms.png" alt="checkRooms" class="centered-image">
+                </div>
+                <div class="col-md-3 col-sm-6 box align-items-center">
+                  <img src="../assets/LeaveRequests.png" alt="checkRooms" class="centered-image">
+                </div>
+                <div class="col-md-3 col-sm-6 box align-items-center">
+                  <img src="../assets/roomleftRequests.png" alt="checkRooms" class="centered-image">
+                </div>
+              </div>
+
+              <br>
+
+              <div class="row dashboard-row">
+                <div class="col-md-3 col-sm-12 box align-items-center">
+                  <img src="../assets/Complaints.png" alt="checkRooms" class="centered-image">
+                </div>
+                <div class="col-md-3 col-sm-12 box align-items-center">
+                  <img src="../assets/attendance.png" alt="checkRooms" class="centered-image">
+                </div>
+                <div class="col-md-3 col-sm-12 box align-items-center">
+                  <img src="../assets/attendance.png" alt="checkRooms" class="centered-image">
+                </div>
               </div>
             </div>
-          </nav>
-          <div class="container-fluid">
-            <div class="row">
-              <div
-                class="col-md-8 col-sm-12"
-                style="
-                  height: fit-content;
-                  width: 58%;
-                  border: 2px solid red;
-                  padding: 1%;
-                  margin-right: 2%;
-                "
-              >
-                <p style="font-size: 2vw">Dashboard</p>
-                <div class="row justify-content-between" style="margin: 0px">
-                  <div
-                    class="col-md-3 col-sm-12"
-                    style="border: 1px solid black"
-                  >
-                    Content for the first column
-                  </div>
-                  <div
-                    class="col-md-3 col-sm-12"
-                    style="border: 1px solid black"
-                  >
-                    <!-- Content for the second column -->
-                  </div>
-                  <div
-                    class="col-md-3 col-sm-12"
-                    style="border: 1px solid black"
-                  >
-                    <!-- Content for the third column -->
-                  </div>
-=======
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav ml-auto ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Total Students</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Hostelers</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">On Leave</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Removed</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12"
-                            style="height:fit-content; width: 58%; border: 2px solid red; padding: 1%; margin-right: 2%;">
-                            <p style="font-size: 2vw;">Dashboard</p>
-                            <div class="row" style="margin-right: 0; margin-left: 0; display: flex; justify-content: space-evenly;">
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    Content for the first column
-                                </div>
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    <!-- Content for the second column -->
-                                </div>
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    <!-- Content for the third column -->
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row" style="margin-right: 0; margin-left: 0; ">
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    Content for the first column
-                                </div>
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    <!-- Content for the second column -->
-                                </div>
-                                <div class="col-md-4 col-sm-12" style="border: 1px solid black;">
-                                    <!-- Content for the third column -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12" style="height: fit-content; width: 40%; border: 2px solid red;">
-                            <!-- Content for the right division -->
-                        </div>
-                    </div>
->>>>>>> 8473ce7dc696046f5158cc6b73cf5896df7a6610
-                </div>
 
 
+            <div class="col-md-4 col-sm-12 right-column">
+              <div class="heading">
+                <p>Newly Admitted Students</p>
+                <img src="../assets/Group 31.png" alt="proceed">
+              </div>
+              
             </div>
+          </div>
         </div>
-    </div>
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Popper.JS -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-      integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Bootstrap JS -->
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-      crossorigin="anonymous"
-    ></script>
 
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("#sidebarCollapse").on("click", function () {
-          $("#sidebar").toggleClass("active");
-        });
+
+      </div>
+    </div>
+  </div>
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+    integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#sidebarCollapse").on("click", function () {
+        $("#sidebar").toggleClass("active");
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
