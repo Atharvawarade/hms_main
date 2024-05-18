@@ -29,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             // $_SESSION['email'] = $entered_email;
             $_SESSION['EN'] = $entered_password;
-            header("Location:../Student_Dashboard.html");
+            header("Location:../Stakeholders/Warden/Warden-Dashboard.html");
             // header("Location: ../Student_Dash/Dashboard.php");
             exit;
         } else {
             echo "Incorrect password!";
         }
     } else {
-        header("Location: ../warden-login.html");
+        header("Location: ../Stakeholders/Warden/Warden-login.html");
     }
 
     $conn->close();

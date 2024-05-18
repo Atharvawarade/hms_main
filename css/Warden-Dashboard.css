@@ -57,6 +57,28 @@ body {
     display: block;
 }
 
+.profile-photo {
+    max-width: 250px;
+    width: 100%;
+    margin: auto;
+    /* border-radius: 50%; */
+  
+  }
+  
+  .profile-photo img {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    align-items: baseline;
+    border-radius: 50%;
+  }
+  
+  .photo-actions {
+    width: fit-content;
+    margin: auto;
+  }
+  
+
 #sidebar ul li a {
     text-align: left;
     text-decoration: none;
