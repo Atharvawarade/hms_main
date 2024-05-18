@@ -328,10 +328,12 @@ span {
 
 .below-navbar{
     height: 75%;
+    overflow-y: auto;
 }
 
 .below-navbar-row{
     height: 100%;
+    
 }
 
 .below-navbar-row .left-column{
@@ -349,6 +351,17 @@ span {
         padding: 1%; 
         margin-right: 2%;
     }
+
+    .below-navbar-row .right-column{
+        height: 100%; 
+        width: 100%; 
+        background: rgba(169, 128, 232, 0.16); 
+        border-radius: 20px;
+        padding: 1%; 
+        position: relative;
+        display: flex;
+        flex-direction: column;
+     }
 }
 
 
@@ -367,11 +380,14 @@ span {
 
 
 .below-navbar-row .right-column{
-    height: 100; 
+    height: 100%; 
     width: 40%; 
     background: rgba(169, 128, 232, 0.16); 
     border-radius: 20px;
     padding: 1%; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
  }
 
 .below-navbar-row .right-column .heading{
@@ -384,6 +400,47 @@ span {
  }
 
  .below-navbar-row .right-column .heading img{
-    height: 100%;
+    height: 50%;
     vertical-align: middle;
+    align-self:baseline;
  }
+
+ .student-list-container {
+    height: calc(100% - 230px); /* Adjust as needed based on your design */
+    overflow-y: auto;
+    padding: 10px;
+    height: 75%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.student{
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    /* height: 20%; */
+    border : 2px solid black;
+    padding: 10px;
+}
+
+/* Hide the default scrollbar */
+.student-list-container::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+
+/* Track styles */
+.student-list-container::-webkit-scrollbar-track {
+    background: #ccbed5; /* Color of the scrollbar track */
+    border-radius: 5px; 
+}
+
+/* Handle styles */
+.student-list-container::-webkit-scrollbar-thumb {
+    background: #aa6ed5; /* Color of the scrollbar handle */
+    border-radius: 5px; /* Rounded corners of the scrollbar handle */
+}
+
+/* Handle on hover */
+.student-list-container::-webkit-scrollbar-thumb:hover {
+    background: #574fe6; /* Color of the scrollbar handle on hover */
+}
