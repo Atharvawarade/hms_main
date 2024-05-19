@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2024 at 06:20 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 19, 2024 at 02:21 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -259,7 +259,8 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`room_id`, `hostel_id`, `room_number`, `capacity`, `room_type`) VALUES
-(1, 1, 1, 2, '');
+(1, 1, 1, 2, ''),
+(2, 1, 2, 2, '');
 
 -- --------------------------------------------------------
 
@@ -269,18 +270,26 @@ INSERT INTO `room` (`room_id`, `hostel_id`, `room_number`, `capacity`, `room_typ
 
 CREATE TABLE `student` (
   `EN` varchar(11) NOT NULL,
-  `YOA` date NOT NULL,
-  `branch` varchar(45) NOT NULL,
-  `FName` varchar(25) NOT NULL,
-  `MName` varchar(25) DEFAULT NULL,
-  `LName` varchar(15) NOT NULL,
+  `Fullname` varchar(200) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `DOB` date DEFAULT NULL,
+  `gender` enum('Male','Female') NOT NULL,
   `student_phone` decimal(10,0) NOT NULL,
-  `Address` varchar(255) DEFAULT NULL,
-  `state` varchar(20) DEFAULT NULL,
-  `room_id` int(10) UNSIGNED NOT NULL,
+  `Add_line_1` varchar(2000) NOT NULL,
+  `Add_line_2` varchar(2000) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pincode` int(10) NOT NULL,
+  `Father_no` int(12) NOT NULL,
+  `Mother_no` int(12) NOT NULL,
+  `Gaurdian_no` int(12) NOT NULL,
+  `Blood_group` varchar(3) NOT NULL,
+  `photo` varchar(100) NOT NULL,
   `YOS` decimal(1,0) DEFAULT NULL,
+  `branch` varchar(45) NOT NULL,
+  `section` char(1) NOT NULL,
   `Batch` varchar(9) DEFAULT NULL,
+  `room_id` int(10) UNSIGNED NOT NULL,
   `dateOfStatusChange` date DEFAULT NULL,
   `status` enum('unpaid','paid','paid and approved') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -289,8 +298,9 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`EN`, `YOA`, `branch`, `FName`, `MName`, `LName`, `email`, `student_phone`, `Address`, `state`, `room_id`, `YOS`, `Batch`, `dateOfStatusChange`, `status`) VALUES
-('EN123456789', '2021-12-21', 'Computer Engineering', 'Atharva ', 'Ramesh', 'Warade', 'co.2021.arwarade@bitwardha.ac.in', 7410767476, 'Meera Nagar', 'Maharashtra', 1, 9, '2021', '2024-05-01', 'paid and approved');
+INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `room_id`, `dateOfStatusChange`, `status`) VALUES
+('EN123456789', '', 'co.2021.arwarade@bitwardha.ac.in', NULL, 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', '2021', 1, '2024-05-01', 'paid and approved'),
+('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, 2, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -347,8 +357,7 @@ ALTER TABLE `room`
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`EN`),
-  ADD KEY `fk_room_student` (`room_id`);
+  ADD PRIMARY KEY (`EN`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -376,7 +385,7 @@ ALTER TABLE `hostels`
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `room_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `room_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
