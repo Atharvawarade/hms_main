@@ -62,22 +62,22 @@ body {
     width: 100%;
     margin: auto;
     /* border-radius: 50%; */
-  
-  }
-  
-  .profile-photo img {
+
+}
+
+.profile-photo img {
     display: flex;
     width: 80%;
     margin: auto;
     align-items: baseline;
     border-radius: 50%;
-  }
-  
-  .photo-actions {
+}
+
+.photo-actions {
     width: fit-content;
     margin: auto;
-  }
-  
+}
+
 
 #sidebar ul li a {
     text-align: left;
@@ -120,21 +120,21 @@ body {
     width: 100%;
     margin: auto;
     /* border-radius: 50%; */
-  
-  }
-  
-  .profile-photo img {
+
+}
+
+.profile-photo img {
     display: flex;
     width: 80%;
     margin: auto;
     align-items: baseline;
     border-radius: 50%;
-  }
-  
-  .photo-actions {
+}
+
+.photo-actions {
     width: fit-content;
     margin: auto;
-  }
+}
 
 #sidebar .sidebar-header strong {
     display: none;
@@ -219,7 +219,8 @@ a.article:hover {
     border: none;
     border-radius: 10px;
     margin-bottom: 40px;
-    box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16); /* X=4, Y=4, blur=10, spread=5, color=#A980E8 16% */
+    box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16);
+    /* X=4, Y=4, blur=10, spread=5, color=#A980E8 16% */
 }
 
 
@@ -235,30 +236,35 @@ a.article:hover {
 } */
 
 .navbar .container-fluid rectangle {
-    width: 20px; /* Adjust width as needed */
-    height: 20px; /* Adjust height as needed */
-    background-color: #925FE2; /* Rectangle color */
-    margin-right: 5px; /* Adjust spacing between rectangles */
+    width: 20px;
+    /* Adjust width as needed */
+    height: 20px;
+    /* Adjust height as needed */
+    background-color: #925FE2;
+    /* Rectangle color */
+    margin-right: 5px;
+    /* Adjust spacing between rectangles */
     border-color: black;
 }
 
 .rectangle:last-child {
-    margin-right: 0; /* Remove margin for the last rectangle */
+    margin-right: 0;
+    /* Remove margin for the last rectangle */
 }
 
 
-.navbar .container-fluid .date{
+.navbar .container-fluid .date {
     margin-top: 2%;
     font-size: 1lvw;
     padding-left: 5%;
 }
 
-.navbar .container-fluid .welcome{
+.navbar .container-fluid .welcome {
     font-size: 3lvw;
     padding-left: 5%;
 }
 
-.navbar .container-fluid .desc{
+.navbar .container-fluid .desc {
     font-size: 1lvw;
     margin-top: 0.5%;
     padding-left: 5%;
@@ -322,91 +328,92 @@ span {
 #content {
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
+    height: 100%;
     transition: all 0.3s;
 }
 
-.below-navbar{
+.below-navbar {
     height: 75%;
     overflow-y: auto;
 }
 
-.below-navbar-row{
+.below-navbar-row {
     height: 100%;
-    
+
 }
 
-.below-navbar-row .left-column{
-    height:100; 
-    width: 58%;  
-    padding: 1%; 
+.below-navbar-row .left-column {
+    height: 100;
+    width: 58%;
+    padding: 1%;
     margin-right: 2%;
 }
 
 
 @media (max-width: 576px) {
     .below-navbar-row .left-column {
-        width: 100%; 
+        width: 100%;
 
-        padding: 1%; 
+        padding: 1%;
         margin-right: 2%;
     }
 
-    .below-navbar-row .right-column{
-        height: 100%; 
-        width: 100%; 
-        background: rgba(169, 128, 232, 0.16); 
+    .below-navbar-row .right-column {
+        height: 100%;
+        width: 100%;
+        background: rgba(169, 128, 232, 0.16);
         border-radius: 20px;
-        padding: 1%; 
+        padding: 1%;
         position: relative;
         display: flex;
         flex-direction: column;
-     }
+    }
 }
 
 
-.below-navbar-row .left-column p{
+.below-navbar-row .left-column p {
     font-size: 2vw;
 }
 
 
-.dashboard-row{
-    margin-right: 0; 
-    margin-left: 0; 
-    display: flex; 
+.dashboard-row {
+    margin-right: 0;
+    margin-left: 0;
+    display: flex;
     justify-content: space-between;
 }
 
 
 
-.below-navbar-row .right-column{
-    height: 100%; 
-    width: 40%; 
-    background: rgba(169, 128, 232, 0.16); 
+.below-navbar-row .right-column {
+    height: 100%;
+    width: 40%;
+    background: rgba(169, 128, 232, 0.16);
     border-radius: 20px;
-    padding: 1%; 
+    padding: 1%;
     position: relative;
     display: flex;
     flex-direction: column;
- }
+}
 
-.below-navbar-row .right-column .heading{
+.below-navbar-row .right-column .heading {
     display: flex;
 
 }
 
-.below-navbar-row .right-column .heading p{
+.below-navbar-row .right-column .heading p {
     font-size: 2vw;
- }
+}
 
- .below-navbar-row .right-column .heading img{
+.below-navbar-row .right-column .heading img {
     height: 50%;
     vertical-align: middle;
-    align-self:baseline;
- }
+    align-self: baseline;
+}
 
- .student-list-container {
-    height: calc(100% - 230px); /* Adjust as needed based on your design */
+.student-list-container {
+    height: calc(100% - 230px);
+    /* Adjust as needed based on your design */
     overflow-y: auto;
     padding: 10px;
     height: 75%;
@@ -414,33 +421,38 @@ span {
     margin-bottom: 5%;
 }
 
-.student{
+.student {
     margin-bottom: 10px;
     background: #FFFFFF;
     border-radius: 5px;
     /* height: 20%; */
-    border : 2px solid black;
+    border: 2px solid black;
     padding: 10px;
 }
 
 /* Hide the default scrollbar */
 .student-list-container::-webkit-scrollbar {
-    width: 5px; /* Width of the scrollbar */
+    width: 5px;
+    /* Width of the scrollbar */
 }
 
 /* Track styles */
 .student-list-container::-webkit-scrollbar-track {
-    background: #ccbed5; /* Color of the scrollbar track */
-    border-radius: 5px; 
+    background: #ccbed5;
+    /* Color of the scrollbar track */
+    border-radius: 5px;
 }
 
 /* Handle styles */
 .student-list-container::-webkit-scrollbar-thumb {
-    background: #aa6ed5; /* Color of the scrollbar handle */
-    border-radius: 5px; /* Rounded corners of the scrollbar handle */
+    background: #aa6ed5;
+    /* Color of the scrollbar handle */
+    border-radius: 5px;
+    /* Rounded corners of the scrollbar handle */
 }
 
 /* Handle on hover */
 .student-list-container::-webkit-scrollbar-thumb:hover {
-    background: #574fe6; /* Color of the scrollbar handle on hover */
+    background: #574fe6;
+    /* Color of the scrollbar handle on hover */
 }
