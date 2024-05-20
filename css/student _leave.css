@@ -675,7 +675,7 @@ a.article:hover {
 .navbar .navbar-nav {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -686,4 +686,8 @@ a.article:hover {
     background-color: rgba(169, 128, 232, 0.16);
     border-radius: 10px;
 
+}
+
+.h2 {
+    text-align: center;
 }
