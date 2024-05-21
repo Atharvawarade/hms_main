@@ -1,0 +1,44 @@
+.main_division{
+    height: 100%; 
+    width: 100%; 
+    background: rgba(169, 128, 232, 0.16); 
+    border-radius: 20px;
+    padding: 1%; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .heading {
+    flex: 0 1 auto;
+  }
+
+  .search-filter {
+    flex: 0 1 auto;
+  }
+
+  .student-list-container {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 75%;
+}
+
+.student{
+  margin-bottom: 10px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  height: 20%;
+  border : 2px solid black;
+  padding: 10px;
+}
+
+.student .btn {
+  margin-bottom: 10px;
+}
+
+.student .collapse {
+  margin-bottom: 15px;
+}
