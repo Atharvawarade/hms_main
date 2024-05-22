@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Database configuration
 $servername = "localhost";
 $username = "root";
@@ -13,8 +15,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if the student is logged in
+if (isset($_SESSION['EN'])) {
+    $enrollment_no = $_SESSION['EN'];
+} else {
+    // Redirect to login if not logged in
+    header("Location: ../Stakeholders/Student/student-login.html");
+    exit();
+}
+
 // Fetch updated data from the form
-$enrollment_no = 'EN21107544'; // This should be dynamic based on logged-in user
 $email = $_POST['email'];
 $DOB = $_POST['DOB'];
 $gender = $_POST['gender'];

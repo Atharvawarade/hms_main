@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Database configuration
 $servername = "localhost";
 $username = "root";
@@ -13,13 +15,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if the student is logged in
+if (isset($_SESSION['EN'])) {
+    $enrollment_no = $_SESSION['EN'];
+} else {
+    // Redirect to login if not logged in
+    header("Location: ../Stakeholders/Student/student-login.html");
+    exit();
+}
+
 // Fetch student data
-$enrollment_no = 'EN21107544'; // This should be dynamic based on logged-in user
 $sql = "SELECT * FROM student WHERE EN = '$enrollment_no'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // output data of each row
     $student = $result->fetch_assoc();
 } else {
     echo "0 results";
