@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 02:21 PM
+-- Generation Time: May 22, 2024 at 01:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -289,9 +289,9 @@ CREATE TABLE `student` (
   `branch` varchar(45) NOT NULL,
   `section` char(1) NOT NULL,
   `Batch` varchar(9) DEFAULT NULL,
-  `room_id` int(10) UNSIGNED NOT NULL,
+  `room_id` int(10) UNSIGNED DEFAULT NULL,
   `dateOfStatusChange` date DEFAULT NULL,
-  `status` enum('unpaid','paid','paid and approved') DEFAULT NULL
+  `status` enum('unpaid','paid','paid and approved') DEFAULT 'paid'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -299,8 +299,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `room_id`, `dateOfStatusChange`, `status`) VALUES
-('EN123456789', '', 'co.2021.arwarade@bitwardha.ac.in', NULL, 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', '2021', 1, '2024-05-01', 'paid and approved'),
-('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, 2, NULL, NULL);
+('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', '2021', 1, '2024-05-01', 'paid'),
+('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, 2, NULL, 'paid and approved'),
+('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, 2, NULL, 'paid and approved'),
+('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example.com', '2004-06-26', 'Male', 2109876543, 'Meera Nagar ', 'Behind Keshav City ', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 0, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, NULL, NULL, 'paid and approved'),
+('EN21107558', 'SHYAM KUMAR', 'shyam.kumar@example.com', '2024-06-08', 'Male', 5678901234, 'Snehal Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 2147483647, 'AB+', '', 1, 'Computer Engineering', 'A', NULL, NULL, NULL, 'paid and approved'),
+('EN21107578', 'GEETA KUMARI', 'geeta.kumari@example.com', '2003-06-24', 'Female', 7890123456, 'Sai Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Civil Engineering', '', NULL, 2, NULL, 'paid and approved');
 
 --
 -- Indexes for dumped tables
@@ -357,7 +361,8 @@ ALTER TABLE `room`
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`EN`);
+  ADD PRIMARY KEY (`EN`),
+  ADD KEY `fk_room_student` (`room_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
