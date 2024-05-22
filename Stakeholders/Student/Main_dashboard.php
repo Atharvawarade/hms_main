@@ -25,7 +25,7 @@
                 <li>
                     <a href="#" class="nav-link" data-id="profile" data-target="Student_profile.php">
                         <i class="fas fa-user"></i>
-                        Profile
+                        Profil
                     </a>
                 </li>
                 <li>
