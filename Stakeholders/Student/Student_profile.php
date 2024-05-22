@@ -14,7 +14,7 @@
         <div class="cols__container">
             <div class="left__col">
                 <div class="img__container">
-                    <img src="../../assets/Anu.jpg" alt="<?php echo $student['Fullname']; ?>" />
+                    <img src="../../uploads/<?php echo $student['photo']; ?>" alt="<?php echo $student['Fullname']; ?>" />
                     <span></span>
                 </div>
                 <h2><?php echo $student['Fullname']; ?></h2>
@@ -24,7 +24,7 @@
             <div class="right__col">
                 
                 <form id="student-form" method="post" action="update_student_data.php">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end " style="margin-top: 2%; margin-right: 2%;">
                     <button class="btn btn-outline-primary me-md-2" type="button" id="edit-btn">Edit</button>
                     <button class="btn btn-outline-success" type="button" id="save-btn" style="display: none;">Save</button>
                 </div>

@@ -9,7 +9,7 @@ body {
 
 .header__wrapper header {
   width: 100%;
-  background: rebeccapurple no-repeat 50% 20% / cover;
+  background: linear-gradient(to right, #925FE2, #DDD0F1) no-repeat 50% 20% / cover;
   min-height: 20vh;
 }
 
@@ -72,6 +72,9 @@ body {
 
 .right__col{
   margin-top: 5%;
+  background: rgba(169, 128, 232, 0.16);
+  border-radius: 20px;
+  
 }
 
 .info-column {
