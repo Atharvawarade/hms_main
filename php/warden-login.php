@@ -13,10 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
     echo $password;
+
+    $dept =  $_POST['Dept'];
     $entered_username =  $_POST['username'];
     $entered_password = $_POST['password'];
 
-    $sql = "SELECT * FROM incharges WHERE username = '$entered_username' AND username LIKE 'WARD%'";
+    $sql = "SELECT * FROM incharges WHERE username = '$entered_username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
@@ -28,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Passwords match, login successful
             $_SESSION['loggedin'] = true;
             // $_SESSION['email'] = $entered_email;
-            $_SESSION['EN'] = $entered_password;
+            // $_SESSION['EN'] = $entered_password;
             header("Location:../Stakeholders/Warden/Warden-Dashboard.html");
             // header("Location: ../Student_Dash/Dashboard.php");
             exit;
