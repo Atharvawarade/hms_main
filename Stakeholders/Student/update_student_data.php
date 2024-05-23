@@ -75,6 +75,6 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 
 // Redirect back to the profile page
-header("Location: student_profile.php");
+header("Location: Main_dashboard.php");
 exit();
 ?>

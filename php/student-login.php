@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             // $_SESSION['email'] = $entered_email;
             $_SESSION['EN'] = $entered_password;
-            header("Location:../Stakeholders/Student/studentDashboard.html");
+            header("Location:../Stakeholders/Student/Main_dashboard.php");
             // header("Location: ../Student_Dash/Dashboard.php");
             exit;
         } else {
