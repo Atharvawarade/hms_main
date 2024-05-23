@@ -1,5 +1,82 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" style="display: flex">
+<style>
+   .navbar .col-11 .row .col .border {
+            padding: 10px;
+        }
+        h6{
+            padding: 2px;
+            padding-left: 5px;
+            font-size: clamp(12px, 2vw, 16px); /* Responsive font size */
+            margin-bottom: 0 !important;
+        }
+        p {
+            padding: 2px; /* Adjust padding as needed */
+            padding-left: 5px;
+            font-size: clamp(12px, 2vw, 16px); /* Responsive font size */
+            margin-bottom: 0 !important;
+        }
+        .heading-with-image {
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+        }
+        .heading-with-image img {
+            width: 1em; /* Matches the font size of the heading */
+            height: 1em; /* Matches the font size of the heading */
+            margin-right: 5px; /* Space between image and heading */
+        }
+
+</style>
+<nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid row">
+            <div class="col-1">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-11">
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Total Students</h6>
+                            </div>
+                            <p>5643</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Hostelers</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
+                            </div>
+                            <p>5643</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-1 border navigation_options">
+                            <div class="heading-with-image">
+                                <h6>On Leave</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
+                            </div>
+                            <p>4589</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Removed</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
+                            </div>
+                            <p>7964</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+<div class="container-fluid" style="display: flex">
     <button type="button" id="sidebarCollapse" class="btn btn-info" style="
         background-color: inherit !important;
         border-color: #925fe2 !important;
