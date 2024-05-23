@@ -411,7 +411,7 @@ span {
 
 .below-navbar-row .right-column .heading {
     display: flex;
-
+    justify-content: space-between;
 }
 
 .below-navbar-row .right-column .heading p {

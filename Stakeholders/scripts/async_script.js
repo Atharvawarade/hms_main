@@ -1,13 +1,13 @@
 async function loadContent() {
   try {
-    // Fetch the content of dash_content.html
-    const response = await fetch("dash_content.html");
+    // Fetch the content of dash_content.html.php
+    const response = await fetch("dash_content.html.php");
 
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
 
-    // Get the text content of dash_content.html
+    // Get the text content of dash_content.html.php
     const html = await response.text();
     
     // Insert the fetched content into the div with ID 'content'
