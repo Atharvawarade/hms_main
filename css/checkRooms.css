@@ -1,0 +1,54 @@
+.sub-heading {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    /* Creates the black line */
+    padding: 10px;
+    /* Adds padding for spacing */
+    font-weight: bold;
+    /* Makes the text bold */
+    margin-bottom: 5px;
+}
+
+.room-box {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    /* Ensures a 1:1 aspect ratio */
+}
+
+.in-box {
+    display: flex;
+    width: 95%;
+    aspect-ratio: 1/1;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16);
+    border-radius: 10px;
+}
+
+.empty {
+    background: rgba(255, 255, 255, 1);
+}
+
+.half {
+    background: rgba(169, 128, 232, 0.16);
+}
+
+.full {
+    background: rgba(169, 128, 232, 0.75);
+}
+
+.indexColor {
+    height: 90%;
+    margin: auto;
+    aspect-ratio: 1/1;
+    float: right;
+}

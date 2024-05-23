@@ -11,8 +11,13 @@ body {
     background-color: #DCCDF3 !important;
 }
 
+.Student_Dashboard {
+    width: 100vw;
+    height: 100vh;
+}
+
 .centraldiv {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -218,7 +223,7 @@ a.article:hover {
     background: #FFFFFF;
     border: none;
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16);
     /* X=4, Y=4, blur=10, spread=5, color=#A980E8 16% */
 }
@@ -330,10 +335,12 @@ span {
     padding: 20px;
     height: 100%;
     transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .below-navbar {
-    height: 75%;
+    height: auto;
     overflow-y: auto;
 }
 
@@ -347,6 +354,12 @@ span {
     width: 58%;
     padding: 1%;
     margin-right: 2%;
+}
+
+@media (min-width:1000px) {
+    .cards {
+        margin-bottom: 20px;
+    }
 }
 
 
