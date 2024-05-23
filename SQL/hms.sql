@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2024 at 07:29 PM
+-- Generation Time: May 23, 2024 at 08:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1195,6 +1195,29 @@ INSERT INTO `incharges` (`username`, `password`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `leave_requests`
+--
+
+CREATE TABLE `leave_requests` (
+  `EN` varchar(11) NOT NULL,
+  `Fullname` varchar(200) NOT NULL,
+  `room_id` int(10) DEFAULT NULL,
+  `status` enum('Pending','Approved','Cancelled') NOT NULL DEFAULT 'Pending',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `reason` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leave_requests`
+--
+
+INSERT INTO `leave_requests` (`EN`, `Fullname`, `room_id`, `status`, `start_date`, `end_date`, `reason`) VALUES
+('EN21107546', 'RAJESH KUMAR', NULL, 'Pending', '2024-05-18', '2024-05-31', 'm');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `paststudent`
 --
 
@@ -1211,6 +1234,18 @@ CREATE TABLE `paststudent` (
   `state` varchar(20) DEFAULT NULL,
   `YOS` decimal(1,0) DEFAULT NULL,
   `Batch` varchar(9) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quit_requests`
+--
+
+CREATE TABLE `quit_requests` (
+  `EN` varchar(11) NOT NULL,
+  `warden_status` enum('Pending','Approved','Canceled') NOT NULL DEFAULT 'Pending',
+  `accountant_status` enum('Pending','Approved','Canceled') NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1438,10 +1473,22 @@ ALTER TABLE `incharges`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indexes for table `leave_requests`
+--
+ALTER TABLE `leave_requests`
+  ADD PRIMARY KEY (`EN`);
+
+--
 -- Indexes for table `paststudent`
 --
 ALTER TABLE `paststudent`
   ADD PRIMARY KEY (`EN`);
+
+--
+-- Indexes for table `quit_requests`
+--
+ALTER TABLE `quit_requests`
+  ADD PRIMARY KEY (`EN`) USING BTREE;
 
 --
 -- Indexes for table `room`
@@ -1493,7 +1540,7 @@ ALTER TABLE `room`
 -- Constraints for table `alloted`
 --
 ALTER TABLE `alloted`
-  ADD CONSTRAINT `alloted_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`EN`),
+  ADD CONSTRAINT `alloted_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`EN`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `alloted_ibfk_2` FOREIGN KEY (`furniture_id_1`) REFERENCES `furniture` (`furniture_id`),
   ADD CONSTRAINT `alloted_ibfk_3` FOREIGN KEY (`furniture_id_2`) REFERENCES `furniture` (`furniture_id`),
   ADD CONSTRAINT `alloted_ibfk_4` FOREIGN KEY (`furniture_id_3`) REFERENCES `furniture` (`furniture_id`),
