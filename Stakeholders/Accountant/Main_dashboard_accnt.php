@@ -127,7 +127,7 @@
     </nav>
             <div class="below_navbar" id="below_navbar">
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 left-col">
                 <div class="container">
                     <div class="row g-2">
                         <div class="col-4">
@@ -147,28 +147,28 @@
                         <div class="col-4">
                             <div class="square-box">
                                 <div class="square-box-content">
-                                    <img src="../../assets/" alt="">
+                                    <img src="../../assets/Add_Student.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="square-box">
                                 <div class="square-box-content">
-                                    <img src="../../assets/" alt="">
+                                    <img src="../../assets/Remove_Student.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="square-box">
                                 <div class="square-box-content">
-                                    <img src="../../assets/" alt="">
+                                    <img src="../../assets/Complaints.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="square-box">
                                 <div class="square-box-content">
-                                    <img src="../../assets/" alt="">
+                                    <img src="../../assets/attendance.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -178,8 +178,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <!-- You can add content here for the second column -->
+            <div class="col-md-6 col-sm-12 right-col d-flex align-items-center justify-content-center">
+                <div class="container">
+                    <div class="heading-with-image">
+                        <h3>Fees Paid Students</h3>
+                        <img src="../../assets/Group 31.png" alt="icon" class="Fees_paid_students" data-id="Fees_paid_students" data-target="Newly_Admitted_Students.php">
+                    </div>
+                    <div class="search-filter-container">
+                        <input type="text" placeholder="Search...">
+                        <button>Filter</button>
+                    </div>
+                    <div class="container student-list-container">
+                        <div class="student-list" id="student-list">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -208,50 +222,93 @@
                 console.log("Sidebar and button toggled");
             });
 
-            // $('.nav-link').on('click', function (e) {
-            //     e.preventDefault();
-            //     console.log("Nav link clicked");
-            //     var targetUrl = $(this).data('target');
-            //     var targetId = $(this).data('id');
-            //     console.log("Target URL: " + targetUrl);
-            //     console.log("Target ID: " + targetId);
-            //     loadContent(targetUrl, targetId);
-            // });
+            $('.Fees_paid_students').on('click', function (e) {
+                e.preventDefault();
+                console.log("Fees_paid_students clicked");
+                var targetUrl = $(this).data('target');
+                var targetId = $(this).data('id');
+                console.log("Target URL: " + targetUrl);
+                console.log("Target ID: " + targetId);
+                loadContent(targetUrl, targetId);
+            });
 
-            // $('.apply_for_leave').on('click', function (e) {
-            //     e.preventDefault();
-            //     console.log("Apply for leave clicked");
-            //     var targetUrl = $(this).data('target');
-            //     var targetId = $(this).data('id');
-            //     console.log("Target URL: " + targetUrl);
-            //     console.log("Target ID: " + targetId);
-            //     loadContent(targetUrl, targetId);
-            // });
+            
 
-            // $('.apply_for_quit').on('click', function (e) {
-            //     e.preventDefault();
-            //     console.log("Apply for quit clicked");
-            //     $('#staticBackdrop').modal('show');
-            // });
+            function loadContent(url, id) {
+                console.log("Loading content from: " + url);
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (data) {
+                        console.log("Content loaded successfully");
+                        $('#below_navbar').html(data);
+                        console.log("Content inserted into #below_navbar");
+                        $('#below_navbar').attr('id', id);
+                        console.log("Content id changed to: " + id);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("Error loading content: " + errorThrown);
+                        $('#below_navbar').html('<p>An error has occurred: ' + errorThrown + '</p>');
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('fetch_newly_admitted_students.php')
+                .then(response => response.json())
+                .then(data => {
+                    const studentList = document.getElementById('student-list');
+                    data.forEach((student, index) => {
+                        const uniqueId = `collapse${index}`;
+                        const studentDiv = document.createElement('div');
+                        studentDiv.className = 'student';
+                        studentDiv.innerHTML = `
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <p>${student.Fullname}</p>
+                                <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#${uniqueId}" aria-expanded="false" aria-controls="${uniqueId}">
+                                    Details
+                                </button>
+                            </div>
+                            <div class="collapse mb-3" id="${uniqueId}">
+                                <div class="card card-body">
+                                    <p>Branch: ${student.branch}</p>
+                                    <p>Date of Admission: ${student.EN}</p>
+                                    <p>Fees Paid: ${student.fees_paid}</p>
+                                    <p>Fees Remaining: ${student.fees_remaining}</p>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-secondary me-2">Print</button>
+                                        <button class="btn btn-success approve-btn" data-student-id="${student.EN}">Approve</button>
+                                    </div>
+                                </div>
+                            </div>`;
+                        studentList.appendChild(studentDiv);
+                    });
 
-            // function loadContent(url, id) {
-            //     console.log("Loading content from: " + url);
-            //     $.ajax({
-            //         url: url,
-            //         method: 'GET',
-            //         success: function (data) {
-            //             console.log("Content loaded successfully");
-            //             $('#below_navbar').html(data);
-            //             console.log("Content inserted into #below_navbar");
-            //             $('#below_navbar').attr('id', id);
-            //             console.log("Content id changed to: " + id);
-            //         },
-            //         error: function (jqXHR, textStatus, errorThrown) {
-            //             console.log("Error loading content: " + errorThrown);
-            //             $('#below_navbar').html('<p>An error has occurred: ' + errorThrown + '</p>');
-            //         }
-            //     });
-            // }
+                    document.querySelectorAll('.approve-btn').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const studentId = this.getAttribute('data-student-id');
+                            fetch('update_student_status.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: `student_id=${studentId}`
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert('Student status updated to paid and approved');
+                                    } else {
+                                        alert('Failed to update status');
+                                    }
+                                })
+                                .catch(error => console.error('Error updating student status:', error));
+                        });
+                    });
+                })
+                .catch(error => console.error('Error fetching student data:', error));
         });
     </script>
 </body>
