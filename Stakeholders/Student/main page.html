@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostel Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    main {
+      padding: 20px;
+    }
+    
+    .room-info {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hostel Management System</h1>
+  </header>
+  
+  <main>
+    <h2>Available Rooms</h2>
+    
+    <div class="room-info">
+      <h3>Room 101</h3>
+      <p>Total Seats: 4</p>
+      <p>Booked Seats: 2</p>
+      <p>Available Seats: <span id="room101AvailableSeats">2</span></p>
+    </div>
+    
+    <div class="room-info">
+      <h3>Room 102</h3>
+      <p>Total Seats: 6</p>
+      <p>Booked Seats: 4</p>
+      <p>Available Seats: <span id="room102AvailableSeats">2</span></p>
+    </div>
+    
+    <!-- Add more room information here -->
+  </main>
+  
+  <script>
+    // Calculate available seats for Room 101
+    var room101TotalSeats = 4;
+    var room101BookedSeats = 2;
+    var room101AvailableSeats = room101TotalSeats - room101BookedSeats;
+    document.getElementById("room101AvailableSeats").textContent = room101AvailableSeats;
+    
+    // Calculate available seats for Room 102
+    var room102TotalSeats = 6;
+    var room102BookedSeats = 4;
+    var room102AvailableSeats = room102TotalSeats - room102BookedSeats;
+    document.getElementById("room102AvailableSeats").textContent = room102AvailableSeats;
+  </script>
+</body>
+</html>
