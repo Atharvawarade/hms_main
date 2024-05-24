@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="row below_student_welcome_container">
-                    <div class="col-md-8 col-sm-12" style="height=100%">
+                    <div class="col-md-8 col-sm-12" style="height:100%">
                         <div class="container">
                             <div class="row row-cols-1">
                                 <div class="col-md-3 option apply_for_leave" data-id="apply_for_leave" data-target="student_leave.php">
@@ -83,15 +83,15 @@
                                 </div>
                                 <div class="col-md-3 option">
                                     <img src="../../assets/Group 132.png" alt="">
-                                </div>    
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12">
-                        
-                    </div>  
+
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -108,17 +108,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             console.log("Document is ready");
 
-            $('#sidebarCollapse').on('click', function () {
+            $('#sidebarCollapse').on('click', function() {
                 console.log("Sidebar collapse button clicked");
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
                 console.log("Sidebar and button toggled");
             });
 
-            $('.nav-link').on('click', function (e) {
+            $('.nav-link').on('click', function(e) {
                 e.preventDefault();
                 console.log("Nav link clicked");
                 var targetUrl = $(this).data('target');
@@ -128,7 +128,7 @@
                 loadContent(targetUrl, targetId);
             });
 
-            $('.apply_for_leave').on('click', function (e) {
+            $('.apply_for_leave').on('click', function(e) {
                 e.preventDefault();
                 console.log("Apply for leave clicked");
                 var targetUrl = $(this).data('target');
@@ -138,7 +138,7 @@
                 loadContent(targetUrl, targetId);
             });
 
-            $('.apply_for_quit').on('click', function (e) {
+            $('.apply_for_quit').on('click', function(e) {
                 e.preventDefault();
                 console.log("Apply for quit clicked");
                 $('#staticBackdrop').modal('show');
@@ -149,14 +149,14 @@
                 $.ajax({
                     url: url,
                     method: 'GET',
-                    success: function (data) {
+                    success: function(data) {
                         console.log("Content loaded successfully");
                         $('#below_navbar').html(data);
                         console.log("Content inserted into #below_navbar");
                         $('#below_navbar').attr('id', id);
                         console.log("Content id changed to: " + id);
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function(jqXHR, textStatus, errorThrown) {
                         console.log("Error loading content: " + errorThrown);
                         $('#below_navbar').html('<p>An error has occurred: ' + errorThrown + '</p>');
                     }

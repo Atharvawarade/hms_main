@@ -1,82 +1,5 @@
-<style>
-   .navbar .col-11 .row .col .border {
-            padding: 10px;
-        }
-        h6{
-            padding: 2px;
-            padding-left: 5px;
-            font-size: clamp(12px, 2vw, 16px); /* Responsive font size */
-            margin-bottom: 0 !important;
-        }
-        p {
-            padding: 2px; /* Adjust padding as needed */
-            padding-left: 5px;
-            font-size: clamp(12px, 2vw, 16px); /* Responsive font size */
-            margin-bottom: 0 !important;
-        }
-        .heading-with-image {
-            display: flex;
-            align-items: center;
-            justify-content:space-between;
-        }
-        .heading-with-image img {
-            width: 1em; /* Matches the font size of the heading */
-            height: 1em; /* Matches the font size of the heading */
-            margin-right: 5px; /* Space between image and heading */
-        }
-
-</style>
-<nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid row">
-            <div class="col-1">
-                <button type="button" id="sidebarCollapse" class="navbar-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-            <div class="col-11">
-                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                    <div class="col">
-                        <div class="p-1 border  navigation_options">
-                            <div class="heading-with-image">
-                                <h6>Total Students</h6>
-                            </div>
-                            <p>5643</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="p-1 border  navigation_options">
-                            <div class="heading-with-image">
-                                <h6>Hostelers</h6>
-                                <img src="../../assets/Group 31.png" alt="icon">
-                            </div>
-                            <p>5643</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="p-1 border navigation_options">
-                            <div class="heading-with-image">
-                                <h6>On Leave</h6>
-                                <img src="../../assets/Group 31.png" alt="icon">
-                            </div>
-                            <p>4589</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="p-1 border  navigation_options">
-                            <div class="heading-with-image">
-                                <h6>Removed</h6>
-                                <img src="../../assets/Group 31.png" alt="icon">
-                            </div>
-                            <p>7964</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-<div class="container-fluid" style="display: flex">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="display: flex">
     <button type="button" id="sidebarCollapse" class="btn btn-info" style="
         background-color: inherit !important;
         border-color: #925fe2 !important;
@@ -106,6 +29,7 @@
     </div>
   </div>
 </nav>
+
 
 <div class="container-fluid below-navbar" style="width: 100%" id="below_nav">
   <div class="row below-navbar-row">
@@ -162,33 +86,45 @@
 </div>
 </div>
 <script>
-  console.log("script working properly");
-
   const newbiesButton = document.getElementById("newbies");
   if (newbiesButton) {
-    console.log("Element with id 'newbies' found");
+    // console.log("Element with id 'newbies' found");
     newbiesButton.addEventListener("click", function() {
       console.log("button");
     });
 
     newbiesButton.addEventListener("click", async () => {
-      console.log("Newbies button clicked");
-      console.log("Button with id 'newbies' was pressed"); // Additional console log
+      // console.log("Newbies button clicked");
+      // console.log("Button with id 'newbies' was pressed"); // Additional console log
       try {
-        const response = await fetch("test.html");
+        const response = await fetch("Newly_Admitted_Students.php");
         console.log("Fetch request sent");
         if (!response.ok) {
           console.error("Network response was not ok");
           throw new Error("Network response was not ok");
         }
-        console.log("Fetch successful");
+        // console.log("Fetch successful");
         const data = await response.text();
-        console.log("Response data received:", data);
+        console.log("Response data received:");
         const contentDiv = document.getElementById("below_nav");
         if (contentDiv) {
-          console.log("Element with id 'below_nav' found");
+          // console.log("Element with id 'below_nav' found");
           contentDiv.innerHTML = data;
-          console.log("Content updated successfully");
+          // console.log("below_nav updated successfully");
+
+          // Find and execute scripts in the fetched content
+          const scripts = contentDiv.getElementsByTagName("script");
+          for (let i = 0; i < scripts.length; i++) {
+            const newScript = document.createElement("script");
+            newScript.type = "text/javascript";
+            if (scripts[i].src) {
+              newScript.src = scripts[i].src;
+            } else {
+              newScript.text = scripts[i].innerHTML;
+            }
+            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+          }
+          console.log("Script appended below");
         } else {
           console.error("Element with id 'below_nav' not found");
         }
@@ -200,9 +136,10 @@
     console.error("Element with id 'newbies' not found");
   }
 
+
   const checkRoomsDiv = document.getElementById("checkRooms");
   if (checkRoomsDiv) {
-    console.log("Element with id 'checkRooms' found");
+    // console.log("Element with id 'checkRooms' found");
     checkRoomsDiv.addEventListener("click", async () => {
       console.log("CheckRooms div clicked");
       try {
