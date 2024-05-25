@@ -160,17 +160,19 @@
 .hostel-management-system,
 .your-home-away {
   align-self: stretch;
-  position: relative;
+  position:relative;
   z-index: 2;
 }
 .hostel-management-system {
-  margin: 0;
-  height: 39px;
-  font-size: inherit;
-  font-weight: 800;
-  font-family: inherit;
-  display: inline-block;
-}
+    margin: 0;
+    height: auto;
+    font-size: inherit;
+    font-weight: 800;
+    font-family: inherit;
+    display: inline-block;
+    white-space: nowrap;
+    }
+
 .your-home-away {
   font-weight: 200;
 }
