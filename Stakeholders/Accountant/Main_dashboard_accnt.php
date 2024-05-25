@@ -45,7 +45,7 @@
                 <h5>Hostel Management System</h5>
             </div>
             <div class="profile-photo" id="profilePhoto">
-                <img src="../../assets/profile_photo.png" alt="">
+                <img src="../../assets/profile.png" alt="">
             </div>
             <ul class="list-unstyled components">
                 <li>
@@ -125,7 +125,7 @@
             </div>
         </div>
     </nav>
-            <div class="below_navbar" id="below_navbar">
+    <div class="below_navbar" id="below_navbar">
         <div class="row">
             <div class="col-md-6 col-sm-12 left-col">
                 <div class="container">
@@ -172,9 +172,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row g-2">
-                        
                     </div>
                 </div>
             </div>

@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sql_update = "UPDATE student SET photo = '$image_path' WHERE EN = '$prn'";
                     if ($conn->query($sql_update) === TRUE) {
                         echo "New record created successfully.";
-                        // header("Location: ../error/successful_login.html");
+                        header("Location: ../Stakeholders/Student/student-login.html");
                         exit();
                     } else {
                         echo "Error updating record: " . $conn->error;

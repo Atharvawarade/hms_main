@@ -60,7 +60,7 @@
                 <div class="row student_welcome_container">
                     <div class="col-8 welcome_msg">
                         <p id="Date">May 14 2024</p>
-                        <h1>Welcome Back, Anuja !!</h1>
+                        <h1>Welcome Back, Vikas !!</h1>
                         <p>Always stay updated in your dashboard</p>
                     </div>
                     <div class="col-4 student_sticker">
@@ -69,27 +69,59 @@
                 </div>
 
                 <div class="row below_student_welcome_container">
-                    <div class="col-md-8 col-sm-12" style="height:100%">
+                    <div class="col-md-6 col-sm-12 left-col">
                         <div class="container">
-                            <div class="row row-cols-1">
-                                <div class="col-md-3 option apply_for_leave" data-id="apply_for_leave" data-target="student_leave.php">
-                                    <img src="../../assets/Group 130.png " alt="">
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <img src="../../assets/Apply for Leave.png" alt="">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 option apply_for_quit" data-id="apply_for_quit">
-                                    <img src="../../assets/Group 131.png" alt="">
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <img src="../../assets/Quit Hostel.png" alt="">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 option">
-                                    <img src="../../assets/Group 131.png" alt="">
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <img src="../../assets/Room Change.png" alt="">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 option">
-                                    <img src="../../assets/Group 132.png" alt="">
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <img src="../../assets/Raise Grievances.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <img src="../../assets/Check Attendance.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="square-box">
+                                        <div class="square-box-content">
+                                            <!-- <img src="../../assets/attendance.png" alt=""> -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+                     <div class="col-md-6 col-sm-12">
 
                     </div>
+            </div>
+                   
                 </div>
 
             </div>
