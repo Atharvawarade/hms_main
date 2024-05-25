@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/home_page.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap"
     />
   </head>
   <body>
@@ -16,72 +20,75 @@
       <img
         class="ccba-designs-bajaj-institute-o-icon"
         alt=""
-        src="./public/ccbadesignsbajajinstituteoftechnologyasocialendeavouruniversitiesarchello1705580377-1@2x.png"
+        src="./../assets/ccba-designs-bajaj-institute-of-technology---a-social-endeavour-universities-archello.1705580377 1.png"
       />
 
-      <div class="content">
-        <div class="content-child" data-scroll-to="rectangle"></div>
-        <div class="about-admission">
-          <div class="about-links">
+      <section class="content">
+        <section
+          class="content-child"
+          data-scroll-to="rectangleSection"
+        ></section>
+        <header class="about-admission">
+          <nav class="about-links">
             <div class="home-button">
-                <div class="home" id="homeText">Home</div>
+              <a class="home" id="homeText">Home</a>
             </div>
-            <div class="about" id="aboutText1">About</div>
-            <div class="vacancy" id="vacancyText">Vacancy</div>
-            <div class="admission" id="admissionText">Admission</div>
-          </div>
+            <a class="about" id="aboutText1">About</a>
+            <a class="vacancy" id="vacancyText">Vacancy</a>
+            <a class="admission" id="admissionText">Admission</a>
+          </nav>
           <div class="login">
-            <div class="rectangle-parent">
+            <button class="rectangle-parent">
               <div class="frame-child"></div>
-              <div class="register">Register</div>
-            </div>
-            <div class="rectangle-group" id="groupContainer1">
+              <a class="register">Register</a>
+            </button>
+            <button class="rectangle-group" id="groupButton1">
               <div class="frame-item"></div>
-              <div class="login1" id="loginText">Login</div>
-            </div>
+              <a class="login1" id="loginText">Login</a>
+            </button>
           </div>
-        </div>
+        </header>
         <div class="hostel-header-wrapper">
           <div class="hostel-header">
-            <div class="hostel-management-system">HOSTEL MANAGEMENT SYSTEM</div>
+            <h2 class="hostel-management-system">HOSTEL MANAGEMENT SYSTEM</h2>
             <div class="hostel-description">
               <div class="hostel-amenities">
                 <div class="your-home-away">
                   Your Home Away from Home | Modern amenities | friendly service
                 </div>
                 <div class="apply-button">
-                    <div class="apply-container">
-                        <div class="apply-container-child"></div>
-                        <div class="apply-for-hostel">Apply for Hostel</div>
-                      </div>
-                    </div>
-                  </div>
+                  <button class="apply-container">
+                    <div class="apply-container-child"></div>
+                    <a class="apply-for-hostel">Apply for Hostel</a>
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="hostel-types">
-              <div class="hostel-navigation">
-                <div class="hostel-options">
-                  <div class="hostels">Hostels</div>
-                  <div class="option-placeholder">
-                    <b class="empty-hostel-option">2</b>
-                  </div>
+          </div>
+        </div>
+        <div class="hostel-types">
+          <div class="hostel-navigation">
+            <div class="hostel-options">
+              <h2 class="hostels">Hostels</h2>
+              <div class="option-placeholder">
+                <b class="empty-hostel-option">2</b>
+              </div>
+            </div>
+            <div class="hostel-navigation-inner">
+              <div class="frame-inner"></div>
+            </div>
+            <div class="room-option-wrapper">
+              <div class="room-option">
+                <h2 class="rooms">Rooms</h2>
+                <div class="room-placeholder">
+                  <b class="empty-room-option">120</b>
                 </div>
-                <div class="hostel-navigation-inner">
-                  <div class="frame-inner"></div>
-                </div>
-                <div class="room-option-wrapper">
-                  <div class="room-option">
-                    <div class="rooms">Rooms</div>
-                    <div class="room-placeholder">
-                      <b class="empty-room-option">120</b>
-                    </div>
-                </div>
+              </div>
             </div>
             <div class="line-parent">
               <div class="line-div"></div>
               <div class="hostelers-parent">
-                <div class="hostelers">Hostelers</div>
+                <h2 class="hostelers">Hostelers</h2>
                 <div class="hostelers-placeholder">
                   <b class="empty-hostelers-option">240</b>
                 </div>
@@ -89,46 +96,47 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="hostel-info">
+      </section>
+      <section class="hostel-info">
         <div class="hostel-details">
           <div class="about-hostel">
-            <div class="about1" data-scroll-to="aboutText">About</div>
+            <h1 class="about1" data-scroll-to="aboutText">About</h1>
           </div>
           <div class="hostel-types-info">
             <div class="types-container">
               <div class="wrapper-boys-image">
                 <img
                   class="boys-image-icon"
+                  loading="lazy"
                   alt=""
-                  src="./public/boys-image@2x.png"
-                  />
-                </div>
-                <div class="boys-details">
-                  <div class="boys-hostel">BOYS HOSTEL</div>
-                  <div class="boys-description">
-                    <div class="welcome-to-our">
-                      Welcome to our Boys' Hostel, where safety, comfort, and
-                      community come first. Located in a secure neighborhood, our
-                      hostel offers spacious rooms with modern amenities, ensuring
-                      a conducive environment for study and relaxation. Residents
-                      enjoy access to recreational facilities, nutritious meals,
-                      and regular events that promote personal growth and
-                      camaraderie. With 24/7 security and dedicated staff, we
-                      provide a nurturing and supportive home away from home. Join
-                      us for an enriching and memorable living experience.
-                    </div>
-                  </div>
+                  src="./public/rectangle-223@2x.png"
+                />
+              </div>
+              <div class="boys-details">
+                <h2 class="boys-hostel">BOYS HOSTEL</h2>
+                <div class="boys-description">
+                  <p class="welcome-to-our">
+                    Welcome to our Boys' Hostel, where safety, comfort, and
+                    community come first. Located in a secure neighborhood, our
+                    hostel offers spacious rooms with modern amenities, ensuring
+                    a conducive environment for study and relaxation. Residents
+                    enjoy access to recreational facilities, nutritious meals,
+                    and regular events that promote personal growth and
+                    camaraderie. With 24/7 security and dedicated staff, we
+                    provide a nurturing and supportive home away from home. Join
+                    us for an enriching and memorable living experience.
+                  </p>
                 </div>
               </div>
-              <div class="girls-details">
-                <div class="girls-container">
-                  <div class="girls-hostel">GIRLS HOSTEL</div>
-                  <div class="welcome-to-our1">
-                    Welcome to our Girls' Hostel, a secure and nurturing haven
-                    designed for comfort and community. Situated in a safe
-                    neighborhood, our hostel features spacious rooms with modern
-                    amenities, creating an ideal environment for both study and
+            </div>
+            <div class="girls-details">
+              <div class="girls-container">
+                <h2 class="girls-hostel">GIRLS HOSTEL</h2>
+                <p class="welcome-to-our1">
+                  Welcome to our Girls' Hostel, a secure and nurturing haven
+                  designed for comfort and community. Situated in a safe
+                  neighborhood, our hostel features spacious rooms with modern
+                  amenities, creating an ideal environment for both study and
                   relaxation. Our residents benefit from a range of recreational
                   facilities, nutritious meals, and a variety of events that
                   encourage personal growth and foster strong bonds. With 24/7
@@ -136,278 +144,296 @@
                   caring atmosphere. Join us for an enriching experience where
                   you can excel academically and socially, and make lasting
                   friendships.
-                </div>
+                </p>
               </div>
               <div class="wrapper-girls-image">
                 <img
                   class="girls-image-icon"
+                  loading="lazy"
                   alt=""
-                  src="./public/girls-image@2x.png"
+                  src="./public/rectangle-224@2x.png"
                 />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="promises">
-        <div class="our-promises">Our promises</div>
-      </div>
-      <div class="hostel-features-grid">
+      </section>
+      <section class="promises">
+        <h1 class="our-promises">Our promises</h1>
+      </section>
+      <section class="hostel-features-grid">
         <div class="feature-categories">
-            <div class="icon-labels-parent">
-                <div class="icon-labels">
-                  <img
-                    class="verified-icon"
-                    alt=""
-                    src="./public/verified@2x.png"
-                  />
-                </div>
-                <div class="rectangle-div"></div>
-                <div class="safety-and-security">Safety and Security</div>
-                <div class="your-safety-is">
-                  Your safety is our top priority. Our hostel is equipped with 24/7
-                  surveillance, secure access controls, and a dedicated security
-                  team to ensure a safe and secure environment for all residents.
+          <div class="icon-labels-parent">
+            <div class="icon-labels">
+              <img
+                class="verified-icon"
+                loading="lazy"
+                alt=""
+                src="./public/verified@2x.png"
+              />
+            </div>
+            <div class="rectangle-div"></div>
+            <div class="safety-and-security">Safety and Security</div>
+            <p class="your-safety-is">
+              Your safety is our top priority. Our hostel is equipped with 24/7
+              surveillance, secure access controls, and a dedicated security
+              team to ensure a safe and secure environment for all residents.
+            </p>
+          </div>
+          <div class="feature-icons">
+            <div class="feature-icons-child"></div>
+            <div class="bunk-bed-wrapper">
+              <img
+                class="bunk-bed-icon"
+                loading="lazy"
+                alt=""
+                src="./public/bunk-bed@2x.png"
+              />
+            </div>
+            <div class="frame-parent">
+              <div class="comfort-and-convenience-wrapper">
+                <div class="comfort-and-convenience-container">
+                  <p class="comfort-and">Comfort and</p>
+                  <p class="convenience">Convenience</p>
                 </div>
               </div>
-              <div class="feature-icons">
-                <div class="feature-icons-child"></div>
-                <div class="bunk-bed-wrapper">
-                  <img
-                    class="bunk-bed-icon"
-                    alt=""
-                    src="./public/bunk-bed@2x.png"
-                  />
+              <p class="enjoy-the-comfort">
+                Enjoy the comfort of our well-furnished rooms and modern
+                amenities. Each room is designed to provide a cozy and
+                convenient living space, complete with high-speed internet and
+                ample storage.
+              </p>
+            </div>
+          </div>
+          <div class="feature-icons1">
+            <div class="nutrition-wrapper">
+              <img
+                class="nutrition-icon"
+                loading="lazy"
+                alt=""
+                src="./public/nutrition@2x.png"
+              />
+            </div>
+            <div class="feature-icons-item"></div>
+            <div class="nutritious-meals-wrapper">
+              <div class="nutritious-meals">Nutritious Meals</div>
+            </div>
+            <p class="relish-healthy-and">
+              Relish healthy and delicious meals prepared by our experienced
+              chefs. We cater to diverse dietary needs, ensuring that every meal
+              is balanced, nutritious, and hygienically prepared.
+            </p>
+          </div>
+          <div class="feature-icons2">
+            <div class="equality-wrapper">
+              <img
+                class="equality-icon"
+                loading="lazy"
+                alt=""
+                src="./public/equality@2x.png"
+              />
+            </div>
+            <div class="feature-icons-inner"></div>
+            <div class="frame-group">
+              <div class="personal-growth-and-community-wrapper">
+                <div class="personal-growth-and-container">
+                  <p class="personal-growth">Personal Growth</p>
+                  <p class="and-community">and Community</p>
                 </div>
-                <div class="frame-parent">
-                    <div class="comfort-and-convenience-wrapper">
-                        <div class="comfort-and-convenience-container">
-                          <p class="comfort-and">Comfort and</p>
-                          <p class="convenience">Convenience</p>
-                        </div>
-                      </div>
-                      <div class="enjoy-the-comfort">
-                        Enjoy the comfort of our well-furnished rooms and modern
-                        amenities. Each room is designed to provide a cozy and
-                        convenient living space, complete with high-speed internet and
-                        ample storage.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="feature-icons1">
-                    <div class="nutrition-wrapper">
-                      <img
-                        class="nutrition-icon"
-                        alt=""
-                        src="./public/nutrition@2x.png"
-                      />
-                    </div>
-                    <div class="feature-icons-item"></div>
-                    <div class="nutritious-meals-wrapper">
-                      <div class="nutritious-meals">Nutritious Meals</div>
-                    </div>
-                    <div class="relish-healthy-and">
-                        Relish healthy and delicious meals prepared by our experienced
-                        chefs. We cater to diverse dietary needs, ensuring that every meal
-                        is balanced, nutritious, and hygienically prepared.
-                      </div>
-                    </div>
-                    <div class="feature-icons2">
-                      <div class="equality-wrapper">
-                        <img
-                          class="equality-icon"
-                          alt=""
-                          src="./public/equality@2x.png"
-                        />
-                      </div>
-                      <div class="feature-icons-inner"></div>
-                      <div class="frame-group">
-                        <div class="personal-growth-and-community-wrapper">
-                          <div class="personal-growth-and-container">
-                            <p class="personal-growth">Personal Growth</p>
-                            <p class="and-community">and Community</p>
-                          </div>
-                        </div>
-                        <div class="we-foster-a">
-                          We foster a supportive community through regular events,
-                          workshops, and recreational activities. Our aim is to promote
-                          personal growth, build friendships, and create cherished
-                          memories.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="vacancy1">
-                  <div class="vacancy-container">
-                    <div class="vacancy-title">
-                      <div class="vacancy2" data-scroll-to="vACANCYText">VACANCY</div>
-                    </div>
-                    <div class="hostel-availability">
-                      <div class="hostel-type-labels">
-                        <div class="hostel-type-labels-child"></div>
-                        <div class="hostel-type-names">
-                          <div class="boys-hostel1">Boys Hostel</div>
-                        </div>
-                        <div class="remaining-slots">
-                          <div class="remaining-slots-child"></div>
-                          <div class="slot-containers">
-                            <div class="slot-containers-child"></div>
-                            <div class="frame-container">
-                              <img
-                                class="group-icon"
-                                alt=""
-                                src="./public/group-145.svg"
-                              />
-          
-                              <div class="remaining">
-                                <p class="p">25%</p>
-                                <p class="remaining1">Remaining</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="hostel-type-labels1">
-                        <div class="hostel-type-labels-item"></div>
-                        <div class="girls-hostel-wrapper">
-                          <div class="girls-hostel1">Girls Hostel</div>
-                        </div>
-                        <div class="rectangle-container">
-                          <div class="frame-child1"></div>
-                          <div class="frame-div">
-                            <div class="frame-child2"></div>
-                            <div class="group-div">
-                              <img
-                                class="frame-child3"
-                                alt=""
-                                src="./public/group-146.svg"
-                                />
+              </div>
+              <p class="we-foster-a">
+                We foster a supportive community through regular events,
+                workshops, and recreational activities. Our aim is to promote
+                personal growth, build friendships, and create cherished
+                memories.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="vacancy1">
+        <div class="vacancy-container">
+          <div class="vacancy-title">
+            <h1 class="vacancy2" data-scroll-to="vACANCYText">VACANCY</h1>
+          </div>
+          <div class="hostel-availability">
+            <div class="hostel-type-labels">
+              <div class="hostel-type-labels-child"></div>
+              <div class="hostel-type-names">
+                <h2 class="boys-hostel1">Boys Hostel</h2>
+              </div>
+              <div class="remaining-slots">
+                <div class="remaining-slots-child"></div>
+                <div class="slot-containers">
+                  <div class="slot-containers-child"></div>
+                  <div class="frame-container">
+                    <img
+                      class="group-icon"
+                      loading="lazy"
+                      alt=""
+                      src="./public/group-145.svg"
+                    />
 
-                    <div class="remaining2">
+                    <h2 class="remaining">
+                      <p class="p">25%</p>
+                      <p class="remaining1">Remaining</p>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hostel-type-labels1">
+              <div class="hostel-type-labels-item"></div>
+              <div class="girls-hostel-wrapper">
+                <h2 class="girls-hostel1">Girls Hostel</h2>
+              </div>
+              <div class="rectangle-container">
+                <div class="frame-child1"></div>
+                <div class="frame-div">
+                  <div class="frame-child2"></div>
+                  <div class="group-div">
+                    <img
+                      class="frame-child3"
+                      loading="lazy"
+                      alt=""
+                      src="./public/group-146.svg"
+                    />
+
+                    <h2 class="remaining2">
                       <p class="p1">50%</p>
                       <p class="remaining3">Remaining</p>
-                    </div>
+                    </h2>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="admission1">
-        <div class="admission2" data-scroll-to="aDMISSIONText">ADMISSION</div>
-      </div>
-      <div class="admission-info">
-        <div class="admission-info-child"></div>
-        <div class="ithe-me-admission">
+      </section>
+      <section class="admission1">
+        <h1 class="admission2" data-scroll-to="aDMISSIONText">ADMISSION</h1>
+      </section>
+      <section class="admission-info">
+        <section class="admission-info-child"></section>
+        <h2 class="ithe-me-admission">
           Ithe me admission to hostel chi process banvto te as it is ithun photo
           uchalaycha aani website vr takaycha
-        </div>
-      </div>
+        </h2>
+      </section>
       <div class="fax-07152-230506">
         <p class="p2">07152-295473</p>
         <p class="fax-07152-2305061">Fax: 07152-230506</p>
-    </div>
-    <img class="telephone-icon" alt="" src="./public/telephone@2x.png" />
-
-    <div class="bitbitwardhaacin-pricipalb">
-      <p class="bitbitwardhaacin">bit@bitwardha.ac.in</p>
-      <p class="pricipalbitwardhaacin">pricipal@bitwardha.ac.in</p>
-    </div>
-    <img class="email-icon" alt="" src="./public/email@2x.png" />
-
-    <div class="faculty">Faculty</div>
-    <div class="blog">Blog</div>
-    <div class="activities">Activities</div>
-    <div class="mandatory-disclosure">Mandatory Disclosure</div>
-    <div class="nirf">NIRF</div>
-    <div class="academic-bank-of">Academic Bank of Credits</div>
-    <div class="digilocker-portal">Digilocker Portal</div>
-    <div class="national-scholarship-portal">National Scholarship Portal</div>
-    <div class="gallery">Gallery</div>
-    <div class="about-us">About us</div>
-    <div class="rectangle-parent1">
-      <div class="frame-child4"></div>
-      <div class="contact-info-container">
-        <div class="contact-details">
-          <div class="contact-options">
-            <div class="contact-links">
-              <div class="contact-us">Contact us</div>
-              <div class="contact-links-inner">
-                <img class="line-icon" alt="" src="./public/line-18.svg" />
-              </div>
-            </div>
-            <div class="address">
-              <div class="address-container">
-                <img
-                  class="placeholder-icon"
-                  alt=""
-                  src="./public/placeholder@2x.png"
-                />
-              </div>
-              <div class="bajaj-institute-of-container">
-                <p class="bajaj-institute-of">
-                  Bajaj Institute of technology, arvi road, pipri,
-                </p>
-                <p class="wardha-442001-maharashtra">
-                  wardha-442001 (maharashtra)
-                </p>
-              </div>
-            </div>
-        </div>
-        <div class="footer">
-          <div class="footer-info">
-            <div class="information">INFORMATION</div>
-            <div class="footer-info-child"></div>
-          </div>
-          <div class="home1">Home</div>
-        </div>
-        <div class="quick-links-title-parent">
-          <div class="quick-links-title">
-            <div class="quick-links">Quick Links</div>
-            <div class="quick-links-title-inner">
-              <div class="frame-child5"></div>
-            </div>
-          </div>
-          <div class="shiksha-mandal-wrapper">
-            <div class="shiksha-mandal">Shiksha Mandal</div>
-          </div>
-        </div>
       </div>
-    </div>
-    <img
-      class="bit-east-elevation-6-removebg-icon"
-      alt=""
-      src="./public/06biteastelevation6removebgpreview-1@2x.png"
-    />
-</div>
-</div>
+      <img
+        class="telephone-icon"
+        loading="lazy"
+        alt=""
+        src="./public/telephone@2x.png"
+      />
 
-<script>
-  var homeText = document.getElementById("homeText");
-  if (homeText) {
-    homeText.addEventListener("click", function () {
-      var anchor = document.querySelector("[data-scroll-to='rectangle']");
-      if (anchor) {
-        anchor.scrollIntoView({ block: "start", behavior: "smooth" });
+      <div class="bitbitwardhaacin-pricipalb">
+        <p class="bitbitwardhaacin">bit@bitwardha.ac.in</p>
+        <p class="pricipalbitwardhaacin">pricipal@bitwardha.ac.in</p>
+      </div>
+      <img
+        class="email-icon"
+        loading="lazy"
+        alt=""
+        src="./public/email@2x.png"
+      />
+
+      <b class="faculty">Faculty</b>
+      <b class="blog">Blog</b>
+      <b class="activities">Activities</b>
+      <b class="mandatory-disclosure">Mandatory Disclosure</b>
+      <b class="nirf">NIRF</b>
+      <div class="academic-bank-of">Academic Bank of Credits</div>
+      <b class="digilocker-portal">Digilocker Portal</b>
+      <div class="national-scholarship-portal">National Scholarship Portal</div>
+      <b class="gallery">Gallery</b>
+      <b class="about-us">About us </b>
+      <footer class="frame-footer">
+        <footer class="rectangle-footer"></footer>
+        <div class="contact-info-container">
+          <div class="contact-details">
+            <div class="contact-options">
+              <div class="contact-links">
+                <h2 class="contact-us">Contact us</h2>
+                <div class="contact-links-inner">
+                  <img class="line-icon" loading="lazy" alt="" />
+                </div>
+              </div>
+              <div class="address">
+                <div class="address-container">
+                  <img
+                    class="placeholder-icon"
+                    loading="lazy"
+                    alt=""
+                    src="./public/placeholder@2x.png"
+                  />
+                </div>
+                <p class="bajaj-institute-of-container">
+                  <span class="bajaj-institute-of"
+                    >Bajaj Institute of technology, arvi road, pipri,
+                  </span>
+                  <span class="wardha-442001-maharashtra"
+                    >wardha-442001 (maharashtra)</span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="footer-info">
+                <h2 class="information">INFORMATION</h2>
+                <div class="footer-info-child"></div>
+              </div>
+              <b class="home1">Home</b>
+            </div>
+            <div class="quick-links-title-parent">
+              <div class="quick-links-title">
+                <h2 class="quick-links">Quick Links</h2>
+                <div class="quick-links-title-inner">
+                  <div class="frame-child4"></div>
+                </div>
+              </div>
+              <div class="shiksha-mandal-wrapper">
+                <b class="shiksha-mandal">Shiksha Mandal</b>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="bit-east-elevation-6-removebg-icon"
+          alt=""
+          src="./public/06biteastelevation6removebgpreview-1@2x.png"
+        />
+      </footer>
+    </div>
+
+    <script>
+      var homeText = document.getElementById("homeText");
+      if (homeText) {
+        homeText.addEventListener("click", function () {
+          var anchor = document.querySelector("[data-scroll-to='rectangleSection']");
+          if (anchor) {
+            anchor.scrollIntoView({ block: "start", behavior: "smooth" });
+          }
+        });
       }
-    });
-  }
-  
-  var aboutText1 = document.getElementById("aboutText1");
-  if (aboutText1) {
-    aboutText1.addEventListener("click", function () {
-      var anchor = document.querySelector("[data-scroll-to='aboutText']");
-      if (anchor) {
-        anchor.scrollIntoView({ block: "start", behavior: "smooth" });
+      
+      var aboutText1 = document.getElementById("aboutText1");
+      if (aboutText1) {
+        aboutText1.addEventListener("click", function () {
+          var anchor = document.querySelector("[data-scroll-to='aboutText']");
+          if (anchor) {
+            anchor.scrollIntoView({ block: "start", behavior: "smooth" });
+          }
+        });
       }
-    });
-  }
-  
-  var vacancyText = document.getElementById("vacancyText");
-  if (vacancyText) {
-    vacancyText.addEventListener("click", function () {
+      
+      var vacancyText = document.getElementById("vacancyText");
+      if (vacancyText) {
+        vacancyText.addEventListener("click", function () {
           var anchor = document.querySelector("[data-scroll-to='vACANCYText']");
           if (anchor) {
             anchor.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -431,9 +457,10 @@
           // Please sync "Select User Page" to the project
         });
       }
-      var groupContainer1 = document.getElementById("groupContainer1");
-      if (groupContainer1) {
-        groupContainer1.addEventListener("click", function (e) {
+      
+      var groupButton1 = document.getElementById("groupButton1");
+      if (groupButton1) {
+        groupButton1.addEventListener("click", function (e) {
           // Please sync "Select User Page" to the project
         });
       }

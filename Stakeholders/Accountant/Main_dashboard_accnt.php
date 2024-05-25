@@ -60,21 +60,21 @@
                 <li>
                     <a href="#" class="nav-link" data-id="profile" data-target="Student_profile.php">
                         <i class="fas fa-user"></i>
-                        Profile
+                        Home
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link" data-id="about" data-target="about.php">
                         <i class="fas fa-briefcase"></i>
-                        About
+                        Profile
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#" class="nav-link" data-id="portfolio" data-target="portfolio.php">
                         <i class="fas fa-image"></i>
                         Portfolio
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="#" class="nav-link" data-id="logout" data-target="logout.php">
                         <i class="fas fa-sign-out-alt"></i>
