@@ -54,7 +54,7 @@
                 <h5>Hostel Management System</h5>
             </div>
             <div class="profile-photo" id="profilePhoto">
-                <img src="../../assets/profile_photo.png" alt="">
+                <img src="../../assets/profile.png" alt="">
             </div>
             <ul class="list-unstyled components">
                 <li>
@@ -84,121 +84,121 @@
             </ul>
         </div>
         <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container-fluid row">
-                    <div class="col-1">
-                        <button type="button" id="sidebarCollapse" class="navbar-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid row">
+            <div class="col-1">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-11">
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Total Students</h6>
+                            </div>
+                            <p>5643</p>
+                        </div>
                     </div>
-                    <div class="col-11">
-                        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                            <div class="col">
-                                <div class="p-1 border  navigation_options">
-                                    <div class="heading-with-image">
-                                        <h6>Total Students</h6>
-                                    </div>
-                                    <p>5643</p>
-                                </div>
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Hostelers</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
                             </div>
-                            <div class="col">
-                                <div class="p-1 border  navigation_options">
-                                    <div class="heading-with-image">
-                                        <h6>Hostelers</h6>
-                                        <img src="../../assets/Group 31.png" alt="icon">
-                                    </div>
-                                    <p>5643</p>
-                                </div>
+                            <p>5643</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-1 border navigation_options">
+                            <div class="heading-with-image">
+                                <h6>On Leave</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
                             </div>
-                            <div class="col">
-                                <div class="p-1 border navigation_options">
-                                    <div class="heading-with-image">
-                                        <h6>On Leave</h6>
-                                        <img src="../../assets/Group 31.png" alt="icon">
-                                    </div>
-                                    <p>4589</p>
-                                </div>
+                            <p>4589</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-1 border  navigation_options">
+                            <div class="heading-with-image">
+                                <h6>Removed</h6>
+                                <img src="../../assets/Group 31.png" alt="icon">
                             </div>
-                            <div class="col">
-                                <div class="p-1 border  navigation_options">
-                                    <div class="heading-with-image">
-                                        <h6>Removed</h6>
-                                        <img src="../../assets/Group 31.png" alt="icon">
-                                    </div>
-                                    <p>7964</p>
-                                </div>
-                            </div>
+                            <p>7964</p>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </div>
+    </nav>
             <div class="below_navbar" id="below_navbar">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 left-col">
-                        <div class="container">
-                            <div class="row g-2">
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content">
-                                            <img src="../../assets/Fees_collection.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content">
-                                            <img src="../../assets/New_Admitted_students.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content add_student" data-id="add_student" data-target="Custom_Registration.php">
-                                            <img src="../../assets/Add_Student.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content">
-                                            <img src="../../assets/Remove_Student.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content">
-                                            <img src="../../assets/Complaints.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="square-box">
-                                        <div class="square-box-content">
-                                            <img src="../../assets/attendance.png" alt="">
-                                        </div>
-                                    </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 left-col">
+                <div class="container">
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/Fees_collection.png" alt="">
                                 </div>
                             </div>
-                            <div class="row g-2">
-
+                        </div>
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/New_Admitted_students.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/Add_Student.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/Remove_Student.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/Complaints.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="square-box">
+                                <div class="square-box-content">
+                                    <img src="../../assets/attendance.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 right-col d-flex align-items-center justify-content-center">
-                        <div class="container">
-                            <div class="heading-with-image">
-                                <h3>Fees Paid Students</h3>
-                                <img src="../../assets/Group 31.png" alt="icon" class="Fees_paid_students" data-id="Fees_paid_students" data-target="Newly_Admitted_Students.php">
-                            </div>
-                            <div class="search-filter-container">
-                                <input type="text" placeholder="Search...">
-                                <button>Filter</button>
-                            </div>
-                            <div class="container student-list-container">
-                                <div class="student-list" id="student-list">
+                    <div class="row g-2">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 right-col d-flex align-items-center justify-content-center">
+                <div class="container">
+                    <div class="heading-with-image">
+                        <h3>Fees Paid Students</h3>
+                        <img src="../../assets/Group 31.png" alt="icon" class="Fees_paid_students" data-id="Fees_paid_students" data-target="Newly_Admitted_Students.php">
+                    </div>
+                    <div class="search-filter-container">
+                        <input type="text" placeholder="Search...">
+                        <button>Filter</button>
+                    </div>
+                    <div class="container student-list-container">
+                        <div class="student-list" id="student-list">
 
                                 </div>
                             </div>
