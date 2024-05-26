@@ -177,20 +177,22 @@
         // }
 
         // Fetch attendance data
-        document.addEventListener("DOMContentLoaded", function() {
-            console.log('DOM fully loaded and parsed');
-            fetch('fetch_attendance.php') // replace 'path_to_your_php_file.php' with the actual path
-                .then(response => {
-                    console.log('fetch response:', response);
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('data:', data);
+        // Fetch attendance data
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log('Fetching attendance data...');
+        fetch('fetch_attendance.php') // replace 'fetch_attendance.php' with the actual path
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Received data:', data);
+                if (Array.isArray(data.data)) {
                     const attendanceList = document.getElementById('attendance-list');
                     console.log('attendanceList:', attendanceList);
                     let htmlContent = '';
 
-                    data.forEach(item => {
+                    data.data.forEach(item => {
                         console.log('item:', item);
                         htmlContent += `
                             <div class="attendance-item">
@@ -201,9 +203,12 @@
 
                     attendanceList.innerHTML = htmlContent;
                     console.log('htmlContent:', htmlContent);
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        });
+                } else {
+                    console.error('Data is not an array:', data.data);
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
     </script>
 </body>
 </html>
