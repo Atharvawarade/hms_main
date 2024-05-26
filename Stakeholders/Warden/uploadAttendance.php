@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="../../css/uploadAttendance.css">
     <style>
         .search-container {
@@ -17,28 +13,34 @@
             justify-content: center;
             padding: 20px;
         }
+
         .search-container .form-control {
             border-radius: 30px 0 0 30px;
             border-right: none;
         }
+
         .search-container .btn {
             border-radius: 0 30px 30px 0;
         }
+
         .filter-button {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
         }
+
         .filter-button .btn {
             display: flex;
             align-items: center;
         }
+
         .filter-button .btn i {
             margin-right: 8px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row attendance_container">
@@ -65,7 +67,7 @@
                                 <option value="December">December</option>
                             </select>
                         </div>
-                    
+
                         <header>Drag and drop attendance CSV file here.</header>
                         <p>OR</p>
                         <button type="button" class="custom-button btn btn-primary" id="browseBtn">Browse Computers</button>
@@ -83,7 +85,7 @@
                     </div>
                     <div class="container attendance-list-container">
                         <div class="attendance-list" id="attendance-list">
-                               
+
                         </div>
                     </div>
                 </div>
@@ -97,15 +99,15 @@
     <script>
         //selecting all required elements
         const dropArea = document.querySelector(".drag-area");
-        console.log('dropArea:', dropArea);
+        // console.log('dropArea:', dropArea);
         const dragText = dropArea.querySelector("header");
-        console.log('dragText:', dragText);
+        // console.log('dragText:', dragText);
         const browseBtn = dropArea.querySelector("#browseBtn");
-        console.log('browseBtn:', browseBtn);
+        // console.log('browseBtn:', browseBtn);
         const uploadBtn = dropArea.querySelector("#uploadBtn");
-        console.log('uploadBtn:', uploadBtn);
+        // console.log('uploadBtn:', uploadBtn);
         const input = dropArea.querySelector("input[type='file']");
-        console.log('input:', input);
+        // console.log('input:', input);
 
         let file; //this is a global variable and we'll use it inside multiple functions
 
@@ -178,37 +180,38 @@
 
         // Fetch attendance data
         // Fetch attendance data
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log('Fetching attendance data...');
-        fetch('fetch_attendance.php') // replace 'fetch_attendance.php' with the actual path
-            .then(response => {
-                console.log('Response status:', response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Received data:', data);
-                if (Array.isArray(data.data)) {
-                    const attendanceList = document.getElementById('attendance-list');
-                    console.log('attendanceList:', attendanceList);
-                    let htmlContent = '';
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('Fetching attendance data...');
+            fetch('fetch_attendance.php') // replace 'fetch_attendance.php' with the actual path
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Received data:', data);
+                    if (Array.isArray(data.data)) {
+                        const attendanceList = document.getElementById('attendance-list');
+                        console.log('attendanceList:', attendanceList);
+                        let htmlContent = '';
 
-                    data.data.forEach(item => {
-                        console.log('item:', item);
-                        htmlContent += `
+                        data.data.forEach(item => {
+                            console.log('item:', item);
+                            htmlContent += `
                             <div class="attendance-item">
                                 <p>ID: ${item.month}</p>
                             </div>
                         `;
-                    });
+                        });
 
-                    attendanceList.innerHTML = htmlContent;
-                    console.log('htmlContent:', htmlContent);
-                } else {
-                    console.error('Data is not an array:', data.data);
-                }
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
+                        attendanceList.innerHTML = htmlContent;
+                        console.log('htmlContent:', htmlContent);
+                    } else {
+                        console.error('Data is not an array:', data.data);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
     </script>
 </body>
+
 </html>
