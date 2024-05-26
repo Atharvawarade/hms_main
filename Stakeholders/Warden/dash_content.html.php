@@ -35,7 +35,7 @@
   <div class="row below-navbar-row">
     <div class="col-md-8 col-sm-12 left-column">
       <p>Warden Dashboard</p>
-      <div class="row dashboard-row" >
+      <div class="row dashboard-row">
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="checkRooms">
           <img src="../../assets/checkRooms.png" alt="checkRooms" class="centered-image" />
         </div>
@@ -175,8 +175,7 @@
     });
 
     uploadAttendance.addEventListener("click", async () => {
-      // console.log("Newbies button clicked");
-      // console.log("Button with id 'newbies' was pressed"); // Additional console log
+
       try {
         const response = await fetch("uploadAttendance.php");
         console.log("Fetch request sent");
@@ -206,6 +205,7 @@
             document.body.appendChild(newScript).parentNode.removeChild(newScript);
           }
           console.log("Script appended below");
+
         } else {
           console.error("Element with id 'below_nav' not found");
         }
@@ -217,17 +217,13 @@
     console.error("Element with id 'newbies' not found");
   }
   // upload attendance javascript : = end
-
-  
-
 </script>
+
+
 <script type="text/javascript">
   $(document).ready(function() {
     $("#sidebarCollapse").on("click", function() {
       $("#sidebar").toggleClass("active");
     });
   });
-
-
 </script>
-
