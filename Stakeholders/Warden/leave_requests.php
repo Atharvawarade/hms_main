@@ -20,8 +20,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student_id = $_POST["student_id"];
     $action = $_POST["action"];
 
+    $status = "";
+    switch ($action) {
+        case "accept":
+            $status = "Accepted";
+            break;
+        case "deny":
+            $status = "Cancelled";
+            break;
+        default:
+            $status = "Pending";
+            break;
+    }
+
     // Update the request status in the database
-    $sql = "UPDATE students SET request_status='$action' WHERE id=$student_id";
+    $sql = "UPDATE student SET request_status='$action' WHERE id=$student_id";
     if ($conn->query($sql) === TRUE) {
         echo "Request status updated successfully.";
     } else {
