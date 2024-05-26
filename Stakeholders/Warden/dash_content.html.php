@@ -35,8 +35,8 @@
   <div class="row below-navbar-row">
     <div class="col-md-8 col-sm-12 left-column">
       <p>Warden Dashboard</p>
-      <div class="row dashboard-row" id="checkRooms">
-        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
+      <div class="row dashboard-row" >
+        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="checkRooms">
           <img src="../../assets/checkRooms.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
@@ -45,19 +45,14 @@
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
           <img src="../../assets/roomleftRequests.png" alt="checkRooms" class="centered-image" />
         </div>
-        <!-- </div>
-
-      <br />
-
-      <div class="row dashboard-row"> -->
         <div class="cards col-md-5 col-sm-12 box align-items-center">
           <img src="../../assets/Complaints.png" alt="checkRooms" class="centered-image" />
         </div>
-        <div class="cards col-md-5 col-sm-12 box align-items-center">
+        <div class="cards col-md-5 col-sm-12 box align-items-center" id="upload_attendance">
           <img src="../../assets/attendance.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-12 box align-items-center">
-          <img src="../../assets/attendance.png" alt="checkRooms" class="centered-image" />
+          <!-- <img src="../../assets/attendance.png" alt="checkRooms" class="centered-image" /> -->
         </div>
       </div>
     </div>
@@ -137,6 +132,7 @@
   }
 
 
+  // Check rooms javascript : = start
   const checkRoomsDiv = document.getElementById("checkRooms");
   if (checkRoomsDiv) {
     // console.log("Element with id 'checkRooms' found");
@@ -167,6 +163,61 @@
   } else {
     console.error("Element with id 'checkRooms' not found");
   }
+  // Check rooms javascript : = end 
+
+
+  // upload attendance javascript : = start
+  const uploadAttendance = document.getElementById("upload_attendance");
+  if (newbiesButton) {
+    // console.log("Element with id 'newbies' found");
+    uploadAttendance.addEventListener("click", function() {
+      console.log("button");
+    });
+
+    uploadAttendance.addEventListener("click", async () => {
+      // console.log("Newbies button clicked");
+      // console.log("Button with id 'newbies' was pressed"); // Additional console log
+      try {
+        const response = await fetch("uploadAttendance.php");
+        console.log("Fetch request sent");
+        if (!response.ok) {
+          console.error("Network response was not ok");
+          throw new Error("Network response was not ok");
+        }
+        // console.log("Fetch successful");
+        const data = await response.text();
+        console.log("Response data received:");
+        const contentDiv = document.getElementById("below_nav");
+        if (contentDiv) {
+          // console.log("Element with id 'below_nav' found");
+          contentDiv.innerHTML = data;
+          // console.log("below_nav updated successfully");
+
+          // Find and execute scripts in the fetched content
+          const scripts = contentDiv.getElementsByTagName("script");
+          for (let i = 0; i < scripts.length; i++) {
+            const newScript = document.createElement("script");
+            newScript.type = "text/javascript";
+            if (scripts[i].src) {
+              newScript.src = scripts[i].src;
+            } else {
+              newScript.text = scripts[i].innerHTML;
+            }
+            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+          }
+          console.log("Script appended below");
+        } else {
+          console.error("Element with id 'below_nav' not found");
+        }
+      } catch (error) {
+        console.error("Error fetching the file:", error);
+      }
+    });
+  } else {
+    console.error("Element with id 'newbies' not found");
+  }
+  // upload attendance javascript : = end
+
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -174,4 +225,7 @@
       $("#sidebar").toggleClass("active");
     });
   });
+
+
 </script>
+
