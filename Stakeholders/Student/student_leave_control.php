@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         echo 'Leave request submitted successfully.';
+        header ("location: Main_dashboard.php");
     } else {
         echo 'Error: ' . $stmt->error;
     }

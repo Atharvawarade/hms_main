@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the confirmation button is clicked and both checkboxes are checked
     if (isset($_POST['confirmation']) && $_POST['confirmation'] === 'clicked' && isset($_POST['returnFurniture']) && isset($_POST['payFees'])) {
         // Include database connection
-        include 'db_connection.php'; // Adjust the path according to your file structure
+        include '../../php/connection/connect.php'; // Adjust the path according to your file structure
 
         // Get EN from session
         $EN = $_SESSION['EN'];
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_query($conn, $sql)) {
             // Redirect to a success page or display a success message
-            header("Location: quit_request_success.php");
+            header("Location: Main_dashboard.php");
             exit();
         } else {
             // Handle database error

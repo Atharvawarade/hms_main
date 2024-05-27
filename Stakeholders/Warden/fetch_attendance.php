@@ -55,7 +55,7 @@
             echo '<div class="col-md-3"><p>' . $row["year"] . '</p></div>';
             
             echo '<div class="col-md-4"><p>' . $row["Date_and_time_of_upload"] . '</p></div>';
-            echo '<div class="col-md-2"><button class="btn btn-primary hii-btn" data-month="' . $row["month"] . '">Hii</button></div>';
+            echo '<div class="col-md-2"><button class="btn btn-primary hii-btn" data-month="' . $row["month"] . '">View</button></div>';
             echo '</div>';
         }
     } else {

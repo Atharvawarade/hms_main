@@ -73,21 +73,21 @@
                         <div class="container">
                             <div class="row g-2">
                                 <div class="col-4">
-                                    <div class="square-box">
+                                    <div class="square-box apply_for_leave" data-id="apply_for_leave" data-target="Student_leave.php">
                                         <div class="square-box-content">
                                             <img src="../../assets/Apply for Leave.png" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="square-box">
+                                    <div class="square-box apply_for_quit" data-id="apply_for_quit" >
                                         <div class="square-box-content">
                                             <img src="../../assets/Quit Hostel.png" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="square-box">
+                                <div class="square-box room_change" data-id="room_change" data-target="student_roomchange.php">
                                         <div class="square-box-content">
                                             <img src="../../assets/Room Change.png" alt="">
                                         </div>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="square-box">
+                                    <div class="square-box check_attendance" data-id="check_attendance" data-target="check_attendance.php">
                                         <div class="square-box-content">
                                             <img src="../../assets/Check Attendance.png" alt="">
                                         </div>
@@ -163,6 +163,27 @@
             $('.apply_for_leave').on('click', function(e) {
                 e.preventDefault();
                 console.log("Apply for leave clicked");
+                var targetUrl = $(this).data('target');
+                var targetId = $(this).data('id');
+                console.log("Target URL: " + targetUrl);
+                console.log("Target ID: " + targetId);
+                loadContent(targetUrl, targetId);
+            });
+
+            $('.room_change').on('click', function(e) {
+                e.preventDefault();
+                console.log("Room Change clicked");
+                var targetUrl = $(this).data('target');
+                var targetId = $(this).data('id');
+                console.log("Target URL: " + targetUrl);
+                console.log("Target ID: " + targetId);
+                loadContent(targetUrl, targetId);
+            });
+
+
+            $('.check_attendance').on('click', function(e) {
+                e.preventDefault();
+                console.log("check_attendance clicked");
                 var targetUrl = $(this).data('target');
                 var targetId = $(this).data('id');
                 console.log("Target URL: " + targetUrl);

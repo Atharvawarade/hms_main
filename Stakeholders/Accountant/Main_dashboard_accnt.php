@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="p-1 border  navigation_options">
+                        <div class="p-1 border  navigation_options hostelers_list" data-id ="hostelers_list" data-target="Hostelers_list.php">
                             <div class="heading-with-image">
                                 <h6>Hostelers</h6>
                                 <img src="../../assets/Group 31.png" alt="icon">
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="square-box">
+                            <div class="square-box add_student" data-id="add_student" data-target="Custom_Registration.php">
                                 <div class="square-box-content">
                                     <img src="../../assets/Add_Student.png" alt="">
                                 </div>
@@ -221,58 +221,81 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            console.log("Document is ready");
+    $(document).ready(function() {
+        console.log("Document is ready");
 
-            $('#sidebarCollapse').on('click', function() {
-                console.log("Sidebar collapse button clicked");
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-                console.log("Sidebar and button toggled");
-            });
-
-            $('.Fees_paid_students').on('click', function(e) {
-                e.preventDefault();
-                console.log("Fees_paid_students clicked");
-                var targetUrl = $(this).data('target');
-                var targetId = $(this).data('id');
-                console.log("Target URL: " + targetUrl);
-                console.log("Target ID: " + targetId);
-                loadContent(targetUrl, targetId);
-            });
-
-            $('.add_student').on('click', function(e) {
-                e.preventDefault();
-                console.log("add_studentclicked");
-                var targetUrl = $(this).data('target');
-                var targetId = $(this).data('id');
-                console.log("Target URL: " + targetUrl);
-                console.log("Target ID: " + targetId);
-                loadContent(targetUrl, targetId);
-            });
-
-
-
-            function loadContent(url, id) {
-                console.log("Loading content from: " + url);
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function(data) {
-                        console.log("Content loaded successfully");
-                        $('#below_navbar').html(data);
-                        console.log("Content inserted into #below_navbar");
-                        $('#below_navbar').attr('id', id);
-                        console.log("Content id changed to: " + id);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("Error loading content: " + errorThrown);
-                        $('#below_navbar').html('<p>An error has occurred: ' + errorThrown + '</p>');
-                    }
-                });
-            }
+        $('#sidebarCollapse').on('click', function() {
+            console.log("Sidebar collapse button clicked");
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+            console.log("Sidebar and button toggled");
         });
-    </script>
+
+        $('.Fees_paid_students').on('click', function(e) {
+            e.preventDefault();
+            console.log("Fees_paid_students clicked");
+            var targetUrl = $(this).data('target');
+            var targetId = $(this).data('id');
+            console.log("Target URL: " + targetUrl);
+            console.log("Target ID: " + targetId);
+            loadContent(targetUrl, targetId);
+        });
+
+        $('.add_student').on('click', function(e) {
+            e.preventDefault();
+            console.log("add_student clicked");
+            var targetUrl = $(this).data('target');
+            var targetId = $(this).data('id');
+            console.log("Target URL: " + targetUrl);
+            console.log("Target ID: " + targetId);
+            loadContent(targetUrl, targetId);
+        });
+
+        $('.hostelers_list').on('click', function(e) {
+            e.preventDefault();
+            console.log("hostelers_list Clicked");
+            var targetUrl = $(this).data('target');
+            var targetId = $(this).data('id');
+            console.log("Target URL: " + targetUrl);
+            console.log("Target ID: " + targetId);
+            loadContent(targetUrl, targetId);
+        });
+
+        function loadContent(url, targetId) {
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    $('#' + targetId).html(data);
+                    // Re-initialize Bootstrap's JavaScript components
+                    var modals = document.querySelectorAll('.modal');
+                    modals.forEach(function(modal) {
+                        new bootstrap.Modal(modal);
+                    });
+                }
+            });
+        }
+
+        function loadContent(url, id) {
+            console.log("Loading content from: " + url);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(data) {
+                    console.log("Content loaded successfully");
+                    $('#below_navbar').html(data);
+                    console.log("Content inserted into #below_navbar");
+                    $('#below_navbar').attr('id', id);
+                    console.log("Content id changed to: " + id);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error loading content: " + errorThrown);
+                    $('#below_navbar').html('<p>An error has occurred: ' + errorThrown + '</p>');
+                }
+            });
+        }
+    });
+</script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             fetch('fetch_newly_admitted_students.php')
