@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2024 at 08:49 PM
+-- Generation Time: May 27, 2024 at 10:31 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `alloted` (
   `furniture_id_2` int(10) UNSIGNED NOT NULL,
   `furniture_id_3` int(10) UNSIGNED NOT NULL,
   `room_id` int(10) UNSIGNED NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `alloted`
@@ -42,7 +42,7 @@ CREATE TABLE `alloted` (
 INSERT INTO `alloted` (`student_id`, `furniture_id_1`, `furniture_id_2`, `furniture_id_3`, `room_id`) VALUES
 ('EN123456789', 1, 2, 3, 1),
 ('EN21107546', 4, 5, 6, 1),
-(NULL, 7, 8, 9, 2),
+('EN21107538 ', 7, 8, 9, 2),
 (NULL, 10, 11, 12, 2),
 (NULL, 13, 14, 15, 3),
 (NULL, 16, 17, 18, 3),
@@ -280,6 +280,27 @@ INSERT INTO `alloted` (`student_id`, `furniture_id_1`, `furniture_id_2`, `furnit
 (NULL, 712, 713, 714, 119),
 (NULL, 715, 716, 717, 120),
 (NULL, 718, 719, 720, 120);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance_files`
+--
+
+CREATE TABLE `attendance_files` (
+  `year` int(4) NOT NULL,
+  `month` enum('January','February','March','April','May','June','July','August','September','October','November','December') NOT NULL,
+  `Date_and_time_of_upload` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `hostel` enum('Boys','Girls') NOT NULL,
+  `file` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attendance_files`
+--
+
+INSERT INTO `attendance_files` (`year`, `month`, `Date_and_time_of_upload`, `hostel`, `file`) VALUES
+(2024, 'January', '2024-05-27 03:13:47', '', '../../Attendance/student_attendance.csv');
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1234,7 @@ CREATE TABLE `leave_requests` (
 --
 
 INSERT INTO `leave_requests` (`EN`, `Fullname`, `room_id`, `status`, `start_date`, `end_date`, `reason`) VALUES
-('EN21107546', 'RAJESH KUMAR', NULL, 'Pending', '2024-05-18', '2024-05-31', 'm');
+('EN21107545', 'SANJAY YADAV', NULL, 'Pending', '2024-05-03', '2024-05-14', 'cvvc');
 
 -- --------------------------------------------------------
 
@@ -1425,10 +1446,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `room_id`, `dateOfStatusChange`, `status`) VALUES
-('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, NULL, '2024-05-01', 'paid'),
+('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, NULL, '2024-05-01', 'paid and approved'),
 ('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, 2, NULL, 'paid and approved'),
-('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, NULL, 'paid'),
-('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example.com', '2004-06-26', 'Male', 2109876543, 'Meera Nagar ', 'Behind Keshav City ', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 0, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, 5, NULL, 'paid and approved'),
+('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, NULL, 'paid and approved'),
+('EN21107545', 'SANJAY YADAV', 'sanjay.yadav@example.com', '2024-05-10', 'Male', 1098765432, 'Ram nagar', '', 'Wardha', 'Maharshtra', 442001, 2147483647, 2147483647, 0, 'A+', 'EN2110754531556Computer EngineeringAprofile_photo.png', 1, 'Computer Engineering', 'A', NULL, NULL, NULL, 'paid and approved'),
+('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example1.com', '2004-06-11', 'Male', 2109876543, 'Meera Naga', 'Behind Keshav Cit', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 78, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, 5, NULL, 'paid and approved'),
+('EN21107554', 'ANITA YADAV', 'anita.yadav@example.com', '2024-05-10', 'Female', 1234567890, 'Jayant Nagar', 'Gandhi Chowk, Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 321456963, 'A+', 'EN2110755430577Mechanical EngineeringBprofile_photo.png', 1, 'Mechanical Engineering', 'B', NULL, NULL, NULL, 'paid and approved'),
 ('EN21107558', 'SHYAM KUMAR', 'shyam.kumar@example.com', '2024-06-08', 'Male', 5678901234, 'Snehal Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 2147483647, 'AB+', '', 1, 'Computer Engineering', 'A', NULL, 3, NULL, 'paid and approved'),
 ('EN21107578', 'GEETA KUMARI', 'geeta.kumari@example.com', '2003-06-24', 'Female', 7890123456, 'Sai Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Civil Engineering', '', NULL, 22, NULL, 'paid and approved');
 
