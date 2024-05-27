@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form method='post' action='" . $_SERVER["PHP_SELF"] . "'>
                       <input type='hidden' name='student_id' value='" . $row["EN"] . "'>
                       <input type='submit' name='action' value='Accept' class='accept-btn'>
-                      <input type='submit' name='action' value='Deny' class='deny-btn'>
+                      <input type='submit' name='action' value='Cancel' class='deny-btn'>
                     </form>
                   </div>
                 </div>";
