@@ -1,3 +1,4 @@
+
 <?php
 $servername = "localhost"; // Replace with your server name
 $username = "root"; // Replace with your username
