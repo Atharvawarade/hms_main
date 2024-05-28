@@ -16,30 +16,39 @@ if ($conn->connect_error) {
 // Fetch leave requests from the database
 $sql = "SELECT * FROM leave_requests";
 $result = $conn->query($sql);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student_id = $_POST["student_id"];
     $action = $_POST["action"];
 
     $status = "";
-    switch ($action) {
-        case "accept":
-            $status = "Accepted";
-            break;
-        case "deny":
-            $status = "Cancelled";
-            break;
-        default:
-            $status = "Pending";
-            break;
+    if ($action == "Accept") {
+        $status = "Approved";
+    } elseif ($action == "Cancel") {
+        $status = "Cancelled";
     }
 
     // Update the request status in the database
-    $sql = "UPDATE student SET request_status='$action' WHERE id=$student_id";
-    if ($conn->query($sql) === TRUE) {
-        echo "Request status updated successfully.";
+    $stmt = $conn->prepare("UPDATE leave_requests SET status=? WHERE EN=?");
+    $stmt->bind_param("ss", $status, $student_id);
+
+    if ($stmt->execute() === TRUE) {
+        // Delete the entry from the database
+        $stmt_delete = $conn->prepare("DELETE FROM leave_requests WHERE EN=?");
+        $stmt_delete->bind_param("s", $student_id);
+
+        if ($stmt_delete->execute() === TRUE) {
+            echo "Request status updated and entry deleted successfully.";
+            header("Location: Warden-Dashboard.html");
+            exit(); // Ensure no further code is executed after redirection
+        } else {
+            echo "Error deleting request: " . $stmt_delete->error;
+        }
+        $stmt_delete->close();
     } else {
-        echo "Error updating request status: " . $conn->error;
+        echo "Error updating request status: " . $stmt->error;
     }
+    $stmt->close();
 }
 ?>
 
@@ -48,141 +57,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Profiles</title>
+  <title>Student Leave Requests</title>
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
   <style>
-   body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #e6c9ff;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.search-filter {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  flex-grow: 1;
-  margin-right: 10px;
-}
-
-.filter-btn {
-  padding: 8px 16px;
-  background-color: #8c52ff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.profile-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.profile-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.profile-details {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.name,
-.program,
-.year {
-  font-size: 16px;
-  color: #040303;
-  
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .table thead {
+        background-color: #6f42c1;
+        color: #fff;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="search-filter">
-      <input type="text" placeholder="Search..." class="search-input">
-      
-    </div>
-    <div class="profile-list">
-      <?php
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          echo "<div class='profile'>
-                  
-                  <div class='profile-details'>
-                    <span class='name'>" . $row["EN"] . "</span>
-                    <span class='program'>" . $row["Fullname"] . "</span>
-                    <span class='year'>" . $row["room_id"] . "</span>
-                    <span class='year'>" . $row["start_date"] . "</span>
-                    <span class='year'>" . $row["end_date"] . "</span>
-                  </div>
-                  <div class='action-buttons'>
-                    <form method='post' action='" . $_SERVER["PHP_SELF"] . "'>
-                      <input type='hidden' name='student_id' value='" . $row["EN"] . "'>
-                      <input type='submit' name='action' value='Accept' class='accept-btn'>
-                      <input type='submit' name='action' value='Cancel' class='deny-btn'>
-                    </form>
-                  </div>
-                </div>";
-        }
-      } else {
-        echo "No student profiles found.";
-      }
-      ?>
+    <h2 class="mb-4">Student Leave Requests</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Enrollment Number</th>
+            <th>Full Name</th>
+            <th>Room ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              echo "<tr>
+                      <td>{$row["EN"]}</td>
+                      <td>{$row["Fullname"]}</td>
+                      <td>{$row["room_id"]}</td>
+                      <td>{$row["start_date"]}</td>
+                      <td>{$row["end_date"]}</td>
+                      <td>{$row["reason"]}</td>
+                      <td>
+                        <form method='post' action='{$_SERVER["PHP_SELF"]}' class='d-inline'>
+                          <input type='hidden' name='student_id' value='{$row["EN"]}'>
+                          <button type='submit' name='action' value='Accept' class='btn btn-outline-success btn-sm'>Accept</button>
+                          <button type='submit' name='action' value='Cancel' class='btn btn-outline-danger btn-sm'>Cancel</button>
+                        </form>
+                      </td>
+                    </tr>";
+            }
+          } else {
+            echo "<tr><td colspan='7' class='text-center'>No leave requests found.</td></tr>";
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
 <?php
 $conn->close();
 ?>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
