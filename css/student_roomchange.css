@@ -713,3 +713,16 @@ h2 {
 .submit-btn:hover {
     background-color: #4c47e0;
 }
+
+.container11 {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(169, 128, 232, 0.75);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.table thead {
+    background-color: #6f42c1;
+    color: #fff;
+}

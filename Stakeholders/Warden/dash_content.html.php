@@ -39,7 +39,7 @@
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="checkRooms">
           <img src="../../assets/checkRooms.png" alt="checkRooms" class="centered-image" />
         </div>
-        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
+        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="leave_request">
           <img src="../../assets/LeaveRequests.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
@@ -225,6 +225,64 @@
     console.error("Element with id 'newbies' not found");
   }
   // upload attendance javascript : = end
+
+
+
+
+
+
+
+  // Leave requests javascript : = start
+  const LeaveRequests = document.getElementById("leave_request");
+  if (LeaveRequests) {
+    // console.log("Element with id 'newbies' found");
+    LeaveRequests.addEventListener("click", function() {
+      console.log("Leave button");
+    });
+
+    LeaveRequests.addEventListener("click", async () => {
+      // console.log("Newbies button clicked");
+      // console.log("Button with id 'newbies' was pressed"); // Additional console log
+      try {
+        const response = await fetch("leave_requests.php");
+        console.log("Fetch request sent");
+        if (!response.ok) {
+          console.error("Network response was not ok");
+          throw new Error("Network response was not ok");
+        }
+        // console.log("Fetch successful");
+        const data = await response.text();
+        console.log("Response data received:");
+        const contentDiv = document.getElementById("below_nav");
+        if (contentDiv) {
+          // console.log("Element with id 'below_nav' found");
+          contentDiv.innerHTML = data;
+          // console.log("below_nav updated successfully");
+
+          // Find and execute scripts in the fetched content
+          const scripts = contentDiv.getElementsByTagName("script");
+          for (let i = 0; i < scripts.length; i++) {
+            const newScript = document.createElement("script");
+            newScript.type = "text/javascript";
+            if (scripts[i].src) {
+              newScript.src = scripts[i].src;
+            } else {
+              newScript.text = scripts[i].innerHTML;
+            }
+            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+          }
+          console.log("Script appended below");
+        } else {
+          console.error("Element with id 'below_nav' not found");
+        }
+      } catch (error) {
+        console.error("Error fetching the file:", error);
+      }
+    });
+  } else {
+    console.error("Element with id 'LeaveRequests' not found");
+  }
+  // Leave Requests javascript : = end  
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
