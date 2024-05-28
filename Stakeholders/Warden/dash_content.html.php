@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid" style="display: flex">
     <button type="button" id="sidebarCollapse" class="btn btn-info" style="
@@ -36,14 +35,14 @@
   <div class="row below-navbar-row">
     <div class="col-md-8 col-sm-12 left-column">
       <p>Warden Dashboard</p>
-      <div class="row dashboard-row" >
+      <div class="row dashboard-row">
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="checkRooms">
           <img src="../../assets/checkRooms.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="leave_request">
           <img src="../../assets/LeaveRequests.png" alt="checkRooms" class="centered-image" />
         </div>
-        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" >
+        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
           <img src="../../assets/roomleftRequests.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-12 box align-items-center">
@@ -137,7 +136,6 @@
   // Check rooms javascript : = start
   const checkRoomsDiv = document.getElementById("checkRooms");
   if (checkRoomsDiv) {
-    // console.log("Element with id 'checkRooms' found");
     checkRoomsDiv.addEventListener("click", async () => {
       console.log("CheckRooms div clicked");
       try {
@@ -150,13 +148,21 @@
         console.log("Fetch successful");
         const data = await response.text();
         console.log("Response data received:", data);
-        const contentDiv = document.getElementById("content");
+        const contentDiv = document.getElementById("below_nav");
         if (contentDiv) {
-          console.log("Element with id 'content' found");
+          console.log("Element with id 'below_nav' found");
           contentDiv.innerHTML = data;
           console.log("Content updated successfully");
+
+          // Initialize popovers
+          const popoverTriggerList = contentDiv.querySelectorAll('[data-bs-toggle="popover"]');
+          const popoverList = [...popoverTriggerList].map(
+            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+          );
+
+          console.log("Script appended below");
         } else {
-          console.error("Element with id 'content' not found");
+          console.error("Element with id 'below_nav' not found");
         }
       } catch (error) {
         console.error("Error fetching the file:", error);
@@ -226,7 +232,7 @@
 
 
 
-   // Leave requests javascript : = start
+  // Leave requests javascript : = start
   const LeaveRequests = document.getElementById("leave_request");
   if (LeaveRequests) {
     // console.log("Element with id 'newbies' found");
@@ -277,7 +283,6 @@
     console.error("Element with id 'LeaveRequests' not found");
   }
   // Leave Requests javascript : = end  
-
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -285,6 +290,4 @@
       $("#sidebar").toggleClass("active");
     });
   });
-
-
 </script>
