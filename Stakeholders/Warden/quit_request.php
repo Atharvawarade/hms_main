@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Update the request status in the database
-    $stmt = $conn->prepare("UPDATE quit_requests SET status=? WHERE EN=?");
+    $stmt = $conn->prepare("UPDATE quit_requests SET warden_status=? WHERE EN=?");
     $stmt->bind_param("ss", $warden_status, $student_id);
 
     if ($stmt->execute() === TRUE) {
