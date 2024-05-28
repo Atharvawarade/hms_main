@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch leave requests from the database
-$sql = "SELECT * FROM leave_requests";
+$sql = "SELECT * FROM quit_requests";
 $result = $conn->query($sql);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,18 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $status = "";
     if ($action == "Accept") {
-        $status = "Approved";
+        $accountant_status = "Approved";
     } elseif ($action == "Cancel") {
-        $status = "Cancelled";
+        $accountant_status = "Cancelled";
     }
 
     // Update the request status in the database
-    $stmt = $conn->prepare("UPDATE leave_requests SET status=? WHERE EN=?");
-    $stmt->bind_param("ss", $status, $student_id);
+    $stmt = $conn->prepare("UPDATE quit_requests SET status=? WHERE EN=?");
+    $stmt->bind_param("ss", $accountant_status, $student_id);
 
     if ($stmt->execute() === TRUE) {
         // Delete the entry from the database
-        $stmt_delete = $conn->prepare("DELETE FROM leave_requests WHERE EN=?");
+        $stmt_delete = $conn->prepare("DELETE FROM quit_requests WHERE EN=?");
         $stmt_delete->bind_param("s", $student_id);
 
         if ($stmt_delete->execute() === TRUE) {
@@ -151,12 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Enrollment Number</th>
-                    <th>Full Name</th>
-                    <th>Room ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Reason</th>
+                    <th>Enrollment Number</th> 
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -166,11 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     while ($row = $result->fetch_assoc()) {
                       echo "<tr>
                               <td>{$row["EN"]}</td>
-                              <td>{$row["Fullname"]}</td>
-                              <td>{$row["room_id"]}</td>
-                              <td>{$row["start_date"]}</td>
-                              <td>{$row["end_date"]}</td>
-                              <td>{$row["reason"]}</td>
+                              
                               <td>
                                 <form method='post' action='{$_SERVER["PHP_SELF"]}' class='d-inline'>
                                   <input type='hidden' name='student_id' value='{$row["EN"]}'>
@@ -181,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>";
                     }
                   } else {
-                    echo "<tr><td colspan='7' class='text-center'>No leave requests found.</td></tr>";
+                    echo "<tr><td colspan='7' class='text-center'>No Quit requests found.</td></tr>";
                   }
                   ?>
                 </tbody>
