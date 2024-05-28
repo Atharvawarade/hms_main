@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Leave Requests</title>
+  <title>Student Quit Requests</title>
   <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         font-family: Arial, sans-serif;
         background-color: #f2f2f2;
     }
-    .container {
+    .container11 {
         max-width: 800px;
         margin: 20px auto;
         background: rgba(169, 128, 232, 0.75);
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
   <div class="container">
-    <h2 class="mb-4">Student Leave Requests</h2>
+    <h2 class="mb-4">Student Quit Requests</h2>
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -134,4 +134,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 $conn->close();
 ?>
-
