@@ -73,11 +73,11 @@
           <a class="admission" id="admissionText">Admission</a>
         </nav>
         <div class="login">
-          <button class="rectangle-parent">
+          <button button id="regButton" class="rectangle-parent">
             <div class="frame-child"></div>
             <a class="register">Register</a>
           </button>
-          <button class="rectangle-group" id="groupButton1">
+          <button class="rectangle-group" id="loginButton">
             <div class="frame-item"></div>
             <a class="login1" id="loginText">Login</a>
           </button>
@@ -429,22 +429,21 @@
         }
       });
     }
+    document.getElementById("regButton").onclick = function () {
+            window.location.href = "/hms/Stakeholders/Student/Student_Registration.html";
+        };
 
-    var loginText = document.getElementById("loginText");
-    if (loginText) {
-      loginText.addEventListener("click", function (e) {
-        // Please sync "Select User Page" to the project
-      });
-    }
+    
+    document.getElementById("loginButton").onclick = function () {
+        window.location.href = "SelectUser.html";
+    };
 
-    var groupButton1 = document.getElementById("groupButton1");
-    if (groupButton1) {
-      groupButton1.addEventListener("click", function (e) {
-        // Please sync "Select User Page" to the project
-      });
-    }
-  </script>
-  <script>
+
+
+   
+    
+
+  
     function progressBar(progressVal, totalPercentageVal = 100) {
       var strokeVal = (86 * 100) / totalPercentageVal;
       var x = document.querySelector('.progress-circle-prog');
