@@ -168,9 +168,9 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="square-box">
+                            <div id="quit" class="square-box">
                                 <div class="square-box-content">
-                                    <img src="../../assets/Complaints.png" alt="">
+                                    <img src="../../assets/quit Hostel.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -274,6 +274,11 @@
                 }
             });
         }
+        
+        document.getElementById("quit").onclick = function () {
+            window.location.href = "/hms/Stakeholders/Accountant/quit_request1.php";
+        };
+
 
         function loadContent(url, id) {
             console.log("Loading content from: " + url);
