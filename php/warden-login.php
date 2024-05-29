@@ -29,8 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($entered_password == $stored_password) {
             // Passwords match, login successful
             $_SESSION['loggedin'] = true;
+            if ($row['username'] == 'WARDB01') {
+                $_SESSION['WardenId'] = 1;
+            } else  if ($row['username'] == 'WARDG01') {
+                $_SESSION['WardenId'] = 2;
+            }
             // $_SESSION['email'] = $entered_email;
             // $_SESSION['EN'] = $entered_password;
+            // echo "<pre>";
+            // echo "Session Variables after Login:<br>";
+            // print_r($_SESSION);
+            // echo "</pre>";
             header("Location:../Stakeholders/Warden/Warden-Dashboard.html");
             // header("Location: ../Student_Dash/Dashboard.php");
             exit;

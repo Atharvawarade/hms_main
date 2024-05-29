@@ -75,7 +75,11 @@
         </div>
       </div> -->
     <?php
-    include 'newbies.php';
+    echo "<pre>";
+    echo "Session Variables after Login:<br>";
+    print_r($_SESSION);
+    echo "</pre>";
+    // include 'newbies.php';
     ?>
   </div>
 </div>
