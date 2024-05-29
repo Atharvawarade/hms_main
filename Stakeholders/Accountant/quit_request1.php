@@ -1,5 +1,3 @@
-
-
 <?php
 // Database connection details
 $servername = "localhost";
@@ -31,28 +29,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Update the request status in the database
-    $stmt = $conn->prepare("UPDATE quit_requests SET status=? WHERE EN=?");
+    $stmt = $conn->prepare("UPDATE quit_requests SET accountant_status=? WHERE EN=?");
     $stmt->bind_param("ss", $accountant_status, $student_id);
 
     if ($stmt->execute() === TRUE) {
-        // Delete the entry from the database
-        $stmt_delete = $conn->prepare("DELETE FROM quit_requests WHERE EN=?");
-        $stmt_delete->bind_param("s", $student_id);
-
-        if ($stmt_delete->execute() === TRUE) {
-            echo "Request status updated and entry deleted successfully.";
-            header("Location: Warden-Dashboard.html");
-            exit(); // Ensure no further code is executed after redirection
-        } else {
-            echo "Error deleting request: " . $stmt_delete->error;
-        }
-        $stmt_delete->close();
+        echo "Request status updated successfully.";
+        header("Location: Warden-Dashboard.html");
     } else {
         echo "Error updating request status: " . $stmt->error;
     }
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,43 +134,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </nav>
         <div class="container11">
-          <div class="container">
-            <h2 class="mb-4">Student Quit Requests</h2>
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Enrollment Number</th> 
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                      echo "<tr>
-                              <td>{$row["EN"]}</td>
-                              
-                              <td>
-                                <form method='post' action='{$_SERVER["PHP_SELF"]}' class='d-inline'>
-                                  <input type='hidden' name='student_id' value='{$row["EN"]}'>
-                                  <button type='submit' name='action' value='Accept' class='btn btn-outline-success btn-sm'>Accept</button>
-                                  <button type='submit' name='action' value='Cancel' class='btn btn-outline-danger btn-sm'>Cancel</button>
-                                </form>
-                              </td>
-                            </tr>";
-                    }
-                  } else {
-                    echo "<tr><td colspan='7' class='text-center'>No Quit requests found.</td></tr>";
-                  }
-                  ?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-      </div>
-      
+        <div class="container">
+    <h2 class="mb-4">Quit Requests</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Enrollment Number</th>
+            
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              echo "<tr>
+                      <td>{$row["EN"]}</td>
+                     
+                      <td>
+                        <form method='post' action='{$_SERVER["PHP_SELF"]}' class='d-inline'>
+                          <input type='hidden' name='student_id' value='{$row["EN"]}'>
+                          <button type='submit' name='action' value='Accept' class='btn btn-outline-success btn-sm'>Accept</button>
+                          <button type='submit' name='action' value='Cancel' class='btn btn-outline-danger btn-sm'>Cancel</button>
+                        </form>
+                      </td>
+                    </tr>";
+            }
+          } else {
+            echo "<tr><td colspan='7' class='text-center'>No leave requests found.</td></tr>";
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
+  </div>
     
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
