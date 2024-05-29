@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo $password;
-    $entered_email =  $_POST['email'];
+
+    $entered_email = $_POST['email'];
     $entered_password = $_POST['password'];
 
     $sql = "SELECT * FROM student WHERE email = '$entered_email'";
@@ -21,23 +21,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $stored_password = $row['EN']; // Assuming PRN is the stored password
+        $stored_password = $row['EN']; // Assuming EN is the stored password
+        $status = $row['status'];
+        $room_id = $row['room_id'];
 
-        // Validate PRN only if the email exists in the database
-        if ($entered_password == $stored_password) {
-            // Passwords match, login successful
-            $_SESSION['loggedin'] = true;
-            // $_SESSION['email'] = $entered_email;
-            $_SESSION['EN'] = $entered_password;
-            header("Location:../Stakeholders/Student/Main_dashboard.php");
-            // header("Location: ../Student_Dash/Dashboard.php");
-            exit;
+        // Check if status is "Paid and Approved" and room_id is not null
+        if ($status === "paid and approved" && !is_null($room_id)) {
+            // Validate PRN only if the email exists in the database
+            if ($entered_password == $stored_password) {
+                // Passwords match, login successful
+                $_SESSION['loggedin'] = true;
+                $_SESSION['EN'] = $entered_password;
+                header("Location: ../Stakeholders/Student/Main_dashboard.php");
+                exit;
+            } else {
+                $_SESSION['error'] = "Incorrect password!";
+            }
         } else {
-            echo "Incorrect password!";
+            $_SESSION['error'] = "Your status is not 'Paid and Approved' or your room has not been assigned!";
         }
     } else {
-        header("Location: ../Stakeholders/Student/student-login.html");
+        $_SESSION['error'] = "Email not found!";
     }
 
     $conn->close();
+    header("Location: ../Stakeholders/Student/student-login.html");
+    exit;
 }
+?>
