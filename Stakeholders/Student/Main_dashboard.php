@@ -110,15 +110,16 @@
                                 <div class="col-4">
                                     <div class="square-box">
                                         <div class="square-box-content">
-                                            <!-- <img src="../../assets/attendance.png" alt=""> -->
+                                        <img src="../../assets/Group 115.png" alt="">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                      <div class="col-md-6 col-sm-12">
-
+                     
                     </div>
             </div>
                    
