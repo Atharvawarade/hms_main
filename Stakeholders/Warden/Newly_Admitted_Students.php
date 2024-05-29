@@ -2,7 +2,7 @@
 include '../../php/connection/connect.php';
 
 // Your SQL query to select students who have paid and approved, are male, and are not assigned to a room
-$sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND room_id IS NULL";
+$sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL";
 $result = $conn->query($sql);
 ?>
 <script>

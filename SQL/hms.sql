@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2024 at 10:31 AM
+-- Generation Time: May 29, 2024 at 07:15 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,6 +21,38 @@ SET time_zone = "+00:00";
 -- Database: `hms`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateRoomStatus` (IN `p_allotment_id` INT)   BEGIN
+    DECLARE v_current_occupancy INT;
+    DECLARE v_capacity INT;
+    
+    -- Get the capacity of the room
+    SELECT `capacity` INTO v_capacity
+    FROM `room`
+    WHERE `room_id` = (SELECT `room_id` FROM `alloted` WHERE `allotment_id` = p_allotment_id);
+    
+    -- Get the current occupancy of the room
+    SELECT COALESCE(COUNT(`student_id`), 0) INTO v_current_occupancy
+    FROM `alloted`
+    WHERE `room_id` = (SELECT `room_id` FROM `alloted` WHERE `allotment_id` = p_allotment_id);
+    
+    -- Update the room status
+    IF v_current_occupancy >= v_capacity THEN
+        UPDATE `room`
+        SET `status` = 'not vacant'
+        WHERE `room_id` = (SELECT `room_id` FROM `alloted` WHERE `allotment_id` = p_allotment_id);
+    ELSE
+        UPDATE `room`
+        SET `status` = 'vacant'
+        WHERE `room_id` = (SELECT `room_id` FROM `alloted` WHERE `allotment_id` = p_allotment_id);
+    END IF;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -28,6 +60,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alloted` (
+  `allotment_id` int(11) NOT NULL,
   `student_id` varchar(11) DEFAULT NULL,
   `furniture_id_1` int(10) UNSIGNED NOT NULL,
   `furniture_id_2` int(10) UNSIGNED NOT NULL,
@@ -39,247 +72,247 @@ CREATE TABLE `alloted` (
 -- Dumping data for table `alloted`
 --
 
-INSERT INTO `alloted` (`student_id`, `furniture_id_1`, `furniture_id_2`, `furniture_id_3`, `room_id`) VALUES
-('EN123456789', 1, 2, 3, 1),
-('EN21107546', 4, 5, 6, 1),
-('EN21107538 ', 7, 8, 9, 2),
-(NULL, 10, 11, 12, 2),
-(NULL, 13, 14, 15, 3),
-(NULL, 16, 17, 18, 3),
-(NULL, 19, 20, 21, 4),
-(NULL, 22, 23, 24, 4),
-(NULL, 25, 26, 27, 5),
-(NULL, 28, 29, 30, 5),
-(NULL, 31, 32, 33, 6),
-(NULL, 34, 35, 36, 6),
-(NULL, 37, 38, 39, 7),
-(NULL, 40, 41, 42, 7),
-(NULL, 43, 44, 45, 8),
-(NULL, 46, 47, 48, 8),
-(NULL, 49, 50, 51, 9),
-(NULL, 52, 53, 54, 9),
-(NULL, 55, 56, 57, 10),
-(NULL, 58, 59, 60, 10),
-(NULL, 61, 62, 63, 11),
-(NULL, 64, 65, 66, 11),
-(NULL, 67, 68, 69, 12),
-(NULL, 70, 71, 72, 12),
-(NULL, 73, 74, 75, 13),
-(NULL, 76, 77, 78, 13),
-(NULL, 79, 80, 81, 14),
-(NULL, 82, 83, 84, 14),
-(NULL, 85, 86, 87, 15),
-(NULL, 88, 89, 90, 15),
-(NULL, 91, 92, 93, 16),
-(NULL, 94, 95, 96, 16),
-(NULL, 97, 98, 99, 17),
-(NULL, 100, 101, 102, 17),
-(NULL, 103, 104, 105, 18),
-(NULL, 106, 107, 108, 18),
-(NULL, 109, 110, 111, 19),
-(NULL, 112, 113, 114, 19),
-(NULL, 115, 116, 117, 20),
-(NULL, 118, 119, 120, 20),
-(NULL, 121, 122, 123, 21),
-(NULL, 124, 125, 126, 21),
-(NULL, 127, 128, 129, 22),
-(NULL, 130, 131, 132, 22),
-(NULL, 133, 134, 135, 23),
-(NULL, 136, 137, 138, 23),
-(NULL, 139, 140, 141, 24),
-(NULL, 142, 143, 144, 24),
-(NULL, 145, 146, 147, 25),
-(NULL, 148, 149, 150, 25),
-(NULL, 151, 152, 153, 26),
-(NULL, 154, 155, 156, 26),
-(NULL, 157, 158, 159, 27),
-(NULL, 160, 161, 162, 27),
-(NULL, 163, 164, 165, 28),
-(NULL, 166, 167, 168, 28),
-(NULL, 169, 170, 171, 29),
-(NULL, 172, 173, 174, 29),
-(NULL, 175, 176, 177, 30),
-(NULL, 178, 179, 180, 30),
-(NULL, 181, 182, 183, 31),
-(NULL, 184, 185, 186, 31),
-(NULL, 187, 188, 189, 32),
-(NULL, 190, 191, 192, 32),
-(NULL, 193, 194, 195, 33),
-(NULL, 196, 197, 198, 33),
-(NULL, 199, 200, 201, 34),
-(NULL, 202, 203, 204, 34),
-(NULL, 205, 206, 207, 35),
-(NULL, 208, 209, 210, 35),
-(NULL, 211, 212, 213, 36),
-(NULL, 214, 215, 216, 36),
-(NULL, 217, 218, 219, 37),
-(NULL, 220, 221, 222, 37),
-(NULL, 223, 224, 225, 38),
-(NULL, 226, 227, 228, 38),
-(NULL, 229, 230, 231, 39),
-(NULL, 232, 233, 234, 39),
-(NULL, 235, 236, 237, 40),
-(NULL, 238, 239, 240, 40),
-(NULL, 241, 242, 243, 41),
-(NULL, 244, 245, 246, 41),
-(NULL, 247, 248, 249, 42),
-(NULL, 250, 251, 252, 42),
-(NULL, 253, 254, 255, 43),
-(NULL, 256, 257, 258, 43),
-(NULL, 259, 260, 261, 44),
-(NULL, 262, 263, 264, 44),
-(NULL, 265, 266, 267, 45),
-(NULL, 268, 269, 270, 45),
-(NULL, 271, 272, 273, 46),
-(NULL, 274, 275, 276, 46),
-(NULL, 277, 278, 279, 47),
-(NULL, 280, 281, 282, 47),
-(NULL, 283, 284, 285, 48),
-(NULL, 286, 287, 288, 48),
-(NULL, 289, 290, 291, 49),
-(NULL, 292, 293, 294, 49),
-(NULL, 295, 296, 297, 50),
-(NULL, 298, 299, 300, 50),
-(NULL, 301, 302, 303, 51),
-(NULL, 304, 305, 306, 51),
-(NULL, 307, 308, 309, 52),
-(NULL, 310, 311, 312, 52),
-(NULL, 313, 314, 315, 53),
-(NULL, 316, 317, 318, 53),
-(NULL, 319, 320, 321, 54),
-(NULL, 322, 323, 324, 54),
-(NULL, 325, 326, 327, 55),
-(NULL, 328, 329, 330, 55),
-(NULL, 331, 332, 333, 56),
-(NULL, 334, 335, 336, 56),
-(NULL, 337, 338, 339, 57),
-(NULL, 340, 341, 342, 57),
-(NULL, 343, 344, 345, 58),
-(NULL, 346, 347, 348, 58),
-(NULL, 349, 350, 351, 59),
-(NULL, 352, 353, 354, 59),
-(NULL, 355, 356, 357, 60),
-(NULL, 358, 359, 360, 60),
-(NULL, 361, 362, 363, 61),
-(NULL, 364, 365, 366, 61),
-(NULL, 367, 368, 369, 62),
-(NULL, 370, 371, 372, 62),
-(NULL, 373, 374, 375, 63),
-(NULL, 376, 377, 378, 63),
-(NULL, 379, 380, 381, 64),
-(NULL, 382, 383, 384, 64),
-(NULL, 385, 386, 387, 65),
-(NULL, 388, 389, 390, 65),
-(NULL, 391, 392, 393, 66),
-(NULL, 394, 395, 396, 66),
-(NULL, 397, 398, 399, 67),
-(NULL, 400, 401, 402, 67),
-(NULL, 403, 404, 405, 68),
-(NULL, 406, 407, 408, 68),
-(NULL, 409, 410, 411, 69),
-(NULL, 412, 413, 414, 69),
-(NULL, 415, 416, 417, 70),
-(NULL, 418, 419, 420, 70),
-(NULL, 421, 422, 423, 71),
-(NULL, 424, 425, 426, 71),
-(NULL, 427, 428, 429, 72),
-(NULL, 430, 431, 432, 72),
-(NULL, 433, 434, 435, 73),
-(NULL, 436, 437, 438, 73),
-(NULL, 439, 440, 441, 74),
-(NULL, 442, 443, 444, 74),
-(NULL, 445, 446, 447, 75),
-(NULL, 448, 449, 450, 75),
-(NULL, 451, 452, 453, 76),
-(NULL, 454, 455, 456, 76),
-(NULL, 457, 458, 459, 77),
-(NULL, 460, 461, 462, 77),
-(NULL, 463, 464, 465, 78),
-(NULL, 466, 467, 468, 78),
-(NULL, 469, 470, 471, 79),
-(NULL, 472, 473, 474, 79),
-(NULL, 475, 476, 477, 80),
-(NULL, 478, 479, 480, 80),
-(NULL, 481, 482, 483, 81),
-(NULL, 484, 485, 486, 81),
-(NULL, 487, 488, 489, 82),
-(NULL, 490, 491, 492, 82),
-(NULL, 493, 494, 495, 83),
-(NULL, 496, 497, 498, 83),
-(NULL, 499, 500, 501, 84),
-(NULL, 502, 503, 504, 84),
-(NULL, 505, 506, 507, 85),
-(NULL, 508, 509, 510, 85),
-(NULL, 511, 512, 513, 86),
-(NULL, 514, 515, 516, 86),
-(NULL, 517, 518, 519, 87),
-(NULL, 520, 521, 522, 87),
-(NULL, 523, 524, 525, 88),
-(NULL, 526, 527, 528, 88),
-(NULL, 529, 530, 531, 89),
-(NULL, 532, 533, 534, 89),
-(NULL, 535, 536, 537, 90),
-(NULL, 538, 539, 540, 90),
-(NULL, 541, 542, 543, 91),
-(NULL, 544, 545, 546, 91),
-(NULL, 547, 548, 549, 92),
-(NULL, 550, 551, 552, 92),
-(NULL, 553, 554, 555, 93),
-(NULL, 556, 557, 558, 93),
-(NULL, 559, 560, 561, 94),
-(NULL, 562, 563, 564, 94),
-(NULL, 565, 566, 567, 95),
-(NULL, 568, 569, 570, 95),
-(NULL, 571, 572, 573, 96),
-(NULL, 574, 575, 576, 96),
-(NULL, 577, 578, 579, 97),
-(NULL, 580, 581, 582, 97),
-(NULL, 583, 584, 585, 98),
-(NULL, 586, 587, 588, 98),
-(NULL, 589, 590, 591, 99),
-(NULL, 592, 593, 594, 99),
-(NULL, 595, 596, 597, 100),
-(NULL, 598, 599, 600, 100),
-(NULL, 601, 602, 603, 101),
-(NULL, 604, 605, 606, 101),
-(NULL, 607, 608, 609, 102),
-(NULL, 610, 611, 612, 102),
-(NULL, 613, 614, 615, 103),
-(NULL, 616, 617, 618, 103),
-(NULL, 619, 620, 621, 104),
-(NULL, 622, 623, 624, 104),
-(NULL, 625, 626, 627, 105),
-(NULL, 628, 629, 630, 105),
-(NULL, 631, 632, 633, 106),
-(NULL, 634, 635, 636, 106),
-(NULL, 637, 638, 639, 107),
-(NULL, 640, 641, 642, 107),
-(NULL, 643, 644, 645, 108),
-(NULL, 646, 647, 648, 108),
-(NULL, 649, 650, 651, 109),
-(NULL, 652, 653, 654, 109),
-(NULL, 655, 656, 657, 110),
-(NULL, 658, 659, 660, 110),
-(NULL, 661, 662, 663, 111),
-(NULL, 664, 665, 666, 111),
-(NULL, 667, 668, 669, 112),
-(NULL, 670, 671, 672, 112),
-(NULL, 673, 674, 675, 113),
-(NULL, 676, 677, 678, 113),
-(NULL, 679, 680, 681, 114),
-(NULL, 682, 683, 684, 114),
-(NULL, 685, 686, 687, 115),
-(NULL, 688, 689, 690, 115),
-(NULL, 691, 692, 693, 116),
-(NULL, 694, 695, 696, 116),
-(NULL, 697, 698, 699, 117),
-(NULL, 700, 701, 702, 117),
-(NULL, 703, 704, 705, 118),
-(NULL, 706, 707, 708, 118),
-(NULL, 709, 710, 711, 119),
-(NULL, 712, 713, 714, 119),
-(NULL, 715, 716, 717, 120),
-(NULL, 718, 719, 720, 120);
+INSERT INTO `alloted` (`allotment_id`, `student_id`, `furniture_id_1`, `furniture_id_2`, `furniture_id_3`, `room_id`) VALUES
+(1, 'EN123456789', 1, 2, 3, 1),
+(2, 'EN21107546', 4, 5, 6, 1),
+(3, 'EN21107538 ', 7, 8, 9, 2),
+(4, NULL, 10, 11, 12, 2),
+(5, NULL, 13, 14, 15, 3),
+(6, NULL, 16, 17, 18, 3),
+(7, NULL, 19, 20, 21, 4),
+(8, NULL, 22, 23, 24, 4),
+(9, NULL, 25, 26, 27, 5),
+(10, NULL, 28, 29, 30, 5),
+(11, 'EN21107546', 31, 32, 33, 6),
+(12, 'EN21107546', 34, 35, 36, 6),
+(13, NULL, 37, 38, 39, 7),
+(14, NULL, 40, 41, 42, 7),
+(15, NULL, 43, 44, 45, 8),
+(16, NULL, 46, 47, 48, 8),
+(17, NULL, 49, 50, 51, 9),
+(18, NULL, 52, 53, 54, 9),
+(19, NULL, 55, 56, 57, 10),
+(20, NULL, 58, 59, 60, 10),
+(21, NULL, 61, 62, 63, 11),
+(22, NULL, 64, 65, 66, 11),
+(23, NULL, 67, 68, 69, 12),
+(24, NULL, 70, 71, 72, 12),
+(25, NULL, 73, 74, 75, 13),
+(26, NULL, 76, 77, 78, 13),
+(27, NULL, 79, 80, 81, 14),
+(28, NULL, 82, 83, 84, 14),
+(29, NULL, 85, 86, 87, 15),
+(30, NULL, 88, 89, 90, 15),
+(31, NULL, 91, 92, 93, 16),
+(32, NULL, 94, 95, 96, 16),
+(33, NULL, 97, 98, 99, 17),
+(34, NULL, 100, 101, 102, 17),
+(35, NULL, 103, 104, 105, 18),
+(36, NULL, 106, 107, 108, 18),
+(37, NULL, 109, 110, 111, 19),
+(38, NULL, 112, 113, 114, 19),
+(39, NULL, 115, 116, 117, 20),
+(40, NULL, 118, 119, 120, 20),
+(41, NULL, 121, 122, 123, 21),
+(42, NULL, 124, 125, 126, 21),
+(43, NULL, 127, 128, 129, 22),
+(44, NULL, 130, 131, 132, 22),
+(45, NULL, 133, 134, 135, 23),
+(46, NULL, 136, 137, 138, 23),
+(47, NULL, 139, 140, 141, 24),
+(48, NULL, 142, 143, 144, 24),
+(49, NULL, 145, 146, 147, 25),
+(50, NULL, 148, 149, 150, 25),
+(51, NULL, 151, 152, 153, 26),
+(52, NULL, 154, 155, 156, 26),
+(53, NULL, 157, 158, 159, 27),
+(54, NULL, 160, 161, 162, 27),
+(55, NULL, 163, 164, 165, 28),
+(56, NULL, 166, 167, 168, 28),
+(57, NULL, 169, 170, 171, 29),
+(58, NULL, 172, 173, 174, 29),
+(59, NULL, 175, 176, 177, 30),
+(60, NULL, 178, 179, 180, 30),
+(61, NULL, 181, 182, 183, 31),
+(62, NULL, 184, 185, 186, 31),
+(63, NULL, 187, 188, 189, 32),
+(64, NULL, 190, 191, 192, 32),
+(65, NULL, 193, 194, 195, 33),
+(66, NULL, 196, 197, 198, 33),
+(67, NULL, 199, 200, 201, 34),
+(68, NULL, 202, 203, 204, 34),
+(69, NULL, 205, 206, 207, 35),
+(70, NULL, 208, 209, 210, 35),
+(71, NULL, 211, 212, 213, 36),
+(72, NULL, 214, 215, 216, 36),
+(73, NULL, 217, 218, 219, 37),
+(74, NULL, 220, 221, 222, 37),
+(75, NULL, 223, 224, 225, 38),
+(76, NULL, 226, 227, 228, 38),
+(77, NULL, 229, 230, 231, 39),
+(78, NULL, 232, 233, 234, 39),
+(79, NULL, 235, 236, 237, 40),
+(80, NULL, 238, 239, 240, 40),
+(81, NULL, 241, 242, 243, 41),
+(82, NULL, 244, 245, 246, 41),
+(83, NULL, 247, 248, 249, 42),
+(84, NULL, 250, 251, 252, 42),
+(85, NULL, 253, 254, 255, 43),
+(86, NULL, 256, 257, 258, 43),
+(87, NULL, 259, 260, 261, 44),
+(88, NULL, 262, 263, 264, 44),
+(89, NULL, 265, 266, 267, 45),
+(90, NULL, 268, 269, 270, 45),
+(91, NULL, 271, 272, 273, 46),
+(92, NULL, 274, 275, 276, 46),
+(93, NULL, 277, 278, 279, 47),
+(94, NULL, 280, 281, 282, 47),
+(95, NULL, 283, 284, 285, 48),
+(96, NULL, 286, 287, 288, 48),
+(97, NULL, 289, 290, 291, 49),
+(98, NULL, 292, 293, 294, 49),
+(99, NULL, 295, 296, 297, 50),
+(100, NULL, 298, 299, 300, 50),
+(101, NULL, 301, 302, 303, 51),
+(102, NULL, 304, 305, 306, 51),
+(103, NULL, 307, 308, 309, 52),
+(104, NULL, 310, 311, 312, 52),
+(105, NULL, 313, 314, 315, 53),
+(106, NULL, 316, 317, 318, 53),
+(107, NULL, 319, 320, 321, 54),
+(108, NULL, 322, 323, 324, 54),
+(109, NULL, 325, 326, 327, 55),
+(110, NULL, 328, 329, 330, 55),
+(111, NULL, 331, 332, 333, 56),
+(112, NULL, 334, 335, 336, 56),
+(113, NULL, 337, 338, 339, 57),
+(114, NULL, 340, 341, 342, 57),
+(115, NULL, 343, 344, 345, 58),
+(116, NULL, 346, 347, 348, 58),
+(117, NULL, 349, 350, 351, 59),
+(118, NULL, 352, 353, 354, 59),
+(119, NULL, 355, 356, 357, 60),
+(120, NULL, 358, 359, 360, 60),
+(121, NULL, 361, 362, 363, 61),
+(122, NULL, 364, 365, 366, 61),
+(123, NULL, 367, 368, 369, 62),
+(124, NULL, 370, 371, 372, 62),
+(125, NULL, 373, 374, 375, 63),
+(126, NULL, 376, 377, 378, 63),
+(127, NULL, 379, 380, 381, 64),
+(128, NULL, 382, 383, 384, 64),
+(129, NULL, 385, 386, 387, 65),
+(130, NULL, 388, 389, 390, 65),
+(131, NULL, 391, 392, 393, 66),
+(132, NULL, 394, 395, 396, 66),
+(133, NULL, 397, 398, 399, 67),
+(134, NULL, 400, 401, 402, 67),
+(135, NULL, 403, 404, 405, 68),
+(136, NULL, 406, 407, 408, 68),
+(137, NULL, 409, 410, 411, 69),
+(138, NULL, 412, 413, 414, 69),
+(139, NULL, 415, 416, 417, 70),
+(140, NULL, 418, 419, 420, 70),
+(141, NULL, 421, 422, 423, 71),
+(142, NULL, 424, 425, 426, 71),
+(143, NULL, 427, 428, 429, 72),
+(144, NULL, 430, 431, 432, 72),
+(145, NULL, 433, 434, 435, 73),
+(146, NULL, 436, 437, 438, 73),
+(147, NULL, 439, 440, 441, 74),
+(148, NULL, 442, 443, 444, 74),
+(149, NULL, 445, 446, 447, 75),
+(150, NULL, 448, 449, 450, 75),
+(151, NULL, 451, 452, 453, 76),
+(152, NULL, 454, 455, 456, 76),
+(153, NULL, 457, 458, 459, 77),
+(154, NULL, 460, 461, 462, 77),
+(155, NULL, 463, 464, 465, 78),
+(156, NULL, 466, 467, 468, 78),
+(157, NULL, 469, 470, 471, 79),
+(158, NULL, 472, 473, 474, 79),
+(159, NULL, 475, 476, 477, 80),
+(160, NULL, 478, 479, 480, 80),
+(161, NULL, 481, 482, 483, 81),
+(162, NULL, 484, 485, 486, 81),
+(163, NULL, 487, 488, 489, 82),
+(164, NULL, 490, 491, 492, 82),
+(165, NULL, 493, 494, 495, 83),
+(166, NULL, 496, 497, 498, 83),
+(167, NULL, 499, 500, 501, 84),
+(168, NULL, 502, 503, 504, 84),
+(169, NULL, 505, 506, 507, 85),
+(170, NULL, 508, 509, 510, 85),
+(171, NULL, 511, 512, 513, 86),
+(172, NULL, 514, 515, 516, 86),
+(173, NULL, 517, 518, 519, 87),
+(174, NULL, 520, 521, 522, 87),
+(175, NULL, 523, 524, 525, 88),
+(176, NULL, 526, 527, 528, 88),
+(177, NULL, 529, 530, 531, 89),
+(178, NULL, 532, 533, 534, 89),
+(179, NULL, 535, 536, 537, 90),
+(180, NULL, 538, 539, 540, 90),
+(181, NULL, 541, 542, 543, 91),
+(182, NULL, 544, 545, 546, 91),
+(183, NULL, 547, 548, 549, 92),
+(184, NULL, 550, 551, 552, 92),
+(185, NULL, 553, 554, 555, 93),
+(186, NULL, 556, 557, 558, 93),
+(187, NULL, 559, 560, 561, 94),
+(188, NULL, 562, 563, 564, 94),
+(189, NULL, 565, 566, 567, 95),
+(190, NULL, 568, 569, 570, 95),
+(191, NULL, 571, 572, 573, 96),
+(192, NULL, 574, 575, 576, 96),
+(193, NULL, 577, 578, 579, 97),
+(194, NULL, 580, 581, 582, 97),
+(195, NULL, 583, 584, 585, 98),
+(196, NULL, 586, 587, 588, 98),
+(197, NULL, 589, 590, 591, 99),
+(198, NULL, 592, 593, 594, 99),
+(199, NULL, 595, 596, 597, 100),
+(200, NULL, 598, 599, 600, 100),
+(201, NULL, 601, 602, 603, 101),
+(202, NULL, 604, 605, 606, 101),
+(203, NULL, 607, 608, 609, 102),
+(204, NULL, 610, 611, 612, 102),
+(205, NULL, 613, 614, 615, 103),
+(206, NULL, 616, 617, 618, 103),
+(207, NULL, 619, 620, 621, 104),
+(208, NULL, 622, 623, 624, 104),
+(209, NULL, 625, 626, 627, 105),
+(210, NULL, 628, 629, 630, 105),
+(211, NULL, 631, 632, 633, 106),
+(212, NULL, 634, 635, 636, 106),
+(213, NULL, 637, 638, 639, 107),
+(214, NULL, 640, 641, 642, 107),
+(215, NULL, 643, 644, 645, 108),
+(216, NULL, 646, 647, 648, 108),
+(217, NULL, 649, 650, 651, 109),
+(218, NULL, 652, 653, 654, 109),
+(219, NULL, 655, 656, 657, 110),
+(220, NULL, 658, 659, 660, 110),
+(221, NULL, 661, 662, 663, 111),
+(222, NULL, 664, 665, 666, 111),
+(223, NULL, 667, 668, 669, 112),
+(224, NULL, 670, 671, 672, 112),
+(225, NULL, 673, 674, 675, 113),
+(226, NULL, 676, 677, 678, 113),
+(227, NULL, 679, 680, 681, 114),
+(228, NULL, 682, 683, 684, 114),
+(229, NULL, 685, 686, 687, 115),
+(230, NULL, 688, 689, 690, 115),
+(231, NULL, 691, 692, 693, 116),
+(232, NULL, 694, 695, 696, 116),
+(233, NULL, 697, 698, 699, 117),
+(234, NULL, 700, 701, 702, 117),
+(235, NULL, 703, 704, 705, 118),
+(236, NULL, 706, 707, 708, 118),
+(237, NULL, 709, 710, 711, 119),
+(238, NULL, 712, 713, 714, 119),
+(239, NULL, 715, 716, 717, 120),
+(240, NULL, 718, 719, 720, 120);
 
 -- --------------------------------------------------------
 
@@ -300,7 +333,10 @@ CREATE TABLE `attendance_files` (
 --
 
 INSERT INTO `attendance_files` (`year`, `month`, `Date_and_time_of_upload`, `hostel`, `file`) VALUES
-(2024, 'January', '2024-05-27 03:13:47', '', '../../Attendance/student_attendance.csv');
+(2024, 'February', '2024-05-26 04:48:44', '', '../../Attendance/candidates.csv'),
+(2024, 'February', '2024-05-26 05:25:21', '', '../../Attendance/candidates.csv'),
+(2024, 'August', '2024-05-26 05:26:12', '', '../../Attendance/candidates.csv'),
+(2024, 'January', '2024-05-28 04:43:06', '', '../../Attendance/contacts.csv');
 
 -- --------------------------------------------------------
 
@@ -1234,7 +1270,8 @@ CREATE TABLE `leave_requests` (
 --
 
 INSERT INTO `leave_requests` (`EN`, `Fullname`, `room_id`, `status`, `start_date`, `end_date`, `reason`) VALUES
-('EN21107545', 'SANJAY YADAV', NULL, 'Pending', '2024-05-03', '2024-05-14', 'cvvc');
+('EN21107545', 'SANJAY YADAV', NULL, 'Pending', '2024-05-03', '2024-05-14', 'cvvc'),
+('EN21107546', 'RAJESH KUMAR', NULL, 'Pending', '2024-05-18', '2024-05-31', 'm');
 
 -- --------------------------------------------------------
 
@@ -1280,134 +1317,135 @@ CREATE TABLE `room` (
   `hostel_id` int(10) UNSIGNED NOT NULL,
   `room_number` int(11) NOT NULL,
   `capacity` int(10) UNSIGNED NOT NULL,
-  `room_type` varchar(25) NOT NULL
+  `room_type` varchar(25) NOT NULL,
+  `status` enum('vacant','not vacant') DEFAULT 'vacant'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`room_id`, `hostel_id`, `room_number`, `capacity`, `room_type`) VALUES
-(1, 1, 1, 4, 'Dual'),
-(2, 1, 2, 4, 'Dual'),
-(3, 1, 3, 4, 'Dual'),
-(4, 1, 4, 4, 'Dual'),
-(5, 1, 5, 4, 'Dual'),
-(6, 1, 6, 4, 'Dual'),
-(7, 1, 7, 4, 'Dual'),
-(8, 1, 8, 4, 'Dual'),
-(9, 1, 9, 4, 'Dual'),
-(10, 1, 10, 4, 'Dual'),
-(11, 1, 11, 4, 'Dual'),
-(12, 1, 12, 4, 'Dual'),
-(13, 1, 13, 4, 'Dual'),
-(14, 1, 14, 4, 'Dual'),
-(15, 1, 15, 4, 'Dual'),
-(16, 1, 16, 4, 'Dual'),
-(17, 1, 17, 4, 'Dual'),
-(18, 1, 18, 4, 'Dual'),
-(19, 1, 19, 4, 'Dual'),
-(20, 1, 20, 4, 'Dual'),
-(21, 1, 21, 4, 'Dual'),
-(22, 1, 22, 4, 'Dual'),
-(23, 1, 23, 4, 'Dual'),
-(24, 1, 24, 4, 'Dual'),
-(25, 1, 25, 4, 'Dual'),
-(26, 1, 26, 4, 'Dual'),
-(27, 1, 27, 4, 'Dual'),
-(28, 1, 28, 4, 'Dual'),
-(29, 1, 29, 4, 'Dual'),
-(30, 1, 30, 4, 'Dual'),
-(31, 1, 31, 4, 'Dual'),
-(32, 1, 32, 4, 'Dual'),
-(33, 1, 33, 4, 'Dual'),
-(34, 1, 34, 4, 'Dual'),
-(35, 1, 35, 4, 'Dual'),
-(36, 1, 36, 4, 'Dual'),
-(37, 1, 37, 4, 'Dual'),
-(38, 1, 38, 4, 'Dual'),
-(39, 1, 39, 4, 'Dual'),
-(40, 1, 40, 4, 'Dual'),
-(41, 1, 41, 4, 'Dual'),
-(42, 1, 42, 4, 'Dual'),
-(43, 1, 43, 4, 'Dual'),
-(44, 1, 44, 4, 'Dual'),
-(45, 1, 45, 4, 'Dual'),
-(46, 1, 46, 4, 'Dual'),
-(47, 1, 47, 4, 'Dual'),
-(48, 1, 48, 4, 'Dual'),
-(49, 1, 49, 4, 'Dual'),
-(50, 1, 50, 4, 'Dual'),
-(51, 1, 51, 4, 'Dual'),
-(52, 1, 52, 4, 'Dual'),
-(53, 1, 53, 4, 'Dual'),
-(54, 1, 54, 4, 'Dual'),
-(55, 1, 55, 4, 'Dual'),
-(56, 1, 56, 4, 'Dual'),
-(57, 1, 57, 4, 'Dual'),
-(58, 1, 58, 4, 'Dual'),
-(59, 1, 59, 4, 'Dual'),
-(60, 1, 60, 4, 'Dual'),
-(61, 2, 1, 4, 'Dual'),
-(62, 2, 2, 4, 'Dual'),
-(63, 2, 3, 4, 'Dual'),
-(64, 2, 4, 4, 'Dual'),
-(65, 2, 5, 4, 'Dual'),
-(66, 2, 6, 4, 'Dual'),
-(67, 2, 7, 4, 'Dual'),
-(68, 2, 8, 4, 'Dual'),
-(69, 2, 9, 4, 'Dual'),
-(70, 2, 10, 4, 'Dual'),
-(71, 2, 11, 4, 'Dual'),
-(72, 2, 12, 4, 'Dual'),
-(73, 2, 13, 4, 'Dual'),
-(74, 2, 14, 4, 'Dual'),
-(75, 2, 15, 4, 'Dual'),
-(76, 2, 16, 4, 'Dual'),
-(77, 2, 17, 4, 'Dual'),
-(78, 2, 18, 4, 'Dual'),
-(79, 2, 19, 4, 'Dual'),
-(80, 2, 20, 4, 'Dual'),
-(81, 2, 21, 4, 'Dual'),
-(82, 2, 22, 4, 'Dual'),
-(83, 2, 23, 4, 'Dual'),
-(84, 2, 24, 4, 'Dual'),
-(85, 2, 25, 4, 'Dual'),
-(86, 2, 26, 4, 'Dual'),
-(87, 2, 27, 4, 'Dual'),
-(88, 2, 28, 4, 'Dual'),
-(89, 2, 29, 4, 'Dual'),
-(90, 2, 30, 4, 'Dual'),
-(91, 2, 31, 4, 'Dual'),
-(92, 2, 32, 4, 'Dual'),
-(93, 2, 33, 4, 'Dual'),
-(94, 2, 34, 4, 'Dual'),
-(95, 2, 35, 4, 'Dual'),
-(96, 2, 36, 4, 'Dual'),
-(97, 2, 37, 4, 'Dual'),
-(98, 2, 38, 4, 'Dual'),
-(99, 2, 39, 4, 'Dual'),
-(100, 2, 40, 4, 'Dual'),
-(101, 2, 41, 4, 'Dual'),
-(102, 2, 42, 4, 'Dual'),
-(103, 2, 43, 4, 'Dual'),
-(104, 2, 44, 4, 'Dual'),
-(105, 2, 45, 4, 'Dual'),
-(106, 2, 46, 4, 'Dual'),
-(107, 2, 47, 4, 'Dual'),
-(108, 2, 48, 4, 'Dual'),
-(109, 2, 49, 4, 'Dual'),
-(110, 2, 50, 4, 'Dual'),
-(111, 2, 51, 4, 'Dual'),
-(112, 2, 52, 4, 'Dual'),
-(113, 2, 53, 4, 'Dual'),
-(114, 2, 54, 4, 'Dual'),
-(115, 2, 55, 4, 'Dual'),
-(116, 2, 56, 4, 'Dual'),
-(117, 2, 57, 4, 'Dual'),
-(118, 2, 58, 4, 'Dual'),
-(119, 2, 59, 4, 'Dual'),
-(120, 2, 60, 4, 'Dual');
+INSERT INTO `room` (`room_id`, `hostel_id`, `room_number`, `capacity`, `room_type`, `status`) VALUES
+(1, 1, 1, 2, 'Dual', 'not vacant'),
+(2, 1, 2, 2, 'Dual', 'vacant'),
+(3, 1, 3, 2, 'Dual', 'vacant'),
+(4, 1, 4, 2, 'Dual', 'vacant'),
+(5, 1, 5, 2, 'Dual', 'vacant'),
+(6, 1, 6, 2, 'Dual', 'not vacant'),
+(7, 1, 7, 2, 'Dual', 'vacant'),
+(8, 1, 8, 2, 'Dual', 'vacant'),
+(9, 1, 9, 2, 'Dual', 'vacant'),
+(10, 1, 10, 2, 'Dual', 'vacant'),
+(11, 1, 11, 2, 'Dual', 'vacant'),
+(12, 1, 12, 2, 'Dual', 'vacant'),
+(13, 1, 13, 2, 'Dual', 'vacant'),
+(14, 1, 14, 2, 'Dual', 'vacant'),
+(15, 1, 15, 2, 'Dual', 'vacant'),
+(16, 1, 16, 2, 'Dual', 'vacant'),
+(17, 1, 17, 2, 'Dual', 'vacant'),
+(18, 1, 18, 2, 'Dual', 'vacant'),
+(19, 1, 19, 2, 'Dual', 'vacant'),
+(20, 1, 20, 2, 'Dual', 'vacant'),
+(21, 1, 21, 2, 'Dual', 'vacant'),
+(22, 1, 22, 2, 'Dual', 'vacant'),
+(23, 1, 23, 2, 'Dual', 'vacant'),
+(24, 1, 24, 2, 'Dual', 'vacant'),
+(25, 1, 25, 2, 'Dual', 'vacant'),
+(26, 1, 26, 2, 'Dual', 'vacant'),
+(27, 1, 27, 2, 'Dual', 'vacant'),
+(28, 1, 28, 2, 'Dual', 'vacant'),
+(29, 1, 29, 2, 'Dual', 'vacant'),
+(30, 1, 30, 2, 'Dual', 'vacant'),
+(31, 1, 31, 2, 'Dual', 'vacant'),
+(32, 1, 32, 2, 'Dual', 'vacant'),
+(33, 1, 33, 2, 'Dual', 'vacant'),
+(34, 1, 34, 2, 'Dual', 'vacant'),
+(35, 1, 35, 2, 'Dual', 'vacant'),
+(36, 1, 36, 2, 'Dual', 'vacant'),
+(37, 1, 37, 2, 'Dual', 'vacant'),
+(38, 1, 38, 2, 'Dual', 'vacant'),
+(39, 1, 39, 2, 'Dual', 'vacant'),
+(40, 1, 40, 2, 'Dual', 'vacant'),
+(41, 1, 41, 2, 'Dual', 'vacant'),
+(42, 1, 42, 2, 'Dual', 'vacant'),
+(43, 1, 43, 2, 'Dual', 'vacant'),
+(44, 1, 44, 2, 'Dual', 'vacant'),
+(45, 1, 45, 2, 'Dual', 'vacant'),
+(46, 1, 46, 2, 'Dual', 'vacant'),
+(47, 1, 47, 2, 'Dual', 'vacant'),
+(48, 1, 48, 2, 'Dual', 'vacant'),
+(49, 1, 49, 2, 'Dual', 'vacant'),
+(50, 1, 50, 2, 'Dual', 'vacant'),
+(51, 1, 51, 2, 'Dual', 'vacant'),
+(52, 1, 52, 2, 'Dual', 'vacant'),
+(53, 1, 53, 2, 'Dual', 'vacant'),
+(54, 1, 54, 2, 'Dual', 'vacant'),
+(55, 1, 55, 2, 'Dual', 'vacant'),
+(56, 1, 56, 2, 'Dual', 'vacant'),
+(57, 1, 57, 2, 'Dual', 'vacant'),
+(58, 1, 58, 2, 'Dual', 'vacant'),
+(59, 1, 59, 2, 'Dual', 'vacant'),
+(60, 1, 60, 2, 'Dual', 'vacant'),
+(61, 2, 1, 2, 'Dual', 'vacant'),
+(62, 2, 2, 2, 'Dual', 'vacant'),
+(63, 2, 3, 2, 'Dual', 'vacant'),
+(64, 2, 4, 2, 'Dual', 'vacant'),
+(65, 2, 5, 2, 'Dual', 'vacant'),
+(66, 2, 6, 2, 'Dual', 'vacant'),
+(67, 2, 7, 2, 'Dual', 'vacant'),
+(68, 2, 8, 2, 'Dual', 'vacant'),
+(69, 2, 9, 2, 'Dual', 'vacant'),
+(70, 2, 10, 2, 'Dual', 'vacant'),
+(71, 2, 11, 2, 'Dual', 'vacant'),
+(72, 2, 12, 2, 'Dual', 'vacant'),
+(73, 2, 13, 2, 'Dual', 'vacant'),
+(74, 2, 14, 2, 'Dual', 'vacant'),
+(75, 2, 15, 2, 'Dual', 'vacant'),
+(76, 2, 16, 2, 'Dual', 'vacant'),
+(77, 2, 17, 2, 'Dual', 'vacant'),
+(78, 2, 18, 2, 'Dual', 'vacant'),
+(79, 2, 19, 2, 'Dual', 'vacant'),
+(80, 2, 20, 2, 'Dual', 'vacant'),
+(81, 2, 21, 2, 'Dual', 'vacant'),
+(82, 2, 22, 2, 'Dual', 'vacant'),
+(83, 2, 23, 2, 'Dual', 'vacant'),
+(84, 2, 24, 2, 'Dual', 'vacant'),
+(85, 2, 25, 2, 'Dual', 'vacant'),
+(86, 2, 26, 2, 'Dual', 'vacant'),
+(87, 2, 27, 2, 'Dual', 'vacant'),
+(88, 2, 28, 2, 'Dual', 'vacant'),
+(89, 2, 29, 2, 'Dual', 'vacant'),
+(90, 2, 30, 2, 'Dual', 'vacant'),
+(91, 2, 31, 2, 'Dual', 'vacant'),
+(92, 2, 32, 2, 'Dual', 'vacant'),
+(93, 2, 33, 2, 'Dual', 'vacant'),
+(94, 2, 34, 2, 'Dual', 'vacant'),
+(95, 2, 35, 2, 'Dual', 'vacant'),
+(96, 2, 36, 2, 'Dual', 'vacant'),
+(97, 2, 37, 2, 'Dual', 'vacant'),
+(98, 2, 38, 2, 'Dual', 'vacant'),
+(99, 2, 39, 2, 'Dual', 'vacant'),
+(100, 2, 40, 2, 'Dual', 'vacant'),
+(101, 2, 41, 2, 'Dual', 'vacant'),
+(102, 2, 42, 2, 'Dual', 'vacant'),
+(103, 2, 43, 2, 'Dual', 'vacant'),
+(104, 2, 44, 2, 'Dual', 'vacant'),
+(105, 2, 45, 2, 'Dual', 'vacant'),
+(106, 2, 46, 2, 'Dual', 'vacant'),
+(107, 2, 47, 2, 'Dual', 'vacant'),
+(108, 2, 48, 2, 'Dual', 'vacant'),
+(109, 2, 49, 2, 'Dual', 'vacant'),
+(110, 2, 50, 2, 'Dual', 'vacant'),
+(111, 2, 51, 2, 'Dual', 'vacant'),
+(112, 2, 52, 2, 'Dual', 'vacant'),
+(113, 2, 53, 2, 'Dual', 'vacant'),
+(114, 2, 54, 2, 'Dual', 'vacant'),
+(115, 2, 55, 2, 'Dual', 'vacant'),
+(116, 2, 56, 2, 'Dual', 'vacant'),
+(117, 2, 57, 2, 'Dual', 'vacant'),
+(118, 2, 58, 2, 'Dual', 'vacant'),
+(119, 2, 59, 2, 'Dual', 'vacant'),
+(120, 2, 60, 2, 'Dual', 'vacant');
 
 -- --------------------------------------------------------
 
@@ -1436,24 +1474,64 @@ CREATE TABLE `student` (
   `branch` varchar(45) NOT NULL,
   `section` char(1) NOT NULL,
   `Batch` varchar(9) DEFAULT NULL,
-  `room_id` int(10) UNSIGNED DEFAULT NULL,
   `dateOfStatusChange` date DEFAULT NULL,
-  `status` enum('unpaid','paid','paid and approved') DEFAULT 'paid'
+  `status` enum('unpaid','paid','paid and approved') DEFAULT 'paid',
+  `allotment_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `room_id`, `dateOfStatusChange`, `status`) VALUES
-('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, NULL, '2024-05-01', 'paid and approved'),
-('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, 2, NULL, 'paid and approved'),
-('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, NULL, 'paid and approved'),
-('EN21107545', 'SANJAY YADAV', 'sanjay.yadav@example.com', '2024-05-10', 'Male', 1098765432, 'Ram nagar', '', 'Wardha', 'Maharshtra', 442001, 2147483647, 2147483647, 0, 'A+', 'EN2110754531556Computer EngineeringAprofile_photo.png', 1, 'Computer Engineering', 'A', NULL, NULL, NULL, 'paid and approved'),
-('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example1.com', '2004-06-11', 'Male', 2109876543, 'Meera Naga', 'Behind Keshav Cit', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 78, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, 5, NULL, 'paid and approved'),
-('EN21107554', 'ANITA YADAV', 'anita.yadav@example.com', '2024-05-10', 'Female', 1234567890, 'Jayant Nagar', 'Gandhi Chowk, Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 321456963, 'A+', 'EN2110755430577Mechanical EngineeringBprofile_photo.png', 1, 'Mechanical Engineering', 'B', NULL, NULL, NULL, 'paid and approved'),
-('EN21107558', 'SHYAM KUMAR', 'shyam.kumar@example.com', '2024-06-08', 'Male', 5678901234, 'Snehal Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 2147483647, 'AB+', '', 1, 'Computer Engineering', 'A', NULL, 3, NULL, 'paid and approved'),
-('EN21107578', 'GEETA KUMARI', 'geeta.kumari@example.com', '2003-06-24', 'Female', 7890123456, 'Sai Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Civil Engineering', '', NULL, 22, NULL, 'paid and approved');
+INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `dateOfStatusChange`, `status`, `allotment_id`) VALUES
+('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, '2024-05-01', 'paid', NULL),
+('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
+('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, 'paid and approved', NULL),
+('EN21107545', 'SANJAY YADAV', 'sanjay.yadav@example.com', '2024-05-10', 'Male', 1098765432, 'Ram nagar', '', 'Wardha', 'Maharshtra', 442001, 2147483647, 2147483647, 0, 'A+', 'EN2110754531556Computer EngineeringAprofile_photo.png', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
+('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example1.com', '2004-06-11', 'Male', 2109876543, 'Meera Naga', 'Behind Keshav Cit', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 78, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
+('EN21107554', 'ANITA YADAV', 'anita.yadav@example.com', '2024-05-10', 'Female', 1234567890, 'Jayant Nagar', 'Gandhi Chowk, Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 321456963, 'A+', 'EN2110755430577Mechanical EngineeringBprofile_photo.png', 1, 'Mechanical Engineering', 'B', NULL, NULL, 'paid and approved', NULL),
+('EN21107558', 'SHYAM KUMAR', 'shyam.kumar@example.com', '2024-06-08', 'Male', 5678901234, 'Snehal Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 2147483647, 'AB+', '', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
+('EN21107578', 'GEETA KUMARI', 'geeta.kumari@example.com', '2003-06-24', 'Female', 7890123456, 'Sai Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Civil Engineering', '', NULL, NULL, 'paid and approved', NULL);
+
+--
+-- Triggers `student`
+--
+DELIMITER $$
+CREATE TRIGGER `after_student_room_id_update` AFTER UPDATE ON `student` FOR EACH ROW BEGIN
+    IF NEW.allotment_id <> OLD.allotment_id THEN
+        -- Check if the new room is vacant
+        IF EXISTS (
+            SELECT 1
+            FROM `room`
+            WHERE `room_id` = (SELECT `room_id` FROM `alloted` WHERE `allotment_id` = NEW.allotment_id)
+            AND `status` = 'vacant'
+        ) THEN
+            -- Update the student_id in the alloted table for the new room
+            UPDATE `alloted`
+            SET `student_id` = NEW.EN
+            WHERE `allotment_id` = NEW.allotment_id;
+
+            -- Update the status for the old room
+            CALL UpdateRoomStatus(OLD.allotment_id);
+            
+            -- Update the status for the new room
+            CALL UpdateRoomStatus(NEW.allotment_id);
+        END IF;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `status_change_trigger` AFTER UPDATE ON `student` FOR EACH ROW BEGIN
+    IF OLD.status <> NEW.status THEN
+        -- Update the dateOfStatusChange to the current date
+        UPDATE `student`
+        SET `dateOfStatusChange` = CURRENT_DATE()
+        WHERE `EN` = NEW.EN;
+    END IF;
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -1463,6 +1541,7 @@ INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phon
 -- Indexes for table `alloted`
 --
 ALTER TABLE `alloted`
+  ADD PRIMARY KEY (`allotment_id`),
   ADD UNIQUE KEY `furniture_id_1_2` (`furniture_id_1`),
   ADD KEY `furniture_id_1` (`furniture_id_1`),
   ADD KEY `furniture_id_2` (`furniture_id_2`),
@@ -1525,11 +1604,17 @@ ALTER TABLE `room`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`EN`),
-  ADD KEY `fk_room_student` (`room_id`);
+  ADD KEY `fk_allotment_student` (`allotment_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alloted`
+--
+ALTER TABLE `alloted`
+  MODIFY `allotment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `furniture`
@@ -1576,16 +1661,16 @@ ALTER TABLE `guardian`
   ADD CONSTRAINT `fk_student_guardian` FOREIGN KEY (`student_id`) REFERENCES `student` (`EN`);
 
 --
--- Constraints for table `room`
+-- Constraints for table `hostels`
 --
-ALTER TABLE `room`
-  ADD CONSTRAINT `fk_hostel_room` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`);
+ALTER TABLE `hostels`
+  ADD CONSTRAINT `hostels_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `room` (`room_id`);
 
 --
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_allotment_student` FOREIGN KEY (`allotment_id`) REFERENCES `alloted` (`allotment_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
