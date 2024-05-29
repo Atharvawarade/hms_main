@@ -110,15 +110,36 @@
                                 <div class="col-4">
                                     <div class="square-box">
                                         <div class="square-box-content">
-                                            <!-- <img src="../../assets/attendance.png" alt=""> -->
+                                        <img src="../../assets/Group 115.png" alt="">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                      <div class="col-md-6 col-sm-12">
+                     <div class="column2">
+                        <div class="account-section">
+                            <h2>Account</h2>
+                            <div class="fees-details">
+                                <div class="fee-box">
+                                    <span>Total Fees</span>
+                                    <p>20000</p>
+                                </div>
 
+                                <div class="fee-box">
+                                    <span>Paid Fees</span>
+                                    <p>10000</p>
+
+                                </div>
+                                <div class="fee-box">
+                                    <span>Balance Fees</span>
+                                    <p>10000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
             </div>
                    

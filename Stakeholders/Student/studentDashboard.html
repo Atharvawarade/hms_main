@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +19,10 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h5 style="text-align: center;">Hostel Management System</h5>
-                    
+
                 </div>
                 <div class="profile-photo" id="profilePhoto">
-                <img src="../../assets/profile_photo.png" alt="Profile Photo" id="photoImg">
+                    <img src="../../assets/profile_photo.png" alt="Profile Photo" id="photoImg">
                     <div class="photo-actions" id="photoActions">
                         <span id="viewBtn">View</span>
                         <span id="editBtn">Edit</span>
@@ -31,7 +30,7 @@
                     </div>
                     <input type="file" accept="image/*" id="fileInput" style="display: none;">
                 </div>
-                
+
                 <ul class="list-unstyled components">
                     <li>
                         <a href="#">
@@ -56,33 +55,69 @@
 
             <div id="content">
 
-               
+
                 <nav class="top-container">
-                     <div class="left-column">
-                            <div class="text-container">
-                                <div class="left-column" id="currentDate">
-                                </div> 
-                            </div>
-                            <div class="text-container">
-                                <div id="welcomeMessage"></div>   
-                            
-                                <p>Always stay updated in your dashboard</p>
+                    <div class="left-column">
+                        <div class="text-container">
+                            <div class="left-column" id="currentDate">
                             </div>
                         </div>
-                        <div class="right-column">
-                            <div class="image-container">
-                                <img src="../../assets/Group 80 (2).png" alt="Student">
-                            </div>
+                        <div class="text-container">
+                            <div id="welcomeMessage"></div>
+
+                            <p>Always stay updated in your dashboard</p>
                         </div>
-                        
-                    </nav>
+                    </div>
+                    <div class="right-column">
+                        <div class="image-container">
+                            <img src="../../assets/Group 80 (2).png" alt="Student">
+                        </div>
+                    </div>
+
+                </nav>
                 <div class="bottom-container">
                     <div class="column1">
-                       
+
                         <div class="row" style="justify-content: space-between;">
                             <div class="icon-box col-md-3">
-                          <img src="../../assets/leave.png" alt="Your Image">
-                          <span>Apply for leave</span>
+                                <img src="../../assets/leave.png" alt="Your Image">
+                                <span>Apply for leave</span>
+                            </div>
+                            <div class="icon-box col-md-3">
+                                <img src="../../assets/left.png" alt="Your Image">
+                                <span>Apply for room left</span>
+                            </div>
+                            <div class="icon-box col-md-3">
+                                <img src="../../assets/leave.png" alt="Your Image">
+                                <span>Apply for room change</span>
+                            </div>
+                            <div class="icon-box col-md-3">
+                                <img src="../../assets/graviance.png" alt="Your Image">
+                                <span>Raise Grievances</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="column2">
+                        <div class="account-section">
+                            <h2>Account</h2>
+                            <div class="fees-details">
+                                <div class="fee-box">
+                                    <span>Total Fees</span>
+                                    <p>20000</p>
+                                </div>
+
+                                <div class="fee-box">
+                                    <span>Paid Fees</span>
+                                    <p>10000</p>
+
+                                </div>
+                                <div class="fee-box">
+                                    <span>Balance Fees</span>
+                                    <p>10000</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="icon-box col-md-3">
                           <img src="../../assets/left.png" alt="Your Image">
@@ -119,13 +154,12 @@
                         </div>
                       </div>
                     </div>
-                  </div>
                 </div>
-              
-      
-                </div>
+
+
             </div>
         </div>
+    </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -133,32 +167,32 @@
     crossorigin="anonymous"></script>
 
 <script>
-     var currentDateElement = document.getElementById("currentDate");  //for date
-        var currentDate = new Date();
-        var options = { month: 'long', day: 'numeric', year: 'numeric' };
-        var formattedDate = currentDate.toLocaleDateString('en-US', options);
-        currentDateElement.textContent = formattedDate;
-        
-        function getUserInfo() {            
-            const currentUser = {
-                name: "John" 
-            };
+    var currentDateElement = document.getElementById("currentDate");  //for date
+    var currentDate = new Date();
+    var options = { month: 'long', day: 'numeric', year: 'numeric' };
+    var formattedDate = currentDate.toLocaleDateString('en-US', options);
+    currentDateElement.textContent = formattedDate;
 
-            return currentUser;
+    function getUserInfo() {
+        const currentUser = {
+            name: "John"
+        };
+
+        return currentUser;
+    }
+
+
+    function displayWelcomeMessage() {
+        const userInfo = getUserInfo();
+        const welcomeMessage = document.getElementById("welcomeMessage");
+
+        if (userInfo) {
+            welcomeMessage.textContent = `Welcome back, ${userInfo.name}!`;
+        } else {
+            welcomeMessage.textContent = "Welcome!";
         }
-
-        
-        function displayWelcomeMessage() {
-            const userInfo = getUserInfo();
-            const welcomeMessage = document.getElementById("welcomeMessage");
-
-            if (userInfo) {
-                welcomeMessage.textContent = `Welcome back, ${userInfo.name}!`;
-            } else {
-                welcomeMessage.textContent = "Welcome!";
-            }
-        }
-        displayWelcomeMessage();                               
+    }
+    displayWelcomeMessage();
     document.addEventListener("DOMContentLoaded", function () {
         // Get elements
         var profilePhoto = document.getElementById("profilePhoto");
