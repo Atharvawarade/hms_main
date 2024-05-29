@@ -7,9 +7,9 @@
       <i class="fas fa-align-left"></i>
       <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
     </button>
-    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-align-justify"></i>
-    </button>
+    </button> -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav ml-auto">
@@ -148,9 +148,9 @@
         console.log("Fetch successful");
         const data = await response.text();
         console.log("Response data received:", data);
-        const contentDiv = document.getElementById("below_nav");
+        const contentDiv = document.getElementById("content");
         if (contentDiv) {
-          console.log("Element with id 'below_nav' found");
+          console.log("Element with id 'content' found");
           contentDiv.innerHTML = data;
           console.log("Content updated successfully");
 
@@ -162,7 +162,7 @@
 
           console.log("Script appended below");
         } else {
-          console.error("Element with id 'below_nav' not found");
+          console.error("Element with id 'content' not found");
         }
       } catch (error) {
         console.error("Error fetching the file:", error);
@@ -284,6 +284,7 @@
   }
   // Leave Requests javascript : = end  
 </script>
+
 <script type="text/javascript">
   $(document).ready(function() {
     $("#sidebarCollapse").on("click", function() {
