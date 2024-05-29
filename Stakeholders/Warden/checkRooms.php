@@ -25,13 +25,13 @@ if ($result->num_rows > 0) {
   echo '<nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid row">
     <div class="col-1">
-      <button type="button" id="sidebarCollapse" class="btn btn-info" style="
+         <button type="button" id="sidebarCollapse" class="btn btn-info" style="
         background-color: inherit !important;
         border-color: #925fe2 !important;
       ">
-        <i class="fas fa-align-left"></i>
-        <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
-      </button>
+      <i class="fas fa-align-left"></i>
+      <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
+    </button>
     </div>
     <div class="col-11">
       <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">

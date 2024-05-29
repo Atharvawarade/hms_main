@@ -8,7 +8,7 @@ echo '<div class="col-md-4 col-sm-12 right-column">
 include '../../php/connection/connect.php';
 
 // Your SQL query to select students who have paid and are not assigned to a room
-$sql = "SELECT Fullname FROM student WHERE status = 'paid and approved' AND room_id IS NULL";
+$sql = "SELECT Fullname FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL";
 $result = $conn->query($sql);
 
 // Check if there are any students matching the criteria
