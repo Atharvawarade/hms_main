@@ -75,6 +75,7 @@
         </div>
       </div> -->
     <?php
+ 
     echo "<pre>";
     echo "Session Variables after Login:<br>";
     print_r($_SESSION);
