@@ -3,6 +3,8 @@
         display: flex;
         flex-direction: row;
         overflow-x: scroll;
+        width: 70%;
+
     }
 
     .box-room {

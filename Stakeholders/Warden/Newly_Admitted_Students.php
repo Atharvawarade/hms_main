@@ -6,7 +6,7 @@ $gender = $WardenId == 1 ? 'Male' : 'Female';
 
 
 // Your SQL query to select students who have paid and approved, are male, and are not assigned to a room
-include 'vacancies.php';
+include 'vacancy.php';
 $sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL AND gender = '$gender' ";
 // echo $sql;
 $result = $conn->query($sql);
