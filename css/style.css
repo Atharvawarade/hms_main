@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../assets/college.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3%;
+}
+
+.nav-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-tabs {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    border-bottom: none !important;
+}
+
+.nav-tabs li {
+    display: inline;
+}
+
+.nav-tabs a {
+    text-decoration: none;
+    color: white;
+    font-size: clamp(14px, 2vw, 20px);
+    padding-inline: clamp(10px, 1%, 2%);
+    font-weight: lighter;
+    font-style: normal;
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: clamp(14px, 2vw, 20px);
+    padding-inline: clamp(20px, 5%, 20%) !important;
+    color: white !important;
+    background: transparent;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    border-color: white;
+    transform: translateY(-5px);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-tabs {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-nav-tabs {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .mobile-nav-tabs li {
+        margin: 0;
+    }
+
+    .mobile-nav-tabs a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 16px;
+        padding-inline: 10px;
+    }
+}
+
+.title {
+    text-align: center;
+    color: white;
+    padding: 0 10px;
+}
+
+.title h1 {
+    font-size: clamp(30px, 8vw, 80px);
+    margin: 0;
+    transition: ease 0.3s;
+}
+
+.title h1:hover {
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+}
+
+.title p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    margin: 10px 0;
+}
+
+.title .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: clamp(14px, 2vw, 18px);
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.title .button:hover {
+    background-color: #0056b3;
+}
+
+.counts-container {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.counts-container .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.counts-container .col {
+    flex: 1;
+    text-align: center;
+    border-left: 1px solid white;
+    padding: 10px;
+}
+
+.counts-container .col:first-child {
+    border-left: none;
+}
+
+.counts-container .col div {
+    margin: 5px 0;
+    font-size: clamp(16px, 2.5vw, 20px);
+}
+
+.vacancy_container {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.vacancy_heading {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.vacancy-content-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.vacancy-row{
+    --bs-gutter-x: 5.5rem !important;
+}
+
+.vacancy-content-container .col-md-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Adjust this value as needed to make the column a vertical rectangle */
+}
+
+.vacancy_box {
+    width: 90%;
+    height: 90%;
+    background-color: #ffffff;
+    border: 2px dashed #000; /* Dashed border */
+    border-color: #3418D9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensure we can position the square box inside */
+    flex-direction: column;
+    justify-content: flex-end; /* Align the square box at the bottom */
+    align-items: center;
+
+}
+
+
+.square_box {
+    width: 100%; /* Square box takes the width of the vacancy box */
+    aspect-ratio: 1 / 1; /* Ensures the box is always square */
+    background-color: #DCCDF3; /* Background color for the square box */
+    position: relative; /* Needed for absolute positioning of inside_square_box */
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    padding: 20px;
+}
+
+
+
+.square_box_heading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.inside_square_box {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.progressdiv {
+  position: relative;
+  width: 80%; /* Adjust as needed */
+}
+
+.progress {
+  display: block;
+  margin: 0 auto;
+  height:fit-content !important;
+  background-color: inherit !important;
+}
+
+.progress circle {
+  stroke: #471792;
+  stroke-width: 10px;
+  fill: none;
+}
+
+.bar {
+  stroke: #ffffff;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem; /* Adjust as needed */
+  color: #000000; /* Adjust as needed */
+}
