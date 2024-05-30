@@ -75,12 +75,12 @@
         </div>
       </div> -->
     <?php
- 
-    echo "<pre>";
-    echo "Session Variables after Login:<br>";
-    print_r($_SESSION);
-    echo "</pre>";
-    // include 'newbies.php';
+    // session_start();
+    // echo "<pre>";
+    // echo "Session Variables after Login:<br>";
+    // print_r($_SESSION);
+    // echo "</pre>";
+    include 'newbies.php';
     ?>
   </div>
 </div>
