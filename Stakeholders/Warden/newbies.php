@@ -6,9 +6,13 @@ echo '<div class="col-md-4 col-sm-12 right-column">
           <p>Upcoming Students <span class="upcoming-count">';
 
 include '../../php/connection/connect.php';
+session_start();
+$WardenId = $_SESSION['WardenId'];
+$gender = $WardenId == 1 ? 'Male' : 'Female';
+
 
 // Your SQL query to select students who have paid and are not assigned to a room
-$sql = "SELECT Fullname FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL";
+$sql = "SELECT Fullname FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL AND gender = '$gender'";
 $result = $conn->query($sql);
 
 // Check if there are any students matching the criteria

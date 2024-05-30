@@ -1,93 +1,94 @@
 <?php
 include '../../php/connection/connect.php';
+session_start();
+$WardenId = $_SESSION['WardenId'];
+$gender = $WardenId == 1 ? 'Male' : 'Female';
+
 
 // Your SQL query to select students who have paid and approved, are male, and are not assigned to a room
-$sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL";
+include 'vacancies.php';
+$sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL AND gender = '$gender' ";
+// echo $sql;
 $result = $conn->query($sql);
 ?>
-<script>
-    console.log(<?php echo $sql; ?>);
+
+<div class="container-fluid py-3">
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Newly Admitted Students</h2>
+        </div>
+
+    </div>
+
+    <div class="container student-list-container">
+        <div class="student-list">
+            <?php if ($result->num_rows > 0) : ?>
+                <?php while ($row = $result->fetch_assoc()) : ?>
+                    <div class="row align-items-center mb-3 p-2 border rounded">
+                        <div class="col-md-3"><strong>Name:</strong> <?php echo htmlspecialchars($row['Fullname']); ?></div>
+                        <div class="col-md-3"><strong>Branch:</strong> <?php echo htmlspecialchars($row['branch']); ?></div>
+                        <div class="col-md-2"><strong>Year of Study:</strong> <?php echo htmlspecialchars($row['YOS']); ?></div>
+                        <div class="col-md-4">
+                            <form class="room-form" data-student-id="<?php echo htmlspecialchars($row['EN']); ?>">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="room_no_<?php echo htmlspecialchars($row['EN']); ?>" name="room_no" placeholder="Enter Room ID" required>
+                                    <button type="submit" class="btn btn-primary">Update Room</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else : ?>
+                <div class="alert alert-warning" role="alert">
+                    No students found.
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<?php include '../../php/connection/break.php'; ?>
+
+<!-- Include jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+
 </script>
 
-<?php
-// Start of the HTML
-echo '<div class="container-fluid py-3">';
-echo '<div class="row mb-3">';
-echo '<div class="col">';
-echo '<h2>Newly Admitted Students</h2>';
-echo '</div>';
-echo '</div>';
-echo '<div class="container student-list-container" id="below_nav">'; // Added id here
-echo '<div class="student-list">';
-
-// Check if there are any students matching the criteria
-if ($result->num_rows > 0) {
-    // Output data of each student
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="row align-items-center mb-3 p-2 border rounded">';
-        echo '<div class="col-md-3"><strong>Name:</strong> ' . htmlspecialchars($row['Fullname']) . '</div>';
-        echo '<div class="col-md-3"><strong>Branch:</strong> ' . htmlspecialchars($row['branch']) . '</div>';
-        echo '<div class="col-md-2"><strong>Year of Study:</strong> ' . htmlspecialchars($row['YOS']) . '</div>';
-        echo '<div class="col-md-4">';
-        echo '<form class="room-form" data-student-id="' . htmlspecialchars($row['EN']) . '">';
-        echo '<div class="input-group">';
-        echo '<input type="number" class="form-control" id="room_id_' . htmlspecialchars($row['EN']) . '" name="room_id" placeholder="Enter Room ID" required>';
-        echo '<button type="submit" class="btn btn-primary">Update Room</button>';
-        echo '</div>';
-        echo '</form>';
-        echo '</div>';
-        echo '</div>';
-    }
-} else {
-    // If no students match the criteria
-    echo '<div class="alert alert-warning" role="alert">';
-    echo 'No students found.';
-    echo '</div>';
-}
-
-echo '</div>'; // Close student-list
-echo '</div>'; // Close student-list-container
-echo '</div>'; // Close main_division
-
-include '../../php/connection/break.php';
-?>
-
-<!-- JavaScript to handle the room update -->
 <script>
-    console.log("welcome in Newly_admitted_student.php");
-    console.log(<?php echo $sql; ?>);
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.room-form').forEach(function(form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var studentId = form.getAttribute('data-student-id');
-                var roomId = form.querySelector('input[name="room_id"]').value;
+    // jQuery function to handle form submission
+    $(document).ready(function() {
+        $('.room-form').submit(function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-                fetch('updateRoom.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
+            var form = $(this); // Get the form element
+            var studentId = form.data('student-id'); // Get the student ID from data attribute
+            var roomId = form.find('input[name="room_no"]').val(); // Get room number from form input
+
+            // AJAX request to updateRoom.php
+            $.ajax({
+                type: 'POST', // HTTP method
+                url: 'updateRoom.php', // Server-side script
+                data: {
+                    EN: studentId, // Student ID
+                    room_no: roomId // Room number
+                },
+                success: function(response) {
+                    console.log('Response from server:', response);
+
+                    // Reload the student list after successful update
+                    $.ajax({
+                        url: 'updateRooms.php', // Server-side script to update the student list
+                        success: function(html) {
+                            $('.student-list-container').html(html); // Replace student list content
                         },
-                        body: 'EN=' + encodeURIComponent(studentId) + '&room_id=' + encodeURIComponent(roomId)
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        // Optionally handle the response data (e.g., show a notification)
-                        console.log('Response from server:', data);
-
-                        // Refresh the content of the element with ID 'below_nav'
-                        fetch('updateRooms.php')
-                            .then(response => response.text())
-                            .then(html => {
-                                document.querySelector('#below_nav').innerHTML = html;
-                            })
-                            .catch(error => {
-                                console.error('Error refreshing student list:', error);
-                            });
-                    })
-                    .catch(error => {
-                        console.error('Error updating room:', error);
+                        error: function(xhr, status, error) {
+                            console.error('Error refreshing student list:', error);
+                        }
                     });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error updating room:', error);
+                }
             });
         });
     });

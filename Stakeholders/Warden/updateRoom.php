@@ -1,41 +1,49 @@
-<script>
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-    console.log("Sunindha ....updateRooms called ");
-</script>
+<?php
+include '../../php/connection/connect.php';
+session_start();
+$WardenId = $_SESSION['WardenId'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $studentId = $_POST['EN'];
+    $roomNo = $_POST['room_no']; // Corrected to 'room_no'
 
-<!--  
- 
- <?php
-    include '../../php/connection/connect.php';
+    // Validate inputs
+    if (empty($studentId) || empty($roomNo)) {
+        echo "Student ID and Room number are required.";
+        exit;
+    }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $studentId = $_POST['EN'];
-        $roomId = $_POST['room_id'];
+    // Update allotment ID for the student based on room number
 
-        // Validate inputs
-        if (empty($studentId) || empty($roomId)) {
-            echo "Student ID and Room ID are required.";
-            exit;
-        }
+    $updateSql1 = "SET @allotment_id = (
+        SELECT allotment_id 
+        FROM alloted 
+        WHERE room_id = (
+            SELECT room_id 
+            FROM room 
+            WHERE room_number = '$roomNo'
+            AND hostel_id = '$WardenId'
+        ) 
+        AND student_id IS NULL 
+        LIMIT 1
+    );
+    ";
 
-        // Update room ID for the student
-        $updateSql = "UPDATE student SET room_id = $roomId WHERE EN = '$studentId'";
+    $updateSql = "
+    UPDATE `student` 
+    SET `allotment_id` = @allotment_id
+    WHERE EN = '$studentId'; ";
+?>
+    <script>
+        console.log('<?php echo $updateSql ?>');
+    </script>
+<?php
+    if ($conn->query($updateSql1) === TRUE) {
         if ($conn->query($updateSql) === TRUE) {
-            echo "Room ID updated successfully for Student ID: " . htmlspecialchars($studentId);
+            echo "Allotment ID updated successfully for Student ID: " . htmlspecialchars($studentId);
         } else {
             echo "Error updating record: " . $conn->error;
         }
     } else {
         echo "Invalid request method.";
     }
-
-    include '../../php/connection/break.php';
-    ?>  -->
+}
