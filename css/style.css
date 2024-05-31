@@ -219,6 +219,68 @@ nav {
     font-size: clamp(16px, 2.5vw, 20px);
 }
 
+
+
+/* <!-- ABOUT SECTION STARTS HERE --> */
+.about_container {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.about_heading {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.about-content-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.about_row{
+    margin: 10%;
+}
+
+.image_container {
+    width: 80%;
+    height: 100%; /* Ensure containers take full height of their column */
+    overflow: hidden;
+
+}
+
+.text_container{
+    width: 80%;
+    height: 100%;
+    text-align: justify;
+}
+
+.image_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.image_container:hover img {
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+
+
+/* <!-- ABOUT SECTION ENDS HERE --> */
+
+
+
+
+
+
+
+
+/* <!-- VACANCY SECTION STARTS HERE--> */
 .vacancy_container {
     text-align: center;
     padding: 50px 0;
@@ -234,9 +296,6 @@ nav {
     margin: 0 auto;
 }
 
-.vacancy-row{
-    --bs-gutter-x: 5.5rem !important;
-}
 
 .vacancy-content-container .col-md-6 {
     display: flex;
@@ -324,3 +383,5 @@ nav {
   font-size: 1.5rem; /* Adjust as needed */
   color: #000000; /* Adjust as needed */
 }
+
+/* <!-- VACANCY SECTION ENDS HERE--> */

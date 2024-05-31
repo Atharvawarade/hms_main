@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT EN, Fullname, room_id FROM student ORDER BY room_id ASC";
+$sql = "SELECT EN, Fullname, allotment_id FROM student ORDER BY allotment_id ASC";
 $result = $conn->query($sql);
 ?>
 
@@ -56,7 +56,7 @@ $result = $conn->query($sql);
                         echo "<tr>";
                         echo "<td>" . $row["EN"]. "</td>";
                         echo "<td>" . $row["Fullname"]. "</td>";
-                        echo "<td>" . $row["room_id"]. "</td>";
+                        echo "<td>" . $row["allotment_id"]. "</td>";
                         echo "<td class='text-center'><div class='d-flex justify-content-center'><button class='btn btn-primary profile'>View</button></div></td>";
                         echo "</tr>";
                     }

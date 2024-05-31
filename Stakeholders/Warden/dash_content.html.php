@@ -42,7 +42,7 @@
         <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center" id="leave_request">
           <img src="../../assets/LeaveRequests.png" alt="checkRooms" class="centered-image" />
         </div>
-        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center">
+        <div class="cards col-md-5 col-sm-4 col-xs-4 box align-items-center"  id="quit_request">
           <img src="../../assets/roomleftRequests.png" alt="checkRooms" class="centered-image" />
         </div>
         <div class="cards col-md-5 col-sm-12 box align-items-center">
@@ -250,6 +250,61 @@
       // console.log("Button with id 'newbies' was pressed"); // Additional console log
       try {
         const response = await fetch("leave_requests.php");
+        console.log("Fetch request sent");
+        if (!response.ok) {
+          console.error("Network response was not ok");
+          throw new Error("Network response was not ok");
+        }
+        // console.log("Fetch successful");
+        const data = await response.text();
+        console.log("Response data received:");
+        const contentDiv = document.getElementById("below_nav");
+        if (contentDiv) {
+          // console.log("Element with id 'below_nav' found");
+          contentDiv.innerHTML = data;
+          // console.log("below_nav updated successfully");
+
+          // Find and execute scripts in the fetched content
+          const scripts = contentDiv.getElementsByTagName("script");
+          for (let i = 0; i < scripts.length; i++) {
+            const newScript = document.createElement("script");
+            newScript.type = "text/javascript";
+            if (scripts[i].src) {
+              newScript.src = scripts[i].src;
+            } else {
+              newScript.text = scripts[i].innerHTML;
+            }
+            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+          }
+          console.log("Script appended below");
+        } else {
+          console.error("Element with id 'below_nav' not found");
+        }
+      } catch (error) {
+        console.error("Error fetching the file:", error);
+      }
+    });
+  } else {
+    console.error("Element with id 'LeaveRequests' not found");
+  }
+  // Leave Requests javascript : = end  
+
+
+
+
+  // Leave requests javascript : = start
+  const QuitRequests = document.getElementById("quit_request");
+  if (QuitRequests) {
+    // console.log("Element with id 'newbies' found");
+    QuitRequests.addEventListener("click", function() {
+      console.log("Leave button");
+    });
+
+    QuitRequests.addEventListener("click", async () => {
+      // console.log("Newbies button clicked");
+      // console.log("Button with id 'newbies' was pressed"); // Additional console log
+      try {
+        const response = await fetch("quit_request.php");
         console.log("Fetch request sent");
         if (!response.ok) {
           console.error("Network response was not ok");

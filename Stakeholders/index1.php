@@ -106,7 +106,7 @@
           <p>Your Home Away From Home | Modern Amenities | Friendly Service</p>
           <a href="./register.html" class="button">Apply For Hostel</a>
         </div>
-        <div class="counts-container">
+          <div class="counts-container">
           <div class="row">
             <div class="col">
               <div>HOSTELS</div>
@@ -123,7 +123,45 @@
           </div>
         </div>
       </header>
-      <!-- VACANCY SECTION -->
+      <!-- ABOUT SECTION STARTS HERE -->
+      <div class="about_container">
+    <div class="about_heading">ABOUT</div>
+      <div class="about-content-container">
+          <div class="row about_row">
+              <div class="col-md-6 image_row d-flex justify-content-center align-items-center">
+                  <div class="image_container">
+                      <img src="../assets/Hostel1.1.jpg" alt="Boys Hostel">
+                  </div>
+              </div>
+              <div class="col-md-6 text_row d-flex justify-content-center align-items-center">
+                  <div class="text_container">
+                      <h4>Boys Hostel</h4>
+                      <p>Welcome to our Boys' Hostel, where safety, comfort, and community come first. Located in a secure neighborhood, our hostel offers spacious rooms with modern amenities, ensuring a conducive environment for study and relaxation. Residents enjoy access to recreational facilities, nutritious meals, and regular events that promote personal growth and camaraderie. With 24/7 security and dedicated staff, we provide a nurturing and supportive home away from home. Join us for an enriching and memorable living experience.</p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row about_row">
+              <div class="col-md-6 text_row d-flex justify-content-center align-items-center">
+                  <div class="text_container">
+                      <h4>Girls Hostel</h4>
+                      <p>Welcome to our Boys' Hostel, where safety, comfort, and community come first. Located in a secure neighborhood, our hostel offers spacious rooms with modern amenities, ensuring a conducive environment for study and relaxation. Residents enjoy access to recreational facilities, nutritious meals, and regular events that promote personal growth and camaraderie. With 24/7 security and dedicated staff, we provide a nurturing and supportive home away from home. Join us for an enriching and memorable living experience.</p>
+                  </div>
+              </div>
+              <div class="col-md-6 image_row d-flex justify-content-center align-items-center">
+                  <div class="image_container">
+                      <img src="../assets/Hostel2.webp" alt="Boys Hostel">
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+      <!-- ABOUT SECTION ENDS HERE -->
+
+
+      <!-- VACANCY SECTION STARTS HERE-->
       <div class="vacancy_container">
         <div class="vacancy_heading">VACANCY</div>
         <div class="vacancy-content-container">
@@ -206,7 +244,7 @@
           </div>
         </div>
       </div>
-
+      <!-- VACANCY SECTION ENDS HERE-->
       <script src="scripts/script.js"></script>
     </body>
   </html>

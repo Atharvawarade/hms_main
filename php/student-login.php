@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $stored_password = $row['EN']; // Assuming EN is the stored password
         $status = $row['status'];
-        $room_id = $row['room_id'];
+        $allotment_id = $row['allotment_id'];
 
-        // Check if status is "Paid and Approved" and room_id is not null
-        if ($status === "paid and approved" && !is_null($room_id)) {
+        // Check if status is "Paid and Approved" and allotment is not null
+        if ($status === "paid and approved" && !is_null($allotment_id)) {
             // Validate PRN only if the email exists in the database
             if ($entered_password == $stored_password) {
                 // Passwords match, login successful

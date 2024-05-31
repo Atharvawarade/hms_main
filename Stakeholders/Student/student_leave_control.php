@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Error: Student is not logged in.');
     }
 
-    // Fetching fullname and room_id from student table
-    $sql = "SELECT fullname, room_id FROM student WHERE EN = ?";
+    // Fetching fullname and allotment_id from student table
+    $sql = "SELECT fullname, allotment_id FROM student WHERE EN = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $EN);
     $stmt->execute();
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($student) {
         $fullname = $student['fullname'];
-        $room_id = $student['room_id'];
+        $allotment_id = $student['allotment_id'];
     } else {
         die('Error: Student record not found.');
     }
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $status = 'Pending'; // Setting initial status to 'Pending'
-    $stmt->bind_param('sssssss', $EN, $fullname, $room_id, $status, $start_date, $end_date, $reason);
+    $stmt->bind_param('sssssss', $EN, $fullname, $allotment_id, $status, $start_date, $end_date, $reason);
 
     if ($stmt->execute()) {
         echo 'Leave request submitted successfully.';
