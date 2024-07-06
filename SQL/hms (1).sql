@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2024 at 07:15 PM
+-- Generation Time: Jul 06, 2024 at 11:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -25,6 +25,24 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateAllotedTable` (IN `new_allotment_id` INT, IN `student_en` VARCHAR(255))   BEGIN
+    IF new_allotment_id IS NULL THEN
+        -- If the new allotment_id is NULL, update student_id to NULL
+        UPDATE alloted
+        SET student_id = NULL
+        WHERE student_id = student_en;
+    ELSE
+        -- If the new allotment_id is not NULL, update student_id to the new value
+        UPDATE alloted
+        SET student_id = student_en
+        WHERE allotment_id = new_allotment_id
+        limit 1;
+
+        -- Update the status for the new room
+        CALL UpdateRoomStatus(new_allotment_id);
+    END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateRoomStatus` (IN `p_allotment_id` INT)   BEGIN
     DECLARE v_current_occupancy INT;
     DECLARE v_capacity INT;
@@ -336,7 +354,9 @@ INSERT INTO `attendance_files` (`year`, `month`, `Date_and_time_of_upload`, `hos
 (2024, 'February', '2024-05-26 04:48:44', '', '../../Attendance/candidates.csv'),
 (2024, 'February', '2024-05-26 05:25:21', '', '../../Attendance/candidates.csv'),
 (2024, 'August', '2024-05-26 05:26:12', '', '../../Attendance/candidates.csv'),
-(2024, 'January', '2024-05-28 04:43:06', '', '../../Attendance/contacts.csv');
+(2024, 'January', '2024-05-28 04:43:06', '', '../../Attendance/contacts.csv'),
+(2024, 'August', '2024-05-30 06:34:27', '', '../../Attendance/student_attendance.csv'),
+(2024, 'November', '2024-05-30 06:37:06', '', '../../Attendance/student_attendance.csv');
 
 -- --------------------------------------------------------
 
@@ -1270,8 +1290,10 @@ CREATE TABLE `leave_requests` (
 --
 
 INSERT INTO `leave_requests` (`EN`, `Fullname`, `room_id`, `status`, `start_date`, `end_date`, `reason`) VALUES
+('EN123456789', 'Atharva Warade', 21, 'Approved', '2024-05-10', '2024-05-17', 'tyt'),
 ('EN21107545', 'SANJAY YADAV', NULL, 'Pending', '2024-05-03', '2024-05-14', 'cvvc'),
-('EN21107546', 'RAJESH KUMAR', NULL, 'Pending', '2024-05-18', '2024-05-31', 'm');
+('EN21107546', 'RAJESH KUMAR', NULL, 'Pending', '2024-05-18', '2024-05-31', 'm'),
+('EN21107547', 'ANIL KUMAR', 45, 'Approved', '2024-05-02', '2024-05-03', 'xyz');
 
 -- --------------------------------------------------------
 
@@ -1305,6 +1327,14 @@ CREATE TABLE `quit_requests` (
   `warden_status` enum('Pending','Approved','Canceled') NOT NULL DEFAULT 'Pending',
   `accountant_status` enum('Pending','Approved','Canceled') NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quit_requests`
+--
+
+INSERT INTO `quit_requests` (`EN`, `warden_status`, `accountant_status`) VALUES
+('EN123456789', 'Approved', 'Approved'),
+('EN21107547', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1484,11 +1514,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`EN`, `Fullname`, `email`, `DOB`, `gender`, `student_phone`, `Add_line_1`, `Add_line_2`, `city`, `state`, `pincode`, `Father_no`, `Mother_no`, `Gaurdian_no`, `Blood_group`, `photo`, `YOS`, `branch`, `section`, `Batch`, `dateOfStatusChange`, `status`, `allotment_id`) VALUES
-('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, '2024-05-01', 'paid', NULL),
-('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
-('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, 'paid and approved', NULL),
+('EN123456789', 'Atharva Warade', 'co.2021.arwarade@bitwardha.ac.in', '0000-00-00', 'Male', 7410767476, '', '', '', '', 0, 0, 0, 0, '', '', 9, 'Computer Engineering', '', NULL, '2024-05-01', 'paid and approved', 21),
+('EN21107538 ', 'ANSHIKA SHARMA', 'anshika.sharma@example.com', '2024-06-08', 'Male', 7654321098, 'sd', 'zzc', 'asd', 'asd', 555, 5, 5, 0, 'y', '', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', 45),
+('EN21107544', 'MEENA KUMARI', 'meena.kumari@example.com', '2022-07-07', 'Male', 1098765432, 'Snehal Nagar', 'Nagpur', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Electrical Engineering', 'B', NULL, NULL, 'paid and approved', 65),
 ('EN21107545', 'SANJAY YADAV', 'sanjay.yadav@example.com', '2024-05-10', 'Male', 1098765432, 'Ram nagar', '', 'Wardha', 'Maharshtra', 442001, 2147483647, 2147483647, 0, 'A+', 'EN2110754531556Computer EngineeringAprofile_photo.png', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
-('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example1.com', '2004-06-11', 'Male', 2109876543, 'Meera Naga', 'Behind Keshav Cit', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 78, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
+('EN21107546', 'RAJESH KUMAR', 'rajesh.kumar@example1.com', '2004-06-11', 'Male', 2109876543, 'Meera Naga', 'Behind Keshav Cit', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 78, 'O+', 'EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg', 1, 'Electrical Engineering', 'A', NULL, NULL, 'paid and approved', 9),
+('EN21107547', 'ANIL KUMAR', 'anil.kumar@example.com', '2024-05-04', 'Male', 3210987654, 'Sai Nagar', 'Wardha', 'Wardha', 'Maaharashtra', 442001, 2147483647, 2147483647, 0, 'A+', 'EN2110754790905Computer EngineeringAHarshal photo (2).jpg', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', 45),
 ('EN21107554', 'ANITA YADAV', 'anita.yadav@example.com', '2024-05-10', 'Female', 1234567890, 'Jayant Nagar', 'Gandhi Chowk, Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 321456963, 'A+', 'EN2110755430577Mechanical EngineeringBprofile_photo.png', 1, 'Mechanical Engineering', 'B', NULL, NULL, 'paid and approved', NULL),
 ('EN21107558', 'SHYAM KUMAR', 'shyam.kumar@example.com', '2024-06-08', 'Male', 5678901234, 'Snehal Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 2147483647, 2147483647, 'AB+', '', 1, 'Computer Engineering', 'A', NULL, NULL, 'paid and approved', NULL),
 ('EN21107578', 'GEETA KUMARI', 'geeta.kumari@example.com', '2003-06-24', 'Female', 7890123456, 'Sai Nagar', 'Wardha', 'Wardha', 'Maharashtra', 442001, 2147483647, 123654789, 2147483647, 'B+', '', 1, 'Civil Engineering', '', NULL, NULL, 'paid and approved', NULL);
@@ -1517,17 +1548,6 @@ CREATE TRIGGER `after_student_room_id_update` AFTER UPDATE ON `student` FOR EACH
             -- Update the status for the new room
             CALL UpdateRoomStatus(NEW.allotment_id);
         END IF;
-    END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `status_change_trigger` AFTER UPDATE ON `student` FOR EACH ROW BEGIN
-    IF OLD.status <> NEW.status THEN
-        -- Update the dateOfStatusChange to the current date
-        UPDATE `student`
-        SET `dateOfStatusChange` = CURRENT_DATE()
-        WHERE `EN` = NEW.EN;
     END IF;
 END
 $$
