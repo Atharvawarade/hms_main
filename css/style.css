@@ -221,6 +221,20 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* <!-- ABOUT SECTION STARTS HERE --> */
 .about_container {
     text-align: center;
@@ -237,18 +251,19 @@ nav {
     margin: 0 auto;
 }
 
-.about_row{
+.about_row {
     margin: 10%;
 }
 
 .image_container {
     width: 80%;
-    height: 100%; /* Ensure containers take full height of their column */
+    height: 100%;
+    /* Ensure containers take full height of their column */
     overflow: hidden;
 
 }
 
-.text_container{
+.text_container {
     width: 80%;
     height: 100%;
     text-align: justify;
@@ -256,22 +271,173 @@ nav {
 
 .image_container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
+    height: auto;
+    object-fit: cover;
+    /* Maintain aspect ratio while covering the container */
     -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }
 
 .image_container:hover img {
-	-webkit-transform: scale(1.3);
-	transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.text_container h4 {
+    margin-bottom: 20px;
 }
 
 
-
 /* <!-- ABOUT SECTION ENDS HERE --> */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* OUR PROMISES SECTION STARTS HERE */
+.our_promises_container {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.our_promises_heading {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.our_promises-content-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.promise-box {
+    width: 100%;
+    margin: 10px;
+    border: 2px dashed #3418D9;
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: color 0.5s ease;
+    z-index: 1; 
+}
+
+.promise-box img {
+    margin-top: 10%;
+    height: 30%;
+    width: 30%;
+    z-index: 10;
+}
+
+.promise-box h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    /* Regular */
+    color: #6E22E2;
+    text-align: center;
+    padding-top: 4%;
+    /* Adjust as necessary */
+    font-size: 1.5vw;
+    /* Responsive font size */
+    z-index: 2;
+}
+
+.promise-box p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    /* Regular */
+    color: #000000;
+    text-align: center;
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size: 0.8vw;
+    /* Responsive font size */
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    .promise-box h3 {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 770px) {
+    .promise-box h3 {
+        font-size: 4vw;
+    }
+}
+
+/* @media (max-width: 1600px) {
+    .promise-box p {
+      font-size: 1vw;
+    }
+  } */
+
+  .promise-box::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: #6E22E2;
+    transition: all 0.7s ease;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  .promise-box:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .promise-box:hover {
+    color: #ffffff;
+  }
+  
+  .promise-box:hover h3 {
+    color: #ffffff;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .promise-box:hover p {
+    color: #ffffff;
+    z-index: 1;
+    position: relative;
+  }
+
+
+
+/* OUR PROMISES SECTION ENDS HERE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,35 +467,43 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px; /* Adjust this value as needed to make the column a vertical rectangle */
+    height: 300px;
+    /* Adjust this value as needed to make the column a vertical rectangle */
 }
 
 .vacancy_box {
     width: 90%;
     height: 90%;
     background-color: #ffffff;
-    border: 2px dashed #000; /* Dashed border */
+    border: 2px dashed #000;
+    /* Dashed border */
     border-color: #3418D9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     display: flex;
     align-items: center;
-    position: relative; /* Ensure we can position the square box inside */
+    position: relative;
+    /* Ensure we can position the square box inside */
     flex-direction: column;
-    justify-content: flex-end; /* Align the square box at the bottom */
+    justify-content: flex-end;
+    /* Align the square box at the bottom */
     align-items: center;
 
 }
 
 
 .square_box {
-    width: 100%; /* Square box takes the width of the vacancy box */
-    aspect-ratio: 1 / 1; /* Ensures the box is always square */
-    background-color: #DCCDF3; /* Background color for the square box */
-    position: relative; /* Needed for absolute positioning of inside_square_box */
+    width: 100%;
+    /* Square box takes the width of the vacancy box */
+    aspect-ratio: 1 / 1;
+    /* Ensures the box is always square */
+    background-color: #DCCDF3;
+    /* Background color for the square box */
+    position: relative;
+    /* Needed for absolute positioning of inside_square_box */
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     padding: 20px;
 }
 
@@ -342,46 +516,50 @@ nav {
     font-weight: bold;
     font-size: 1.2rem;
 }
+
 .inside_square_box {
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .progressdiv {
-  position: relative;
-  width: 80%; /* Adjust as needed */
+    position: relative;
+    width: 80%;
+    /* Adjust as needed */
 }
 
 .progress {
-  display: block;
-  margin: 0 auto;
-  height:fit-content !important;
-  background-color: inherit !important;
+    display: block;
+    margin: 0 auto;
+    height: fit-content !important;
+    background-color: inherit !important;
 }
 
 .progress circle {
-  stroke: #471792;
-  stroke-width: 10px;
-  fill: none;
+    stroke: #471792;
+    stroke-width: 10px;
+    fill: none;
 }
 
 .bar {
-  stroke: #ffffff;
-  transition: stroke-dashoffset 1s ease;
+    stroke: #ffffff;
+    transition: stroke-dashoffset 1s ease;
 }
 
 .percentage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem; /* Adjust as needed */
-  color: #000000; /* Adjust as needed */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    /* Adjust as needed */
+    color: #000000;
+    /* Adjust as needed */
 }
 
 /* <!-- VACANCY SECTION ENDS HERE--> */
