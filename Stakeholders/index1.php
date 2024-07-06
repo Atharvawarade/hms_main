@@ -230,7 +230,7 @@
 
     <!-- VACANCY SECTION STARTS HERE-->
     <div class="vacancy_container">
-      <div class="vacancy_heading">VACANCY</div>
+      <div class="vacancy_heading">VACANY</div>
       <div class="vacancy-content-container">
         <div class="row vacancy-row">
           <div class="col-md-6">
