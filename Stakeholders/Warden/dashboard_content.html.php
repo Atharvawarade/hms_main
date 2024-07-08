@@ -4,7 +4,7 @@
         background-color: inherit !important;
         border-color: #925fe2 !important;
       ">
-      <i class="fas fa-align-left"></i>
+      <i></i>
       <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
     </button>
     <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

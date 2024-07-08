@@ -11,6 +11,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
 
   <body>
@@ -18,7 +22,7 @@
       <div class="centraldiv">
         <nav id="sidebar">
           <div class="sidebar-header">
-            <p class="header-title">Hostel Management System</p>
+            <h5>Hostel Management System</h5>
           </div>
           <div class="profile-photo" id="profilePhoto">
             <img
@@ -26,48 +30,119 @@
               alt="Profile Photo"
               id="photoImg"
             />
-            <div class="photo-actions" id="photoActions">
-              <span id="viewBtn">View</span>
-              <span id="editBtn">Edit</span>
-              <span id="removeBtn">Remove</span>
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              id="fileInput"
-              style="display: none"
-            />
           </div>
 
           <ul class="list-unstyled components">
             <li>
               <a href="#">
-                <i class="fas fa-briefcase"></i>
-                About
+                <i class="fa fa-user"></i>
+                Profile
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="fas fa-image"></i>
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-question"></i>
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-paper-plane"></i>
-                Contact
+                <i class="fa fa-sign-out"></i>
+                Logout
               </a>
             </li>
           </ul>
         </nav>
 
-        <div id="content"></div>
+        <div id="content">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="nav_buttons d-flex justify-content-between">
+              <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
+              </button>
+              <div class="nav_button_item">
+                <div class="button_type">
+                  Total Students <br />
+                  1233
+                </div>
+                <img src="../../assets/Group 31.png" alt="go" />
+              </div>
+              <div class="nav_button_item">
+                <div class="button_type">
+                  Hostelers<br />
+                  1233
+                </div>
+                <img src="../../assets/Group 31.png" alt="go" />
+              </div>
+              <div class="nav_button_item">
+                <div class="button_type">
+                  On Leave<br />
+                  1233
+                </div>
+                <img src="../../assets/Group 31.png" alt="go" />
+              </div>
+              <div class="nav_button_item">
+                <div class="button_type">
+                  Removed<br />
+                  1233
+                </div>
+                <img src="../../assets/Group 31.png" alt="go" />
+              </div>
+            </div>
+          </nav>
+
+          <div class="content_heading">
+            <h5>Warden Dashboard</h5>
+          </div>
+          <div class="container boxes_container">
+            <div class="text-center">
+              <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-5">
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <div class="row">
+                      <div class="col-12 col-md-4">
+                        <img src="../../assets/bed.png" alt="room_status" />
+                      </div>
+                      <div class="col-12 col-md-8" style="text-align: center; vertical-align: top;">
+                        <p>Room Status</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <img src="../../assets/bed.png" alt="room_status" />
+                    <p>Room Status</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <img src="../../assets/bed.png" alt="room_status" />
+                    <p>Room Status</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <img src="../../assets/bed.png" alt="room_status" />
+                    <p>Room Status</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <img src="../../assets/bed.png" alt="room_status" />
+                    <p>Room Status</p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="box p-2">
+                    <div class="color_doppler"></div>
+                    <img src="../../assets/bed.png" alt="room_status" />
+                    <p>Room Status</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
