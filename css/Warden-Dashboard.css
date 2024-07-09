@@ -227,6 +227,8 @@ a[data-toggle="collapse"] {
 .nav_button_item:hover {
     box-shadow: 7px 7px rgba(170, 128, 232, 0.421);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transform: scale(1.01);
 }
 
 
@@ -267,6 +269,7 @@ a[data-toggle="collapse"] {
     box-sizing: border-box;
     overflow: hidden;
     border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .box .p-3 {
@@ -288,30 +291,54 @@ a[data-toggle="collapse"] {
     z-index: 2; /* Ensure the image is above the color_doppler */
     position: relative; /* Make sure the image stays in place */
     float: left;
+
   }
+  
   
   .boxes_container .box p {
-    margin-top: 2vh;
+    margin-top: 1.5vh;
     z-index: 2; /* Ensure the text is above the color_doppler */
     position: relative; /* Make sure the text stays in place */
-    font-size: 3vh;
+    font-size: 2.5vh;
   }
   
+
   .color_doppler {
     height: 128px;
     width: 128px;
-    background-color: #f9b234;
     z-index: 1;
     position: absolute;
-    top: -75px;
-    right: -75px;
+    top: -85px;
+    right: -85px;
     border-radius: 50%;
     transition: all .5s ease;
+  }
+
+  .color_doppler_1 {
+    background: radial-gradient(#f7e5c6, #f9d393, #f6a720);
+  }
+
+  .color_doppler_2 {
+    background: radial-gradient(#e0f7fa, #80deea, #26c6da);
+  }
+
+  .color_doppler_3 {
+    background: radial-gradient(#e1bee7, #ba68c8, #8e24aa);
+  }
+
+  .color_doppler_4 {
+    background: radial-gradient(#c6e7df, #75ddc3, #2ee1b5);
   }
   
   .box:hover .color_doppler {
     transform: scale(10);
     z-index: 0; /* Ensure the color_doppler is below the image and text */
+  }
+
+  .box:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
 
