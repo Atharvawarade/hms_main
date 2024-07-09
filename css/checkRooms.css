@@ -8,6 +8,11 @@
     font-weight: bold;
     /* Makes the text bold */
     margin-bottom: 5px;
+    justify-content: space-between;
+}
+
+#legend {
+    width: 50%;
 }
 
 .room-box {
@@ -40,7 +45,7 @@
 }
 
 .half {
-    background: rgba(13, 205, 112, 0.573);
+    background: #0dcd7092;
 }
 
 .full {
@@ -88,4 +93,8 @@ p {
     /* Matches the font size of the heading */
     margin-right: 5px;
     /* Space between image and heading */
+}
+
+#below_nav {
+    margin-bottom: 10px;
 }
