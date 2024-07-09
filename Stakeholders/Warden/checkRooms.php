@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style></style>
+</head>
+<body>
 <?php
 include '../../php/connection/connect.php';
 
@@ -156,3 +165,5 @@ include '../../php/connection/break.php';
   });
 </script>
  -->
+</body>
+</html>
