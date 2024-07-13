@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="../../css/uploadAttendance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .search-container {
             display: flex;
@@ -17,80 +15,126 @@
             justify-content: center;
             padding: 20px;
         }
+
         .search-container .form-control {
             border-radius: 30px 0 0 30px;
             border-right: none;
         }
+
         .search-container .btn {
             border-radius: 0 30px 30px 0;
         }
+
         .filter-button {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
         }
+
         .filter-button .btn {
             display: flex;
             align-items: center;
         }
+
         .filter-button .btn i {
             margin-right: 8px;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="row attendance_container">
-            <div class="col-lg-4 col-md-12 gap-desktop">
-                <div class="p-3 border bg-light left-column drag-area">
-                    <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
-                        <div id="lottie-container">
-                            <iframe src="https://lottie.host/embed/359caf78-fc68-4c21-95cc-4a2986d48638/s1YooQKD8S.json"></iframe>
-                        </div>
-                        <div class="mb-3">
-                            <label for="monthSelect" class="form-label">Select Month</label>
-                            <select class="form-select" id="monthSelect" name="month">
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
-                        </div>
-                    
-                        <header>Drag and drop attendance CSV file here.</header>
-                        <p>OR</p>
-                        <button type="button" class="custom-button btn btn-primary" id="browseBtn">Browse Computers</button>
-                        <input type="file" hidden accept=".csv" name="file" id="fileInput">
-                        <button type="submit" class="custom-button btn btn-success" id="uploadBtn" disabled>Upload</button>
-                        <p class="note">Only CSV file is allowed and max file size should be 5MB.</p>
-                    </form>
+    <div class="centraldiv">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+            <button type="button" class="btn btn-outline-dark btn-square back_button"><i class="fa fa-angle-left" style="font-size:36px"></i></button>
+                <div class="nav_button_item">
+                    <div class="button_type">
+                        Total Students <br />
+                        1233
+                    </div>
+                    <img src="../../assets/Group 31.png" alt="go" />
+                </div>
+                <div class="nav_button_item">
+                    <div class="button_type">
+                        Hostelers<br />
+                        1233
+                    </div>
+                    <img src="../../assets/Group 31.png" alt="go" />
+                </div>
+                <div class="nav_button_item">
+                    <div class="button_type">
+                        On Leave<br />
+                        1233
+                    </div>
+                    <img src="../../assets/Group 31.png" alt="go" />
+                </div>
+                <div class="nav_button_item">
+                    <div class="button_type">
+                        Removed<br />
+                        1233
+                    </div>
+                    <img src="../../assets/Group 31.png" alt="go" />
                 </div>
             </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="p-3 border bg-light right-column">
-                    <div class="search-filter-container">
-                        <input type="text" placeholder="Search...">
-                        <button>Filter</button>
-                    </div>
-                    <div class="container attendance-list-container">
-                        <div class="attendance-list" id="attendance-list">
-                            <div class="row">
-                            <div class="col-md-3">Month</div>
-                                <div class="col-md-3">Year</div>
-                                
-                                <div class="col-md-3">Date of upload</div>
-                                <div class="col-md-3">File</div>
+         </nav>
+        <div class="container_fluid below_navbar">
+            <div class="row attendance_container">
+                <div class="col-lg-4 col-md-12 gap-desktop">
+                    <div class="p-3 border bg-light left-column drag-area">
+                        <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+                            <div id="lottie-container">
+                                <iframe
+                                    src="https://lottie.host/embed/359caf78-fc68-4c21-95cc-4a2986d48638/s1YooQKD8S.json"></iframe>
                             </div>
-                            <?php include("fetch_attendance.php")?>
+                            <div class="mb-3">
+                                <label for="monthSelect" class="form-label">Select Month</label>
+                                <select class="form-select" id="monthSelect" name="month">
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                </select>
+                            </div>
+
+                            <header>Drag and drop attendance CSV file here.</header>
+                            <p>OR</p>
+                            <div class="buttons_div">
+                                <button type="button" class="custom-button btn btn-primary" id="browseBtn">Browse
+                                    Computers</button>
+                                <input type="file" hidden accept=".csv" name="file" id="fileInput">
+                                <button type="submit" class="custom-button btn btn-success" id="uploadBtn"
+                                    disabled>Upload</button>
+                            </div>
+                            <p class="note">Only CSV file is allowed and max file size should be 5MB.</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="p-3 border bg-light right-column">
+                        <div class="search-filter-container">
+                            <input type="text" placeholder="Search...">
+                            <button>Filter</button>
+                        </div>
+                        <div class="container attendance-list-container">
+                            <div class="attendance-list" id="attendance-list">
+                                <div class="row">
+                                    <div class="col-md-3">Month</div>
+                                    <div class="col-md-3">Year</div>
+
+                                    <div class="col-md-3">Date of upload</div>
+                                    <div class="col-md-3">File</div>
+                                </div>
+                                <?php include("fetch_attendance.php")?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,9 +142,15 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg9OK7iVy9R1z7OfE/C5Zp6GYlgJp6Lr9eUksdSQ/2" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-QFY6xUR/ftl0TVNGomZ96TkGpRN+GhY34mYYyUbsmMDTD3JzDbuRv0TfCMhCFeD8" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js" integrity="sha384-G6E3nx8rTpWbRo3m+a4zNYqPQJ3fRgY4dPIlbcYg0AMhU5H+II4GH6BTAme/aB9Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg9OK7iVy9R1z7OfE/C5Zp6GYlgJp6Lr9eUksdSQ/2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QFY6xUR/ftl0TVNGomZ96TkGpRN+GhY34mYYyUbsmMDTD3JzDbuRv0TfCMhCFeD8"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"
+        integrity="sha384-G6E3nx8rTpWbRo3m+a4zNYqPQJ3fRgY4dPIlbcYg0AMhU5H+II4GH6BTAme/aB9Q"
+        crossorigin="anonymous"></script>
     <script>
         //selecting all required elements
         const dropArea = document.querySelector(".drag-area");
@@ -115,7 +165,7 @@
             input.click(); //if user click on the button then the input also clicked
         }
 
-        input.addEventListener("change", function() {
+        input.addEventListener("change", function () {
             //getting user select file and [0] this means if user select multiple files then we'll select only the first one
             file = this.files[0];
             dropArea.classList.add("active");
@@ -166,4 +216,5 @@
         // }
     </script>
 </body>
+
 </html>

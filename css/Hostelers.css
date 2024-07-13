@@ -27,6 +27,8 @@ body {
     border-radius: 20px;
     box-shadow: 4px 4px 20px 8px #A091B8;
     z-index: 2;
+
+    /* display: flex; */
 }
 
 @media only screen and (max-width: 768px) {
@@ -36,42 +38,8 @@ body {
     }
 }
 
-.navbar {
-    padding: 15px 10px;
-    text-align: center;
+.nav-bar{
     margin-top: 1%;
-}
-
-
-.back_button {
-    width: 4%;  /* Adjust the width and height as needed */
-    height: 100%; /* The height is the same as the width to make it square */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    text-align: center;
-    line-height: 1.5; /* Adjust the line height if needed */
-    aspect-ratio: 1;
-  }
-  
-  .back_button img{
-    height: 90%;
-    width: 100%;
-
-  }
-
-.nav_buttons_container {
-    flex-grow: 1;
-}
-
-.nav_buttons {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-evenly;
-    margin-left: 1%;
-    margin-right: 1%;
-    align-items: center;
 }
 
 .nav_button_item {
@@ -115,37 +83,67 @@ body {
     }
 }
 
-
-.below_navbar{
-    margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
+.table-responsive {
+    max-height: 60vh; /* Adjust height as needed */
+    overflow-y: auto;
+}
+thead th {
+    position: sticky;
+    top: 0;
+    background: #fff; /* Adjust background as needed */
+    z-index: 1;
+}
+.student-table-container {
+    max-height: 60vh; /* Adjust height as needed */
+    overflow-y: auto;
 }
 
-
-#lottie-container {
+.profile_button{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; Adjust the height as needed */
-}
-
-#lottie-container iframe {
-    border: none; /* Optional: remove border around the iframe */
-    width: 100%; /* Adjust width and height as needed */
     height: 100%;
-    max-width: 600px; /* Example maximum width */
-    max-height: 
-    400px; /* Example maximum height */
 }
 
-#uploadForm header, p{
-    text-align: center;
+.table {
+    border-collapse: collapse; /* Ensure borders don't double */
+    width: 100%;
 }
 
-.attendance_container .gap-desktop .left-column .buttons_div{
+
+.table-responsive {
+    max-height: 63vh; /* Adjust height as needed */
+    overflow-y: auto;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: #fff; /* Adjust background as needed */
+    z-index: 1;
+    background-color: #DCCDF3 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.profile_button {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 5%;
+    height: 100%;
+}
+
+.search-filter-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+@media (max-width: 576px) {
+    .search-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
