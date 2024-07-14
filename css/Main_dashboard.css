@@ -277,14 +277,13 @@ a:focus {
 }
 
 
-
-.account-section {
+account-section {
     background: linear-gradient(#925FE2, #A980E8);
     color: black;
-    padding: 20px;
+    padding: 40px;
     border-radius: 20px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 100%;
     height: 100%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -299,19 +298,27 @@ a:focus {
   }
   
   .fee-box {
-    margin: 0 10px;
+    margin: 0 20px;
     background-color: white;
     border-radius: 10px;
     min-height: 4px;
   
   }
   
-  .fee-box P {
+  .fee-box p {
     font-size: 18px;
     font-weight: bold;
     min-height: 4px;
   }
   
+ 
+  
+  .column2 {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 40px;
+  }
   .column1 {
     padding: 20px;
     float: left;
@@ -320,9 +327,4 @@ a:focus {
     overflow-y: hidden;
   }
   
-  .column2 {
-    float: left;
-    width: 30%;
-    height: 100%;
-    padding: 20px;
-  }
+  
