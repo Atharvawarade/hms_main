@@ -123,7 +123,7 @@
                             <div class="account-section">
                                 <h2>Account</h2>
                                 <div class="fees-details">
-                                    <div class="fee-box">
+                                <div class="fee-box">
                                         <span>Total Fees</span>
                                         <p>20000</p>
                                     </div>
