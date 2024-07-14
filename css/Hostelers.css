@@ -54,6 +54,7 @@ body {
     background-color: inherit;
     color: #000;
     font-size: 0.9vw;
+    text-decoration: none;
 }
 
 .nav_button_item:hover {

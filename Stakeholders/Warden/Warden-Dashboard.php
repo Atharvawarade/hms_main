@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <?php include '../../php/connection/connect.php'?>
   <div class="Student_Dashboard">
     <div class="centraldiv">
       <nav id="sidebar">
@@ -49,28 +50,76 @@
               <a href="another-page.html" class="nav_button_item">
                 <div class="button_type">
                   Total Students <br />
-                  1233
+                  <?php
+                    $sql = "SELECT COUNT(*) AS total_candidates FROM candidates";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        // Fetch the result
+                        $row = $result->fetch_assoc();
+                        $total_candidates = $row['total_candidates'];
+                        echo $total_candidates;
+                    } else {
+                        echo "0 results";
+                    }            
+                  ?>
                 </div>
                 <img src="../../assets/Group 31.png" alt="go" />
               </a>
-              <a href="../Warden/Hostelers.php" class="nav_button_item">
+              <a href="../../Common Files/Hostelers.php" class="nav_button_item">
                 <div class="button_type">
                   Hostelers <br />
-                  1233
+                  <?php
+                   $sql = "SELECT COUNT(*) AS total_hostelers FROM student";
+                   $result = $conn->query($sql);
+                   
+                   if ($result->num_rows > 0) {
+                       // Fetch the result
+                       $row = $result->fetch_assoc();
+                       $total_candidates = $row['total_hostelers'];
+                       echo $total_candidates;
+                   } else {
+                       echo "0 results";
+                   }             
+                  ?>
                 </div>
                 <img src="../../assets/Group 31.png" alt="go" />
               </a>
               <a href="another-page.html" class="nav_button_item">
                 <div class="button_type">
                   On Leave <br />
-                  1233
+                  <?php
+                    $sql = "SELECT COUNT(*) AS On_leave FROM leave_requests";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        // Fetch the result
+                        $row = $result->fetch_assoc();
+                        $total_candidates = $row['On_leave'];
+                        echo $total_candidates;
+                    } else {
+                        echo "0 results";
+                    }            
+                  ?>
                 </div>
                 <img src="../../assets/Group 31.png" alt="go" />
               </a>
               <a href="another-page.html" class="nav_button_item">
                 <div class="button_type">
                   Removed <br />
-                  1233
+                  <?php
+                    $sql = "SELECT COUNT(*) AS Past FROM paststudent";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        // Fetch the result
+                        $row = $result->fetch_assoc();
+                        $total_candidates = $row['Past'];
+                        echo $total_candidates;
+                    } else {
+                        echo "0 results";
+                    }            
+                  ?>
                 </div>
                 <img src="../../assets/Group 31.png" alt="go" />
               </a>
