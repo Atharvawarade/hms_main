@@ -1,40 +1,177 @@
+<?php
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "hms";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get the EN from the query string
+$studentEN = $_GET['EN'];
+
+// Fetch student details based on EN
+$sql = "SELECT * FROM student WHERE EN = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $studentEN);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $student = $result->fetch_assoc();
+} else {
+    echo "No student found.";
+}
+
+// Close connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Profile</title>
     <style>
-        .list-group-item{
-            background-color:green;
+        .card img{
+            margin:5%;
+            width:90%;
+            height:90%;
+        }
+        .card{
+            background-color: rgba(169,128,232,0);
+            border: 1px solid black;
+        }
+        .card-body .card-head {
+            text-align: center;
+            font-size: 100%;
+        }
+        .card-body .card-text {
+            font-size: 90%;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .glass-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+        .glass-box h6 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .glass-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .glass-box table, .glass-box th, .glass-box td {
+            border: 1px solid black;
+        }
+        .glass-box th, .glass-box td {
+            padding: 5px; /* Reduce padding to reduce gap */
+            text-align: left;
+        }
+        .modal-body{
+            background-color: rgba(169,128,232,0.16);
         }
     </style>
 </head>
-
 <body>
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4 border-end">
-                                <div class="card" >
-                                    <img src="https://cdn.siasat.com/wp-content/uploads/2022/04/allu-arjun-ed.jpg" class="card-img-top" alt="..." style="aspect-ratio:1;">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <!-- Main content -->
-                                <h5>Profile Information</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus, maiores vitae?</p>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam at id enim minima praesentium unde porro voluptas maiores distinctio odit hic ut perferendis assumenda esse eveniet, facilis nulla ipsam, suscipit perspiciatis recusandae laborum quos dolores. Ex neque beatae molestias sequi, placeat deleniti fugit aut nisi nostrum ducimus et exercitationem sint suscipit, id voluptatem aliquam voluptate ipsa laborum iste qui quaerat? Eos aperiam vel, laboriosam, commodi accusamus suscipit tempora tenetur voluptates minima, esse amet quam reiciendis libero? Inventore amet maiores numquam aperiam sunt, nemo, quasi in voluptas iste eius, perspiciatis sit aspernatur reprehenderit expedita harum voluptatibus eaque mollitia ad quod nihil animi quaerat sint. Adipisci nemo atque aliquid rem nam iure ipsam distinctio voluptates saepe facere aperiam rerum recusandae debitis consequatur, quia explicabo vitae minima ullam neque placeat quis, illum perferendis? Necessitatibus explicabo quae rerum provident error mollitia quidem dolorum qui amet sit tempora vel autem laborum facere, beatae facilis non adipisci obcaecati. Quam qui tempore vel ullam, dolore esse perferendis, sequi tempora optio error explicabo iure. Ducimus ab dignissimos quisquam voluptatibus? Cumque dolore id in odit, aliquid numquam voluptatem laborum quos similique temporibus possimus, unde natus minus porro alias beatae enim debitis doloribus tempora vitae nam, delectus saepe. Maiores amet tenetur, ipsa odio qui repellendus pariatur quo unde praesentium laborum laudantium obcaecati mollitia dignissimos accusamus magni similique? Corrupti, itaque enim. Unde dignissimos quas ab aut odit? Voluptate iure eveniet perspiciatis placeat? Quae, quia accusantium! Autem quos praesentium dolore quaerat, error illum tenetur placeat natus veniam expedita sapiente id accusantium recusandae quasi quis libero in incidunt sed nobis aliquid neque vitae deleniti, commodi sit. Totam dolor aliquid modi error repellendus quibusdam rerum, ullam ad. Error consequuntur sunt obcaecati eum voluptates sapiente dolorum ad libero debitis eaque, pariatur ex id expedita recusandae repellat totam mollitia rem, aut ea in? Aliquid eos iusto adipisci assumenda, consequatur vero nesciunt repellat. Pariatur perferendis libero inventore tempore nostrum dicta! Tempora deserunt earum blanditiis? Aspernatur veniam architecto laboriosam in reiciendis eveniet, quod ab repudiandae, repellendus incidunt dolorum expedita aliquid consequuntur amet. Est veniam quibusdam architecto sed, eaque, nemo amet quis iure ab laborum adipisci in maxime velit delectus corporis reiciendis et aperiam saepe dolorem ex eius! Repellat quis veritatis recusandae voluptas fuga labore neque exercitationem. Blanditiis, fuga! Hic excepturi numquam magnam recusandae praesentium debitis blanditiis itaque magni! Quae nemo a ullam earum odio dolores accusantium, sit maxime commodi, hic deleniti maiores unde harum expedita error. Alias molestias recusandae adipisci quisquam ratione voluptates consequuntur nesciunt, sapiente itaque similique natus molestiae expedita fugiat repudiandae. Vero, totam voluptatum, aliquid nobis tenetur tempore amet nostrum maxime animi exercitationem, aperiam nulla aliquam quod ipsam velit laudantium expedita sapiente quas possimus dolor dolores. Assumenda ab, minima eius, mollitia nostrum error vero at sapiente officia sunt reiciendis fuga eveniet exercitationem in asperiores id incidunt quidem aperiam ut deleniti voluptatibus esse aliquid a. Ipsam eius aut rem, officiis nesciunt reiciendis doloribus dolores possimus quo impedit temporibus necessitatibus inventore quam. Voluptatibus eaque officiis consequatur, blanditiis voluptatum neque esse modi voluptatem a asperiores fugit nemo incidunt debitis sapiente temporibus non. Enim dolor modi minima optio quidem earum necessitatibus architecto. Repellat magnam ab vitae in repudiandae? Quaerat at minus laboriosam id soluta distinctio illum minima sed consequatur nemo neque, velit ut vel quo eos beatae necessitatibus recusandae optio eligendi accusamus repudiandae aut! Facilis nobis eos veritatis id esse aut totam dolores, ipsam ullam itaque suscipit reiciendis fugiat iste ex vero nemo ipsum placeat natus laborum, illum dolorum sed cumque beatae quasi. Sint atque, qui aliquid labore autem saepe in deserunt nulla dolore explicabo quia alias, ab quos? Aliquam quos, tempore voluptatibus mollitia rerum cumque? Illum temporibus, modi enim maxime ut deserunt dignissimos rem reiciendis quaerat nesciunt iste praesentium, impedit aliquid asperiores! A corrupti, ad consequatur facere minima dignissimos autem magnam hic cupiditate, pariatur sit aut aliquam, est odit velit nostrum vitae excepturi blanditiis obcaecati asperiores quo? Quo sit earum facere et explicabo magni dolorum aliquid deleniti vitae vero consequatur, obcaecati incidunt molestiae hic velit tempora eum adipisci consequuntur dolores voluptate temporibus repudiandae illum ipsa. Eveniet, magnam dolor repudiandae nemo commodi, architecto, asperiores totam error quaerat molestias adipisci atque delectus similique! Quam assumenda minus reiciendis ipsam similique aspernatur placeat maxime. Totam, perferendis deserunt quam cumque sequi illo, reiciendis optio excepturi quia impedit doloribus earum delectus eaque nobis magni! At magni dolore sequi quod repudiandae asperiores itaque natus nam vel dolores. Nobis numquam cum ex consequuntur quas deleniti obcaecati, magni et quis perferendis dolor repudiandae modi veritatis temporibus officia dolorum alias suscipit provident distinctio enim? Molestias commodi ipsa iste quasi ab et, repudiandae assumenda aliquid sed? Quos sapiente illum optio corporis itaque veniam nemo quis mollitia ipsam architecto dolor, molestiae magni enim odit dolores laboriosam aliquid, suscipit similique incidunt atque exercitationem assumenda odio. Assumenda quaerat veritatis modi soluta fugit quae reiciendis non obcaecati dolore accusantium. Est minima cum totam molestiae at aut. Fuga odit voluptas reprehenderit obcaecati tempore illo nobis quasi laboriosam dolorem, libero ipsam soluta possimus voluptatum ea iusto veniam dolor velit deserunt tempora! Repudiandae neque placeat enim blanditiis voluptatibus iusto laudantium repellendus, nostrum quis maiores sapiente fuga rerum necessitatibus, esse quod, fugit consequuntur exercitationem excepturi qui. Eveniet dolores, cum placeat incidunt sint ipsum laudantium doloremque soluta ipsam distinctio veritatis fugiat sapiente minus nisi nesciunt consequatur praesentium atque voluptas a voluptatibus odit perferendis qui quis! Nulla aut vel necessitatibus dolore iusto consequuntur ipsum non repudiandae minima, quo nam aliquid excepturi itaque illum pariatur accusantium ut sed maxime. Voluptatem tempora porro dolorum, officia beatae quia? Optio asperiores quis suscipit. Tempora, accusamus! Libero at facilis, architecto perferendis quasi repellendus quam, accusamus impedit modi pariatur magni dicta ea laboriosam quidem repudiandae? Sunt, ipsa facere neque maxime veritatis fugit, molestias a pariatur ex recusandae perferendis eum laboriosam. Aperiam obcaecati omnis mollitia inventore, officiis illo quae laudantium labore accusantium doloribus laborum similique reiciendis non libero repellat dicta odit, reprehenderit quo a fugit accusamus nesciunt! Ullam ipsum eaque asperiores, vitae error culpa atque odit esse sit corporis. Veniam deserunt nesciunt asperiores ab, at omnis eaque illo, minus id voluptas atque est, qui optio blanditiis vero?</p>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 border-end">
+                <div class="card">
+                    <img src="../uploads/<?php echo $student['photo']; ?>" class="card-img-top card-img-bottom" alt="Student Photo">
+                    <div class="card-body">
+                        <h5 class="card-head"><?php echo $student['Fullname']; ?></h5>
+                        <p class="card-text"><strong>EN : </strong><?php echo $student['EN']; ?></p>
+                        <p class="card-text"><strong>Email : </strong><?php echo $student['email']; ?></p>
+                        <p class="card-text"><strong>Room No. : </strong><?php echo $student['allotment_id']; ?></p>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="glass-box">
+                    <h6>General Information</h6>
+                    <table>
+                        <tr>
+                            <th>Fullname</th>
+                            <td><?php echo $student['Fullname']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Year of Study</th>
+                            <td><?php echo $student['YOS']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Branch</th>
+                            <td><?php echo $student['branch']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Section</th>
+                            <td><?php echo $student['section']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Section</th>
+                            <td><?php echo $student['section']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Date of Birth</th>
+                            <td><?php echo $student['DOB']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Blood Group</th>
+                            <td><?php echo $student['Blood_group']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="glass-box">
+                    <h6>Contact & Address</h6>
+                    <table>
+                        <tr>
+                            <th>Student Phone</th>
+                            <td><?php echo $student['student_phone']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Father Phone</th>
+                            <td><?php echo $student['Father_no']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Mother Phone</th>
+                            <td><?php echo $student['Mother_no']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Gaurdian Phone</th>
+                            <td><?php echo $student['Gaurdian_no']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><?php echo $student['Add_line_1']; ?>, <?php echo $student['Add_line_2']; ?>, <?php echo $student['city']; ?>, <?php echo $student['state']; ?>, <?php echo $student['pincode']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="glass-box">
+                    <h6>Other Information</h6>
+                    <table>
+                        <tr>
+                            <th>Hostel Room</th>
+                            <td><?php echo $student['hostel_room']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Allotment ID</th>
+                            <td><?php echo $student['allotment_id']; ?></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

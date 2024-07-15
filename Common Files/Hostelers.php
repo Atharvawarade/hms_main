@@ -195,7 +195,7 @@
                                 echo '<td>' . $row["YOS"] . '</td>';
                                 echo '<td>' . $row["branch"] . '</td>';
                                 echo '<td>' . $row["allotment_id"] . '</td>';
-                                echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-fullname="' . $row["Fullname"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
+                                echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-en="' . $row["EN"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
                                 echo '</tr>';
                             }
                         } else {
@@ -215,7 +215,15 @@
 
 
     <!-- Include the modal -->
-    <?php include 'Profile_modal.php'; ?>
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <?php include 'Profile_modal.php'?>
+                </div>
+            </div>
+        </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg9OK7iVy9R1z7OfE/C5Zp6GYlgJp6Lr9eUksdSQ/2" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-QFY6xUR/ftl0TVNGomZ96TkGpRN+GhY34mYYyUbsmMDTD3JzDbuRv0TfCMhCFeD8" crossorigin="anonymous"></script>
@@ -281,6 +289,11 @@
             }
         });
     }
+
+    $('.view-profile-btn').on('click', function() {
+        var studentEN = $(this).data('en');
+        $('#profileModal').find('.modal-body').load('Profile_modal.php?EN=' + studentEN);
+    });
 });
 
 </script>

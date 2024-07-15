@@ -148,3 +148,8 @@ thead th {
         align-items: stretch;
     }
 }
+
+
+.card-body{
+    text-align: center;
+}
