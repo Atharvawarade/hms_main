@@ -90,10 +90,19 @@ body {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 10px;
     background: #4731a0;
     text-align: center;
 }
+/* 
+#sidebar .sidebar-header .header_text{
+    margin-left: -5%;
+} */
+
+/* #sidebar .sidebar-header img{
+    height: 30%;
+    width: 30%;
+} */
 
 
 #sidebar ul.components {
@@ -130,7 +139,10 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
-
+.sidebar-collapsed .header_text h5 {
+    display: none;
+  }
+  
 
 
 
@@ -242,6 +254,12 @@ a[data-toggle="collapse"] {
     overflow: hidden;
     border-radius: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* text-decoration: none; */
+  }
+
+  .box_col{
+    text-decoration: none;
+    color: #000;
   }
   
   .box .p-3 {
@@ -255,6 +273,7 @@ a[data-toggle="collapse"] {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    text-decoration: none !important;
   }
   
   .boxes_container .box img {

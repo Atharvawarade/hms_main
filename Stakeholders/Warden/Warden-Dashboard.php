@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,13 +13,33 @@
 </head>
 
 <body>
-  <?php include '../../php/connection/connect.php'?>
+
+  <?php
+    session_start();
+
+    if (!isset($_SESSION['warden_loggedin']) || $_SESSION['warden_loggedin'] !== true) {
+        header("Location: ../Warden/warden-login.html");
+        exit;
+    }
+
+    $warden_ID = $_SESSION['username'];
+    include '../../php/connection/connect.php'
+  ?>
+
   <div class="Student_Dashboard">
     <div class="centraldiv">
       <nav id="sidebar">
-        <div class="sidebar-header">
-          <h5>Hostel Management System</h5>
+        <div class="sidebar-header container">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <img src="../../assets/bitlogo_transparent.png" alt="Logo" class="img-fluid" style="max-height: 60px; min-height: 40px;">
+            </div>
+            <div class="col header_text">
+              <h5>Hostel Management System</h5>
+            </div>
+          </div>
         </div>
+
         <div class="profile-photo" id="profilePhoto">
           <img src="../../assets/Profile.png" alt="Profile Photo" id="photoImg" />
         </div>
@@ -40,7 +61,7 @@
       </nav>
 
       <div id="content">
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar navbar-expand-lg">
           <button type="button" id="sidebarCollapse" class="btn btn-info">
             <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
           </button>
@@ -55,7 +76,6 @@
                     $result = $conn->query($sql);
                     
                     if ($result->num_rows > 0) {
-                        // Fetch the result
                         $row = $result->fetch_assoc();
                         $total_candidates = $row['total_candidates'];
                         echo $total_candidates;
@@ -74,7 +94,6 @@
                    $result = $conn->query($sql);
                    
                    if ($result->num_rows > 0) {
-                       // Fetch the result
                        $row = $result->fetch_assoc();
                        $total_candidates = $row['total_hostelers'];
                        echo $total_candidates;
@@ -93,7 +112,6 @@
                     $result = $conn->query($sql);
                     
                     if ($result->num_rows > 0) {
-                        // Fetch the result
                         $row = $result->fetch_assoc();
                         $total_candidates = $row['On_leave'];
                         echo $total_candidates;
@@ -112,7 +130,6 @@
                     $result = $conn->query($sql);
                     
                     if ($result->num_rows > 0) {
-                        // Fetch the result
                         $row = $result->fetch_assoc();
                         $total_candidates = $row['Past'];
                         echo $total_candidates;
@@ -132,14 +149,22 @@
           </button>
         </nav>
 
-
         <div class="content_heading">
-          <h5>Warden Dashboard</h5>
+          <h5>Warden Dashboard (<?php
+            if (strpos($warden_ID, 'WARDB') !== false) {
+                echo 'BOYS HOSTEL';
+            } elseif (strpos($warden_ID, 'WARDG') !== false) {
+                echo 'GIRLS HOSTEL';
+            } else {
+                echo 'UNKNOWN HOSTEL';
+            }
+            ?>)       
+          </h5>
         </div>
         <div class="container boxes_container">
           <div class="text-center">
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-5">
-              <div class="col">
+              <a href="Room_Status.php" class="col box_col">
                 <div class="box p-2">
                   <div class="color_doppler color_doppler_1"></div>
                   <div class="row">
@@ -151,7 +176,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
               <div class="col">
                 <div class="box p-2">
                   <div class="color_doppler color_doppler_2"></div>
@@ -236,6 +261,7 @@
       </div>
     </div>
   </div>
+
   <!-- jQuery CDN - Slim version (=without AJAX) -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -253,7 +279,6 @@
     crossorigin="anonymous"></script>
 
   <script src="../scripts/async_script.js"></script>
-
   <script src="../scripts/toggle_sidebar.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -50,38 +50,41 @@
             <h3>Welcome back !👋</h3>
             <h6>Please enter log in details below</h6>
             <br />
-            <form action="../../php/warden-login.php" method="post">
+            <form action="../../php/warden-login.php" method="post" onsubmit="return validateForm()">
               <div class="input-boxes">
-                <div class="input-box">
-                  <select name="Dept" id="Dept">
-                    <option value="">Select Hostel</option>
+                <div class="input-box mb-3">
+                  <select class="form-select" name="Dept" id="Dept" required>
+                    <option value="" selected disabled>Select Hostel</option>
                     <option value="boys">Boys Hostel</option>
                     <option value="girls">Girls Hostel</option>
                   </select>
-                  <!-- <input type="text" placeholder="Enter your username" required id="username" name="username" /> -->
                 </div>
-                <div class="input-box">
-                  <i class="fas fa-envelope"></i>
-                  <input
-                    type="text"
-                    placeholder="Enter your username"
-                    required
-                    id="username"
-                    name="username"
-                  />
+                <div class="input-box mb-3">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter your username"
+                      required
+                      id="username"
+                      name="username"
+                    />
+                  </div>
                 </div>
-                <div class="input-box">
-                  <i class="fas fa-lock"></i>
-                  <input
-                    type="password"
-                    placeholder="Enter your password"
-                    required
-                    id="password"
-                    name="password"
-                  />
+                <div class="input-box mb-3">
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Enter your password"
+                      required
+                      id="password"
+                      name="password"
+                    />
+                  </div>
                 </div>
                 <div class="button input-box">
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Submit" class="btn btn-primary w-100" />
                 </div>
               </div>
             </form>
@@ -89,12 +92,31 @@
         </div>
       </div>
     </div>
+    <script>
+      document
+        .getElementById("clickableImage")
+        .addEventListener("click", function () {
+          window.location.href = "../SelectUser.html";
+        });
+
+      function validateForm() {
+        var dept = document.getElementById("Dept").value;
+        var username = document.getElementById("username").value;
+
+        if (dept === "boys" && !username.startsWith("WARDB")) {
+          alert("Username must start with 'WARDB' for Boys Hostel");
+          return false;
+        }
+        if (dept === "girls" && !username.startsWith("WARDG")) {
+          alert("Username must start with 'WARDG' for Girls Hostel");
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script>
-    document
-      .getElementById("clickableImage")
-      .addEventListener("click", function () {
-        window.location.href = "../SelectUser.html";
-      });
-  </script>
 </html>
