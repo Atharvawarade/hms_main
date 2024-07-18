@@ -1,0 +1,337 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #DCCDF3 !important;
+}
+
+.Student_Dashboard {
+    width: 100vw;
+    height: 100vh;
+}
+
+.centraldiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95vw;
+    height: 90vh;
+    background: linear-gradient(109.89deg, rgba(255, 255, 255, 0.85), #fff 47.5%, rgba(255, 255, 255, 0.75));
+    border-radius: 20px;
+    box-shadow: 4px 4px 20px 8px #A091B8;
+    display: flex;
+    z-index: 2;
+}
+
+@media only screen and (max-width: 768px) {
+    .centraldiv {
+        width: 90vw;
+        height: 95vh;
+    }
+}
+
+.centraldiv #sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: linear-gradient(#925FE2, #A980E8);
+    color: #fff;
+    transition: all 0.3s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#sidebar.active {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+
+.profile-photo {
+    max-width: 250px;
+    width: 100%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.profile-photo img {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    align-items: baseline;
+    border-radius: 50%;
+}
+
+#sidebar ul li a {
+    text-align: left;
+    text-decoration: none;
+    color: white;
+}
+
+#sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+    color: white;
+}
+
+#sidebar.active ul li a i {
+    margin-right: 0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+#sidebar .sidebar-header {
+    padding: 10px;
+    background: #4731a0;
+    text-align: center;
+}
+/* 
+#sidebar .sidebar-header .header_text{
+    margin-left: -5%;
+} */
+
+/* #sidebar .sidebar-header img{
+    height: 30%;
+    width: 30%;
+} */
+
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.3em;
+    display: block;
+    margin-right: 10%;
+}
+
+#sidebar ul li:hover a {
+    color: #7386D5;
+}
+
+#sidebar ul li:hover {
+    background: white;
+}
+
+#sidebar ul li a i {
+    margin-right: 10%;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.sidebar-collapsed .header_text h5 {
+    display: none;
+  }
+  
+
+
+
+/* NAVBAR STYLING */
+.navbar {
+    padding: 15px 10px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 4px 4px 10px 5px rgba(169, 128, 232, 0.16);
+    display: flex;
+    align-items: center;
+}
+
+#sidebarCollapse {
+    background-color: inherit !important;
+    border-color: white !important;
+
+}
+
+.nav_buttons_container {
+    flex-grow: 1;
+}
+
+.nav_buttons {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 1%;
+    margin-right: 1%;
+    align-items: center;
+}
+
+.nav_button_item {
+    flex: 1;
+    margin: 0 1%;
+    background-color: #fff;
+    border: 1px solid #000000;
+    padding: 1vh;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: inherit;
+    color: #000;
+    font-size: 0.9vw;
+    text-decoration: none;
+}
+
+.nav_button_item:hover {
+    box-shadow: 7px 7px rgba(170, 128, 232, 0.421);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.nav_button_item img {
+    width: 1vw;
+    height: 1vw;
+}
+
+.nav_button_item:first-child {
+    margin-left: 0;
+}
+
+.nav_button_item:last-child {
+    margin-right: 0;
+}
+
+/* For smaller screens, make the nav_buttons container collapse into a dropdown */
+@media (max-width: 992px) {
+    .nav_buttons {
+        flex-direction: column;
+    }
+}
+
+/* CONTENT STYLING  STARTS*/
+
+
+
+#content {
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.content_heading {
+    text-align: center;
+    margin-top: 2%;
+
+}
+
+/* Ensure the container takes the full width */
+.boxes_container {
+    width: 100%;
+    margin-top: 2%;
+}
+
+/* Make each box a square, add black border, and ensure equal spacing */
+.box {
+    border: 1px solid black;
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* This makes the height equal to the width, creating a square */
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* text-decoration: none; */
+  }
+
+  .box_col{
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .box .p-3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    text-decoration: none !important;
+  }
+  
+  .boxes_container .box img {
+    height: 5vw;
+    width: 5vw;
+    z-index: 2; /* Ensure the image is above the color_doppler */
+    position: relative; /* Make sure the image stays in place */
+    float: left;
+
+  }
+  
+  
+  .boxes_container .box p {
+    margin-top: 1.5vh;
+    z-index: 2; /* Ensure the text is above the color_doppler */
+    position: relative; /* Make sure the text stays in place */
+    font-size: 2.5vh;
+  }
+  
+
+  .color_doppler {
+    height: 128px;
+    width: 128px;
+    z-index: 1;
+    position: absolute;
+    top: -85px;
+    right: -85px;
+    border-radius: 50%;
+    transition: all .5s ease;
+  }
+
+  .color_doppler_1 {
+    background: radial-gradient(#ffcccc, #ff6666, #cc0000); /* Red and its variants */
+  }
+  
+  .color_doppler_2 {
+    background: radial-gradient(#e0f7fa, #81d4fa, #0288d1); /* Sky blue and its variants */
+  }
+  
+  .color_doppler_3 {
+    background: radial-gradient(#ccffcc, #66ff66, #009933); /* Leaf green and its variants */
+  }
+  
+  .color_doppler_4 {
+    background: radial-gradient(#ffebcc, #ffcc80, #ff9933); /* Saffron and its variants */
+  }
+  
+  
+  .box:hover .color_doppler {
+    transform: scale(10);
+    z-index: 0; /* Ensure the color_doppler is below the image and text */
+  }
+
+  .box:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+
+/* CONTENT STYLING  ENDS HERE*/

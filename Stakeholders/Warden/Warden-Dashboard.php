@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -280,19 +279,7 @@
 
   <script src="../scripts/async_script.js"></script>
   <script src="../scripts/toggle_sidebar.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Check if the URL has the upload_success parameter
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has("upload_success")) {
-        const uploadAttendanceDiv =
-          document.getElementById("upload_attendance");
-        if (uploadAttendanceDiv) {
-          uploadAttendanceDiv.click();
-        }
-      }
-    });
-  </script>
+  
 </body>
 
 </html>

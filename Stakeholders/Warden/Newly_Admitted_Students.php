@@ -1,95 +1,344 @@
-<?php
-include '../../php/connection/connect.php';
-session_start();
-$WardenId = $_SESSION['WardenId'];
-$gender = $WardenId == 1 ? 'Male' : 'Female';
-
-
-// Your SQL query to select students who have paid and approved, are male, and are not assigned to a room
-include 'vacancy.php';
-$sql = "SELECT EN, Fullname, branch, YOS FROM student WHERE status = 'paid and approved' AND allotment_id IS NULL AND gender = '$gender' ";
-// echo $sql;
-$result = $conn->query($sql);
-?>
-
-<div class="container-fluid py-3">
-    <div class="row mb-3">
-        <div class="col">
-            <h2>Newly Admitted Students</h2>
-        </div>
-
-    </div>
-
-    <div class="container student-list-container">
-        <div class="student-list">
-            <?php if ($result->num_rows > 0) : ?>
-                <?php while ($row = $result->fetch_assoc()) : ?>
-                    <div class="row align-items-center mb-3 p-2 border rounded">
-                        <div class="col-md-3"><strong>Name:</strong> <?php echo htmlspecialchars($row['Fullname']); ?></div>
-                        <div class="col-md-3"><strong>Branch:</strong> <?php echo htmlspecialchars($row['branch']); ?></div>
-                        <div class="col-md-2"><strong>Year of Study:</strong> <?php echo htmlspecialchars($row['YOS']); ?></div>
-                        <div class="col-md-4">
-                            <form class="room-form" data-student-id="<?php echo htmlspecialchars($row['EN']); ?>">
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="room_no_<?php echo htmlspecialchars($row['EN']); ?>" name="room_no" placeholder="Enter Room ID" required>
-                                    <button type="submit" class="btn btn-primary">Update Room</button>
-                                </div>
-                            </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostelers</title>
+    <link rel="stylesheet" href="../../css/Newly_Admitted_Students.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <?php include '../../php/connection/connect.php'?>
+<div class="Student_Dashboard">
+    <div class="centraldiv">
+        <nav class="container-fluid nav-bar">
+            <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                <div class="col">
+                    <a href="another-page.html" class="p-3 nav_button_item">
+                        <div class="button_type">
+                            Total Students <br />
+                            <?php
+                                $sql = "SELECT COUNT(*) AS total_candidates FROM candidates";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    // Fetch the result
+                                    $row = $result->fetch_assoc();
+                                    $total_candidates = $row['total_candidates'];
+                                    echo $total_candidates;
+                                } else {
+                                    echo "0 results";
+                                }
+                            ?>
+                        </div>
+                        <img src="../../assets/Group 31.png" alt="go" />
+                    </a>
+                </div>
+                <div class="col">
+                    <a class="p-3 nav_button_item">
+                        <div class="button_type">
+                            Hostelers<br />
+                            <?php
+                                $sql = "SELECT COUNT(*) AS total_hostelers FROM student";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    // Fetch the result
+                                    $row = $result->fetch_assoc();
+                                    $total_candidates = $row['total_hostelers'];
+                                    echo $total_candidates;
+                                } else {
+                                    echo "0 results";
+                                }
+                            ?>
+                        </div>
+                        <img src="../../assets/Group 31.png" alt="go" />
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="another-page.html" class="p-3 nav_button_item">
+                        <div class="button_type">
+                            On Leave <br />
+                            <?php
+                                $sql = "SELECT COUNT(*) AS On_leave FROM leave_requests";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    // Fetch the result
+                                    $row = $result->fetch_assoc();
+                                    $total_candidates = $row['On_leave'];
+                                    echo $total_candidates;
+                                } else {
+                                    echo "0 results";
+                                }
+                            ?>
+                        </div>
+                        <img src="../../assets/Group 31.png" alt="go" />
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="another-page.html" class="p-3 nav_button_item">
+                        <div class="button_type">
+                            Removed <br />
+                            <?php
+                                $sql = "SELECT COUNT(*) AS Past FROM paststudent";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    // Fetch the result
+                                    $row = $result->fetch_assoc();
+                                    $total_candidates = $row['Past'];
+                                    echo $total_candidates;
+                                } else {
+                                    echo "0 results";
+                                }
+                            ?>
+                        </div>
+                        <img src="../../assets/Group 31.png" alt="go" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container-fluid mt-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center ">
+                    <a href="../Stakeholders/Warden/Warden-Dashboard.php" class="btn btn-outline-dark me-3">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>                
+                    <h3 class="text-center mb-0">New Admissions</h3>
+                </div>
+                <div class="search-filter-container">
+                    <input type="text" class="form-control" id="searchBox" placeholder="Search">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButtonBranch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter By Branch
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-checkbox" aria-labelledby="dropdownMenuButtonBranch">
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="branch" data-value="Computer Engineering"> Computer Engineering                           
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="branch" data-value="Mechanical Engineering"> Mechanical Engineering
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="branch" data-value="Electrical Engineering"> Electrical Engineering
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="branch" data-value="Civil Engineering"> Civil Engineering                        
+                            </a>
                         </div>
                     </div>
-                <?php endwhile; ?>
-            <?php else : ?>
-                <div class="alert alert-warning" role="alert">
-                    No students found.
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButtonYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter By Year of Study
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-checkbox" aria-labelledby="dropdownMenuButtonYear">
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="YOS" data-value="1st Year"> 1st Year 
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="YOS" data-value="2nd Year"> 2nd Year 
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="YOS" data-value="3rd Year"> 3rd Year 
+                            </a>
+                            <a class="dropdown-item dropdown-item-checkbox" href="#">
+                                <input type="checkbox" data-column="YOS" data-value="4th Year "> 4th Year 
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            <?php endif; ?>
+            </div>
+
+            <div class="table-responsive">
+    <table class="table table-bordered" id="studentTable">
+        <thead>
+            <tr>
+                <th>Fullname</th>
+                <th>Year of Study</th>
+                <th>Branch</th>
+                <th>Allotment</th>
+                <th>View Profile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Database connection details
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "hms";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // SQL query to fetch data
+            $sql = "SELECT EN, Fullname, YOS, branch FROM student WHERE allotment_id IS NULL";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>' . $row["Fullname"] . '</td>';
+                    echo '<td>' . $row["YOS"] . '</td>';
+                    echo '<td>' . $row["branch"] . '</td>';
+                    echo '<td>
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" class="form-control allotment-input" id="allotmentInput_' . $row["EN"] . '" readonly>
+                            </div>
+                            <div class="col-3">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select
+                                    </button>
+                                    <ul class="dropdown-menu w-100">';
+                                    for ($i = 1; $i <= 60; $i++) {
+                                        echo '<li><a class="dropdown-item" href="#" onclick="selectAllotment(' . $i . ', \'' . $row["EN"] . '\')">' . $i . '</a></li>';
+                                    }
+                            echo '  </ul>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-primary w-100 assign-btn" onclick="assignAllotment(\'' . $row["EN"] . '\')">Assign</button>
+                            </div>
+                        </div>
+                    </td>';
+                    echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-en="' . $row["EN"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
+                    echo '</tr>';
+                }
+            } else {
+                echo '<tr><td colspan="5" class="text-center">No Students Found</td></tr>';
+            }
+
+            // Close connection
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
         </div>
     </div>
 </div>
 
-<?php include '../../php/connection/break.php'; ?>
 
-<!-- Include jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 
-</script>
-
+    <!-- Include the modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <?php include 'Profile_modal.php'?>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg9OK7iVy9R1z7OfE/C5Zp6GYlgJp6Lr9eUksdSQ/2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-QFY6xUR/ftl0TVNGomZ96TkGpRN+GhY34mYYyUbsmMDTD3JzDbuRv0TfCMhCFeD8" crossorigin="anonymous"></script>
 <script>
-    // jQuery function to handle form submission
-    $(document).ready(function() {
-        $('.room-form').submit(function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            var form = $(this); // Get the form element
-            var studentId = form.data('student-id'); // Get the student ID from data attribute
-            var roomId = form.find('input[name="room_no"]').val(); // Get room number from form input
-
-            // AJAX request to updateRoom.php
-            $.ajax({
-                type: 'POST', // HTTP method
-                url: 'updateRoom.php', // Server-side script
-                data: {
-                    EN: studentId, // Student ID
-                    room_no: roomId // Room number
-                },
-                success: function(response) {
-                    console.log('Response from server:', response);
-
-                    // Reload the student list after successful update
-                    $.ajax({
-                        url: 'updateRooms.php', // Server-side script to update the student list
-                        success: function(html) {
-                            $('.student-list-container').html(html); // Replace student list content
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error refreshing student list:', error);
-                        }
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error updating room:', error);
-                }
-            });
+   $(document).ready(function() {
+    // Search box functionality
+    $('#searchBox').on('input', function() {
+        var searchText = $(this).val().toLowerCase();
+        $('#studentTable tbody tr').each(function() {
+            var fullName = $(this).find('td:eq(0)').text().toLowerCase();
+            if (fullName.includes(searchText)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
         });
     });
+
+    $('.dropdown-item-checkbox').on('change', function() {
+        var checkedBranches = [];
+        // Loop through checked checkboxes
+        $('.dropdown-item-checkbox input:checked').each(function() {
+            var branchValue = $(this).data('value');
+            checkedBranches.push(branchValue);
+        });
+
+        // Show/hide table rows based on selected branches
+        filterTableRows(checkedBranches);
+    });
+
+    // Function to handle checkbox change for Year of Study filter
+    $('#dropdownMenuButtonYear').on('click', function() {
+        // Reset all other filters
+        $('.dropdown-menu-checkbox a').removeClass('active');
+        // Get selected Year of Study value
+        var yearValue = $(this).data('value');
+        // Show/hide table rows based on selected year
+        filterTableRowsYear(yearValue);
+    });
+
+    function filterTableRows(checkedBranches) {
+        if (checkedBranches.length > 0) {
+            $('#studentTable tbody tr').each(function() {
+                var branch = $(this).find('td:eq(2)').text().trim();
+                if (checkedBranches.includes(branch)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        } else {
+            $('#studentTable tbody tr').show();
+        }
+    }
+
+    function filterTableRowsYear(yearValue) {
+        $('#studentTable tbody tr').each(function() {
+            var YOS = $(this).find('td:eq(1)').text().trim();
+            if (YOS === yearValue) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $('.view-profile-btn').on('click', function() {
+        var studentEN = $(this).data('en');
+        $('#profileModal').find('.modal-body').load('Profile_modal.php?EN=' + studentEN);
+    });
+
+    function selectAllotment(value, en) {
+    document.getElementById('allotmentInput_' + en).value = value;
+}
+
+function assignAllotment(en) {
+    var inputVal = document.getElementById('allotmentInput_' + en).value;
+    if (inputVal !== "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "assign_allotment.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert(xhr.responseText);
+                location.reload(); // Reload the page to reflect the changes
+            }
+        };
+        xhr.send("en=" + en + "&allotment_id=" + inputVal);
+    } else {
+        alert("Please select an allotment number.");
+    }
+}
+});
+
 </script>
+</body>
+</html>

@@ -1,44 +1,155 @@
-.main_division{
-    height: 100%; 
-    width: 100%; 
-    background: rgba(169, 128, 232, 0.16); 
-    border-radius: 20px;
-    padding: 1%; 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .heading {
-    flex: 0 1 auto;
-  }
-
-  .search-filter {
-    flex: 0 1 auto;
-  }
-
-  .student-list-container {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding: 10px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    height: 75%;
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #DCCDF3 !important;
 }
 
-.student{
-  margin-bottom: 10px;
-  background: #FFFFFF;
+.Student_Dashboard {
+  width: 100vw;
+  height: 100vh;
+}
+
+.centraldiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  height: 90vh;
+  background: linear-gradient(109.89deg, rgba(255, 255, 255, 0.85), #fff 47.5%, rgba(255, 255, 255, 0.75));
+  border-radius: 20px;
+  box-shadow: 4px 4px 20px 8px #A091B8;
+  z-index: 2;
+
+  /* display: flex; */
+}
+
+@media only screen and (max-width: 768px) {
+  .centraldiv {
+      width: 90vw;
+      height: 95vh;
+  }
+}
+
+.nav-bar{
+  margin-top: 1%;
+}
+
+.nav_button_item {
+  flex: 1;
+  margin: 0 1%;
+  background-color: #fff;
+  border: 1px solid #000000;
+  padding: 1vh;
+  display: flex;
+  justify-content: space-between;
   border-radius: 5px;
-  height: 20%;
-  border : 2px solid black;
-  padding: 10px;
+  background-color: inherit;
+  color: #000;
+  font-size: 0.9vw;
+  text-decoration: none;
 }
 
-.student .btn {
-  margin-bottom: 10px;
+.nav_button_item:hover {
+  box-shadow: 7px 7px rgba(170, 128, 232, 0.421);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
-.student .collapse {
-  margin-bottom: 15px;
+.nav_button_item img {
+  width: 1vw;
+  height: 1vw;
+}
+
+.nav_button_item:first-child {
+  margin-left: 0;
+}
+
+.nav_button_item:last-child {
+  margin-right: 0;
+}
+
+/* For smaller screens, make the nav_buttons container collapse into a dropdown */
+@media (max-width: 992px) {
+  .nav_buttons {
+      flex-direction: column;
+  }
+}
+
+.table-responsive {
+  max-height: 60vh; /* Adjust height as needed */
+  overflow-y: auto;
+}
+thead th {
+  position: sticky;
+  top: 0;
+  background: #fff; /* Adjust background as needed */
+  z-index: 1;
+}
+.student-table-container {
+  max-height: 60vh; /* Adjust height as needed */
+  overflow-y: auto;
+}
+
+.profile_button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.table {
+  border-collapse: collapse; /* Ensure borders don't double */
+  width: 100%;
+}
+
+
+.table-responsive {
+  max-height: 63vh; /* Adjust height as needed */
+  overflow-y: auto;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: #fff; /* Adjust background as needed */
+  z-index: 1;
+  background-color: #DCCDF3 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.profile_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 576px) {
+  .search-filter-container {
+      flex-direction: column;
+      align-items: stretch;
+  }
+}
+
+
+.card-body{
+  text-align: center;
 }

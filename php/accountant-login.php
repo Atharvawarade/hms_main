@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost"; // Replace with your server name
-$username = "root"; // Replace with your username
-$password = ""; // Replace with your password
-$dbname = "hms"; // Replace with your database name
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "hms"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo $password;
-    $entered_username =  $_POST['username'];
+    
+    $entered_username = $_POST['username'];
     $entered_password = $_POST['password'];
 
     $sql = "SELECT * FROM incharges WHERE username = '$entered_username' AND username LIKE 'ACCNT%'";
@@ -21,16 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $stored_password = $row['password']; // Assuming PRN is the stored password
+        $stored_password = $row['password']; 
 
-        // Validate PRN only if the email exists in the database
         if ($entered_password == $stored_password) {
-            // Passwords match, login successful
             $_SESSION['loggedin'] = true;
-            // $_SESSION['email'] = $entered_email;
+            $_SESSION['accountant_login'] = true;
+            $_SESSION['username'] = $entered_username;
             $_SESSION['EN'] = $entered_password;
-            header("Location:../Stakeholders/Accountant/Main_dashboard_accnt.php");
-            // header("Location: ../Student_Dash/Dashboard.php");
+            header("Location: ../Stakeholders/Accountant/Accountant_Dashboard.php");
             exit;
         } else {
             echo "Incorrect password!";
@@ -41,3 +39,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn->close();
 }
+?>
