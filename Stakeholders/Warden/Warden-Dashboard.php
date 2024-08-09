@@ -51,10 +51,11 @@
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fa fa-sign-out"></i>
+            <a href="../../php/warden-logout.php"><i class="fa fa-sign-out"></i>Logout</a>
+            <!-- <a href="#">
+              
               Logout
-            </a>
+            </a> -->
           </li>
         </ul>
       </nav>

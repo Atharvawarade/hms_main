@@ -17,7 +17,7 @@
                 <h5>Hostel Management System</h5>
             </div>
             <div class="profile-photo" id="profilePhoto">
-                <img src="../../assets/profile_photo.png" alt="">
+                <img src="../../uploads/EN2110754666495Electrical EngineeringAIMG-20220409-WA0013.jpg" alt="">
             </div>
             <ul class="list-unstyled components">
                 <li>

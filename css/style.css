@@ -577,9 +577,9 @@ nav {
     background-color: #471792;
     position: relative;
     overflow: hidden;
-  }
-  
-  .custom-footer::before {
+}
+
+/* .custom-footer::before {
     content: '';
     position: absolute;
     top: 0;
@@ -589,37 +589,37 @@ nav {
     background: url('../assets/06-bit-east-elevation-6-removebg-preview.png') no-repeat center bottom;
     background-size: contain;
     opacity: 0.3;
-    z-index: 1;
-  }
-  
-  .custom-footer .footer_container {
+    z-index: 0;
+} */
+
+.custom-footer .footer_container {
     position: relative;
     z-index: 2;
     width: 95%;
     margin-left: 2.5%;
-  }
-  
-  .footer-column {
+}
+
+.footer-column {
     text-align: left;
     margin-bottom: 1rem; /* Margin between rows on smaller devices */
-  }
-  
-  .custom-footer a {
+}
+
+.custom-footer a {
     color: #ddd;
     text-decoration: none;
-  }
-  
-  .custom-footer a:hover {
+}
+
+.custom-footer a:hover {
     color: #fff;
     text-decoration: underline;
-  }
-  
-  .custom-footer h5 {
+}
+
+.custom-footer h5 {
     margin-bottom: 1rem;
     position: relative;
-  }
-  
-  .custom-footer h5::after {
+}
+
+.custom-footer h5::after {
     content: '';
     display: block;
     width: 100%;
@@ -628,50 +628,45 @@ nav {
     position: absolute;
     bottom: -10px; /* Adjust as needed for spacing */
     left: 0;
-  }
-  
-  .custom-footer p {
+}
+
+.custom-footer p {
     margin: 0;
-  }
+}
 
-  .custom-footer .first-col p{
+.custom-footer .first-col p {
     margin-left: 10% !important;
-  }
-  
-  /* Flexbox styles */
-  .d-flex {
+}
+
+/* Flexbox styles */
+.d-flex {
     display: flex;
-  }
-  
-  .align-items-start {
+}
+
+.align-items-start {
     align-items: flex-start;
-  }
-  
+}
 
-  
-  .ms-2 {
+.ms-2 {
     margin-left: 8px; /* Margin to the left of the icon */
-  }
-  
-  /* Margin between columns */
-  @media (min-width: 768px) {
-    .footer-column {
-      margin-bottom: 0;
-    }
-  }
-  
-  .footer_container .row {
-    margin-right: 20px; /* Space between rows */
-  }
-  
-  .footer_container .row > [class*='col-'] {
-    margin-bottom: 20px; /* Vertical space between columns on smaller devices */
-  }
+}
 
-  .custom-footer .row .first_col a:hover{
+/* Margin between columns */
+@media (min-width: 768px) {
+    .footer-column {
+        margin-bottom: 0;
+    }
+}
+
+.footer_container .row {
+    margin-right: 20px; /* Space between rows */
+}
+
+.footer_container .row > [class*='col-'] {
+    margin-bottom: 20px; /* Vertical space between columns on smaller devices */
+}
+
+.custom-footer .row .first_col a:hover {
     text-decoration: underline !important;
     cursor: pointer;
-  }
-
-
-  
+}

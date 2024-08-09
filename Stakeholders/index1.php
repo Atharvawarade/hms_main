@@ -18,6 +18,7 @@
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <title>Responsive Navbar</title>
   <?php include '../php/vacancy_count.php';?>
 
@@ -264,10 +265,10 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-3 mb-4 footer-column first-col">
-        <h5>Contact Us</h5>
+        <h5>CONTACT US</h5>
         <div class="d-flex align-items-start mb-3">
           <div class="icon">
-          <i class="fa fa-map-marker" style="font-size:4vh;color:white"></i>
+            <i class="fa fa-map-marker" style="font-size:4vh;color:white"></i>
           </div>
           <p class="ms-2">Bajaj Institute of Technology, Arvi Road, Pipri, Wardha-442001 (Maharashtra)</p>
         </div>
@@ -275,19 +276,21 @@
           <div class="icon">
             <i class="fa fa-phone" style="font-size:4vh;color:white"></i>
           </div>
-          <p class="ms-2"> <a href="tel:07152295473" class="text-white">07152-295473</a> <br> Fax: 07152-230506</p>
+          <p class="ms-2"><a href="tel:07152295473" class="text-white">07152-295473</a></p>
         </div>
         <div class="d-flex align-items-start">
           <div class="icon">
             <i class="fa fa-envelope" style="font-size:4vh;color:white"></i>
           </div>
-          <p> <a href="mailto:bit@bitwardha.ac.in" class="text-white">bit@bitwardha.ac.in</a> <br>
-          <a href="mailto:principal@bitwardha.ac.in" class="text-white">principal@bitwardha.ac.in</a></p>
+          <p class="ms-2">
+            <a href="mailto:bit@shikshamandal.org" class="text-white">bit@bitwardha.ac.in</a> <br>
+            <a href="mailto:principal@bitwardha.ac.in" class="text-white">principal@bitwardha.ac.in</a>
+          </p>
         </div>
       </div>
       <div class="col-12 col-md-1 mb-4 footer-column"></div>
       <div class="col-12 col-md-3 mb-4 footer-column">
-        <h5>Quick Links</h5>
+        <h5>INFORMATION</h5>
         <ul class="list-unstyled">
           <li><a href="#" class="text-white">Home</a></li>
           <li><a href="#" class="text-white">About</a></li>
@@ -297,10 +300,19 @@
       </div>
       <div class="col-12 col-md-1 mb-4 footer-column"></div>
       <div class="col-12 col-md-4 mb-4 footer-column">
-        <h5>Follow Us</h5>
-        <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+        <h5>QUICK LINKS</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-arrow-right"></i><a href="https://www.shikshamandal.org/" class="text-white">Shiksha Mandal</a></li>
+          <li><a href="https://bitwardha.ac.in/" class="text-white">Main Website</a></li>
+          <li><a href="https://bitwardha.ac.in/faculty/" class="text-white">Faculty</a></li>
+          <li><a href="https://bitwardha.ac.in/blog/" class="text-white">Blog</a></li>
+          <li><a href="https://www.facebook.com/bitwardha1" class="text-white">Activities</a></li>
+          <li><a href="https://bitwardha.ac.in/wp-content/uploads/2024/01/Mandatory-Disclosure-2023-new.pdf" class="text-white">Mandatory Disclosure</a></li>
+          <li><a href="https://bitwardha.ac.in/wp-content/uploads/2024/03/NIRF_BIT_WEBSITE_08March2024_01.pdf" class="text-white">NIRF</a></li>
+          <li><a href="https://www.abc.gov.in/" class="text-white">Academic Bank of Credits</a></li>
+          <li><a href="https://www.digilocker.gov.in/" class="text-white">Digilocker Portal</a></li>
+          <li><a href="https://scholarships.gov.in/" class="text-white">National Scholarship Portal</a></li>
+        </ul>
       </div>
     </div>
     <div class="text-center mt-3">
@@ -309,14 +321,6 @@
   </div>
 </footer>
 
-
-
-<!-- Add FontAwesome for social media icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-
-  <!-- Add FontAwesome for social media icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <!-- FOOTER SECTION ENDS HERE -->
   <script src="scripts/script.js"></script>

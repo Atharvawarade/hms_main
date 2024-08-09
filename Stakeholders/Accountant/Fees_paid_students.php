@@ -158,67 +158,66 @@
                 </div>
     
                 <div class="table-responsive">
-    <table class="table table-bordered" id="studentTable">
-        <thead>
-            <tr>
-                <th>Fullname</th>
-                <th>Year of Study</th>
-                <th>Branch</th>
-                <th>Approval</th>
-                <th>View Profile</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Database connection details
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "hms";
+                    <table class="table table-bordered" id="studentTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center" >Fullname</th>
+                                <th class="text-center" >Year of Study</th>
+                                <th class="text-center" >Branch</th>
+                                <th class="text-center" style="width: 200px;">Approval</th> <!-- Adjusted width here -->
+                                <th class="text-center">Print Receipt</th>
+                                <th class="text-center">View Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = "SELECT EN, Fullname, YOS, branch, allotment_id FROM student WHERE status = 'paid'";
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+                            $result = $conn->query($sql);
 
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // SQL query to fetch data
-            $sql = "SELECT EN, Fullname, YOS, branch, allotment_id FROM student";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo '<tr>';
-                    echo '<td>' . $row["Fullname"] . '</td>';
-                    echo '<td>' . $row["YOS"] . '</td>';
-                    echo '<td>' . $row["branch"] . '</td>';
-                    echo '<td class="approval-buttons" style="margin:0">
-                            <button type="button" class="btn btn-outline-success approve-btn ">Approve</button>
-                            <button type="button" class="btn btn-outline-danger reject-btn">Reject</button>
-                          </td>';
-                    echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-en="' . $row["EN"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
-                    echo '</tr>';
-                }
-            } else {
-                echo '<tr><td colspan="5" class="text-center">No Students Found</td></tr>';
-            }
-
-            // Close connection
-            $conn->close();
-            ?>
-        </tbody>
-    </table>
-</div>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row["Fullname"] . '</td>';
+                                    echo '<td>' . $row["YOS"] . '</td>';
+                                    echo '<td>' . $row["branch"] . '</td>';
+                                    echo '<td class="approval-buttons" style="white-space: nowrap;">
+                                            <button type="button" class="btn btn-outline-success approve-btn" data-en="' . $row["EN"] . '">Accept</button>
+                                            <button type="button" class="btn btn-outline-danger reject-btn" data-en="' . $row["EN"] . '">Reject</button>
+                                        </td>';
+                                    echo '<td class="text-center">';
+                                    echo '<button class="btn btn-outline-dark" onclick="window.print()">';
+                                    echo '<i class="fa fa-print"></i>';
+                                    echo '</button>';
+                                    echo '</td>';
+                                    echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-en="' . $row["EN"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
+                                    echo '</tr>';
+                                }
+                            } else {
+                                echo '<tr><td colspan="6" class="text-center">No Students Found</td></tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg9OK7iVy9R1z7OfE/C5Zp6GYlgJp6Lr9eUksdSQ/2" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-QFY6xUR/ftl0TVNGomZ96TkGpRN+GhY34mYYyUbsmMDTD3JzDbuRv0TfCMhCFeD8" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
+
+    <!-- Include the modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <?php include '../../Common Files/Profile_modal.php'?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
             // Search box functionality
             $('#searchBox').on('input', function() {
                 var searchText = $(this).val().toLowerCase();
@@ -280,47 +279,44 @@
                 });
             }
 
-            $('.view-profile-btn').on('click', function() {
-                var studentEN = $(this).data('en');
-                $('#profileModal').find('.modal-body').load('Profile_modal.php?EN=' + studentEN);
-            });
-
 
             
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-        // Handle Approve button click
-        document.querySelectorAll('.approve-btn').forEach(function(button) {
-            button.addEventListener('click', function() {
-                this.classList.toggle('btn-success');
-                this.classList.toggle('btn-outline-success');
-                this.textContent = this.classList.contains('btn-success') ? 'Approved' : 'Approve';
-                
-                // Ensure the reject button is reset
-                const rejectButton = this.nextElementSibling;
-                rejectButton.classList.remove('btn-danger');
-                rejectButton.classList.add('btn-outline-danger');
-                rejectButton.textContent = 'Reject';
+        $(document).ready(function() {
+            $('.approve-btn').on('click', function() {
+                var studentEN = $(this).data('en');
+                updateStatus(studentEN, 'paid and approved');
+            });
+
+            $('.reject-btn').on('click', function() {
+                var studentEN = $(this).data('en');
+                updateStatus(studentEN, 'unpaid');
+            });
+
+            function updateStatus(en, status) {
+                $.ajax({
+                    url: 'update_status.php',
+                    type: 'POST',
+                    data: {
+                        en: en,
+                        status: status
+                    },
+                    success: function(response) {
+                        alert(response);
+                        location.reload(); // Reload the page to reflect the changes
+                    },
+                    error: function() {
+                        alert('An error occurred while updating the status.');
+                    }
+                });
+            }
+
+            $('.view-profile-btn').on('click', function() {
+                var studentEN = $(this).data('en');
+                $('#profileModal').find('.modal-body').load('Profile_modal.php?EN=' + studentEN);
             });
         });
 
-        // Handle Reject button click
-        document.querySelectorAll('.reject-btn').forEach(function(button) {
-            button.addEventListener('click', function() {
-                this.classList.toggle('btn-danger');
-                this.classList.toggle('btn-outline-danger');
-                this.textContent = this.classList.contains('btn-danger') ? 'Rejected' : 'Reject';
-                
-                // Ensure the approve button is reset
-                const approveButton = this.previousElementSibling;
-                approveButton.classList.remove('btn-success');
-                approveButton.classList.add('btn-outline-success');
-                approveButton.textContent = 'Approve';
-            });
-        });
-    });
-        
-    </script>
-</body>
+</script>
 </html>

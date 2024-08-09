@@ -17,15 +17,17 @@ html {
 
 .centraldiv {
     position: relative;
-    width: 70vw; /* Adjusted as specified */
-    height: 70vh; /* Adjusted as specified */
+    width: 90vw; /* Adjusted for better responsiveness */
+    height: auto; /* Adjusted for better responsiveness */
     background: linear-gradient(109.89deg, rgba(255, 255, 255, 0.85), #fff 47.5%, rgba(255, 255, 255, 0.75));
     border-radius: 16px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    display: block;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
+    padding: 20px;
 }
 
 .b1,
@@ -48,25 +50,18 @@ html {
 .b2 {
     top: 100%; /* Center of b2 aligned with the bottom-right corner of centraldiv */
     left: 100%;
- /* Increasing transparency from top right to bottom left */
     background: linear-gradient(to bottom right, rgba(226, 219, 228, 0), rgba(95, 24, 149, 0.5));
 }
 
-/* .centraldiv .container .logins{ */
-        /* padding-top: 20px; */
-/* } */
-
-/* Yaha pr frame ka code khatam hota hai iske niche ka centradiv ke andar ka hai usse copy mat karna Samjhe!!!! */
-
-
-.centraldiv .container .row .col-md-4 {
+.logins {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .dotlottie-player {
-    width: 80%; /* Adjust the width as per your preference */
+    width: 100%; /* Adjust the width as per your preference */
     height: auto; /* Let the height adjust according to the aspect ratio */
     border: 2px solid black; /* Black colored outline */
     border-radius: 20px; /* Border radius of 20 */

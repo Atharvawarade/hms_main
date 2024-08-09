@@ -178,16 +178,16 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="box p-2">
-                    <div class="color_doppler color_doppler_3"></div>
-                    <div class="row">
-                        <div class="col-12 col-md-4 icon">
-                        <img src="../../assets/csv.png" alt="room_status" />
+                    <div class="box p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="color_doppler color_doppler_3"></div>
+                        <div class="row">
+                            <div class="col-12 col-md-4 icon">
+                                <img src="../../assets/csv.png" alt="room_status" />
+                            </div>
+                            <div class="col-12 col-md-8" style="text-align: center; vertical-align: top">
+                                <p>Upload CSV</p>
+                            </div>
                         </div>
-                        <div class="col-12 col-md-8" style="text-align: center; vertical-align: top">
-                        <p>Upload CSV</p>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <div class="col">
@@ -248,6 +248,14 @@
         </div>
         </div>
     </div>
+
+    <!-- The uploas CSV modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <?php include 'upload_csv.php'; ?>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -263,6 +271,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
     <script src="../scripts/async_script.js"></script>
     <script src="../scripts/toggle_sidebar.js"></script>
