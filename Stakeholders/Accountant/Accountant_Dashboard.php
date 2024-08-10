@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="box p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div class="box p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                         <div class="color_doppler color_doppler_3"></div>
                         <div class="row">
                             <div class="col-12 col-md-4 icon">
@@ -191,7 +191,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="box p-2">
+                    <div class="box p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                     <div class="color_doppler color_doppler_4"></div>
                     <div class="row">
                         <div class="col-12 col-md-4 icon">
@@ -250,9 +250,15 @@
     </div>
 
     <!-- The uploas CSV modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <?php include 'upload_csv.php'; ?>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <?php include 'Custom_Registration.php'; ?>
         </div>
     </div>
 
@@ -272,6 +278,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <!-- <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>  -->
 
     <script src="../scripts/async_script.js"></script>
     <script src="../scripts/toggle_sidebar.js"></script>
