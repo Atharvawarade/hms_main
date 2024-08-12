@@ -4,22 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Room Status</title>
   <link rel="stylesheet" href="../../css/Room_Status.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <!-- Popper.JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-oBqDVmMz4fnFO9gybbyJv8LBVikbZrI+M0hiE7PEEL/2eRPf5sYAzYKTlxk8QK8G" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="Student_Dashboard">
     <div class="centraldiv">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <div class="nav_button_item ">
             <div class="button_type">
@@ -53,107 +50,148 @@
       </nav>
 
       <div class="main">
-        <?php
-        include '../../php/connection/connect.php';
+        <div class="room-container">
+          <?php
+          session_start();
+          include '../../php/connection/connect.php'; // Include your database configuration file
 
-        // Function to determine color class based on count
-        function getColorClass($count)
-        {
-          if ($count == 0) {
-            return 'vacant';
-          } elseif ($count == 1) {
-            return 'half';
-          } elseif ($count == 2) {
-            return 'full';
-          }
-        }
+          // Get the username from session
+          $username = $_SESSION['username'];
 
-        // Define the session variable value
-        $session_value = 1; // Assuming session variable value is 1 or 2
+          // Extract the hostel_id from the username
+          $hostel_id = substr($username, 4); // Extract substring after "WARD"
 
-        // Your SQL query
-        $sql = "SELECT room_id, COALESCE(COUNT(student_id), 0) AS count FROM alloted GROUP BY room_id";
-        $result = $conn->query($sql);
+          // Prepare and execute the SQL query to get rooms and related student details
+          $sql = 'SELECT r.room_id, r.room_number, r.status, r.no_of_students,
+                  GROUP_CONCAT(CONCAT(n.row_num, ". ", n.Fullname, 
+                  " (<a href=\"view_profile.php?en=", n.EN, "\" target=\"_blank\">View Profile</a>)<br>")
+                  ORDER BY n.row_num SEPARATOR "") AS student_names
+            FROM room r
+            LEFT JOIN (
+                SELECT s.room_id, s.Fullname, s.EN,
+                      ROW_NUMBER() OVER (PARTITION BY s.room_id ORDER BY s.Fullname) AS row_num
+                FROM student s
+            ) n ON r.room_id = n.room_id
+            WHERE r.hostel_id = ?
+            GROUP BY r.room_id
+            ORDER BY CAST(SUBSTRING(r.room_id, LENGTH(?) + 2) AS UNSIGNED) ASC;';
 
-        // Check if query was successful
-        if ($result->num_rows > 0) {
 
-          echo '<div class="container-fluid below-navbar" style="width: 100%" id="below_nav">';
-          // Output data of each row
-          echo '<link rel="stylesheet" href="../../css/checkRooms.css" />';
+          $stmt = $conn->prepare($sql);
+          $stmt->bind_param("ss", $hostel_id, $hostel_id);
+          $stmt->execute();
+          $result = $stmt->get_result();
 
-          $num = 1;
-          $currentSlot = 0;
+          if ($result->num_rows > 0) {
+              // Output data of each row
+              while ($row = $result->fetch_assoc()) {
+                  $status_class = ($row['status'] == 'vacant') ? 'vacant' : 'not-vacant';
+                  $room_id = htmlspecialchars($row['room_id']);
+                  $room_number = htmlspecialchars($row['room_number']);
+                  $status = htmlspecialchars($row['status']);
+                  $no_of_students = htmlspecialchars($row['no_of_students']);
+                  $student_names = htmlspecialchars($row['student_names']) ?: 'No students assigned';
 
-          while ($row = $result->fetch_assoc()) {
-            $count = $row['count'];
-            $colorClass = getColorClass($count);
-
-            // Fetch student details for the current room
-            $room_id = $row['room_id'];
-            $student_sql = "SELECT Fullname, EN FROM student WHERE EN IN (SELECT student_id FROM alloted WHERE room_id = $room_id)";
-            $student_result = $conn->query($student_sql);
-
-            $student_details = '';
-            if ($student_result->num_rows > 0) {
-              while ($student_row = $student_result->fetch_assoc()) {
-                $student_details .= $student_row['Fullname'] . ' (' . $student_row['EN'] . ') ';
+                  $popover_content = "Room Number: $room_number<br>Status: $status<br>No. of Students: $no_of_students<br>Students: <br>$student_names";
+                  
+                  echo "<button class='room-box $status_class' data-bs-toggle='popover' data-bs-trigger='focus' data-bs-title='Room ID: $room_id' data-bs-html='true' data-bs-content='$popover_content'>$room_id</button>";
               }
-            } else {
-              $student_details = 'No students assigned to this room.';
-            }
-
-            if (($session_value == 1 && $num <= 60) || ($session_value == 2 && $num > 60 && $num <= 120)) {
-              $slot = ($session_value == 1) ? (int)(($num - 1) / 15) + 1 : (int)(($num - 61) / 15) + 1;
-
-              if ($slot !== $currentSlot) {
-                if ($currentSlot !== 0) {
-                  echo '</div>'; // Close the previous row div
-                }
-                $currentSlot = $slot;
-
-                // Print heading based on the slot
-                switch ($slot) {
-                  case 1:
-                    echo '<div class="sub-heading">First Year   <img id="legend"  src="../../assets/legend.png" alt=""></div>';
-                    break;
-                  case 2:
-                    echo '<div class="sub-heading">Second Year</div>';
-                    break;
-                  case 3:
-                    echo '<div class="sub-heading">Third Year</div>';
-                    break;
-                  case 4:
-                    echo '<div class="sub-heading">Fourth Year</div>';
-                    break;
-                }
-                echo '<div class="row">';
-              }
-
-              echo '<button class="room-box" type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-trigger="focus"';
-              echo 'data-bs-content="' . $student_details . '">';
-              echo '<div class="in-box ' . $colorClass . '">';
-              echo $num;
-              echo '</div>';
-              echo '</button>';
-            }
-            $num++;
+          } else {
+              echo "<p>No rooms found for your hostel.</p>";
           }
-          echo '</div></div>';
-          // Close the last row div
-        } else {
-          echo "0 results";
-        }
-
-        include '../../php/connection/break.php';
-        ?>
+          ?>
+        </div>
       </div>
     </div>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".nav_buttons_container" aria-controls="nav_buttons_container" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
   </div>
-</body>
 
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <!-- Content will be loaded dynamically here -->
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var lastClicked = null;
+
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        var statusClass = popoverTriggerEl.classList.contains('vacant') ? 'popover-vacant' : 'popover-not-vacant';
+        
+        // Initialize the popover with custom options
+        var popover = new bootstrap.Popover(popoverTriggerEl, {
+          template: '<div class="popover ' + statusClass + '" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+          html: true, // Allow HTML content in the popover
+          trigger: 'manual' // Manually control the popover
+        });
+
+        // Add click event listener to each popover trigger element
+        popoverTriggerEl.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation(); // Prevent the click from closing the popover
+
+          // Check if the current popover is already open
+          if (lastClicked && lastClicked === popoverTriggerEl) {
+            popover.hide();
+            lastClicked = null;
+          } else {
+            // Hide the previous popover if another room-box is clicked
+            if (lastClicked) {
+              bootstrap.Popover.getInstance(lastClicked).hide();
+            }
+            popover.show();
+            lastClicked = popoverTriggerEl;
+          }
+        });
+
+        return popover;
+      });
+
+      // Prevent popover from being dismissed when clicking inside it
+      document.addEventListener('click', function (e) {
+        if (lastClicked && !lastClicked.contains(e.target) && !document.querySelector('.popover')?.contains(e.target)) {
+          bootstrap.Popover.getInstance(lastClicked)?.hide();
+          lastClicked = null;
+        }
+      });
+    });
+
+    // $(document).ready(function(){
+    //   // Handle click event on the Profile link
+    //   $(document).on('click', '.view-profile-link', function(e) {
+    //       e.preventDefault(); // Prevent the default anchor behavior
+          
+    //       var EN = $(this).data('en'); // Get the EN value from the data-en attribute
+
+    //       // Load the profile data into the modal using AJAX
+    //       $.ajax({
+    //           url: '../../Common Files/Profile_modal.php', // URL of the PHP script that loads the profile data
+    //           type: 'GET',
+    //           data: { EN: EN }, // Pass the EN value to the script
+    //           success: function(response) {
+    //               // Load the response into the modal's body
+    //               $('#profileModal .modal-body').html(response);
+                  
+    //               // Open the modal
+    //               $('#profileModal').modal('show');
+    //           },
+    //           error: function() {
+    //               // Handle errors if the AJAX call fails
+    //               alert('Failed to load profile. Please try again.');
+    //           }
+    //       });
+    //   });
+    // });
+  </script>
+</body>
 </html>
+
+<?php
+$stmt->close();
+$conn->close();
+?>

@@ -108,3 +108,75 @@ body {
 .main {
     margin: 0 20px 20px 20px;
 }
+
+.room-box {
+    width: 100px;
+    height: 100px;
+    border: 1.5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    font-weight: bold;
+    color: #007bff;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .room-box:hover {
+    /* transform: scale(1.5); */
+    /* background-color: #007bff; */
+    color: #ffffff;
+  }
+
+  .room-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+.main {
+    height: 75vh; /* Adjust the height as needed */
+    overflow: hidden;
+    position: relative;
+}
+
+.room-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto; /* Enable vertical scrolling inside the main container */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px; /* Add some padding for spacing */
+    box-sizing: border-box; /* Ensures padding doesn't affect container size */
+}
+
+
+.vacant {
+    background: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    color: white;
+}
+  
+.not-vacant {
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
+    color: white;
+}
+  
+
+.popover-vacant .popover-header {
+  background-color: #96e6a1; /* Green color for vacant */
+  color: white;
+}
+
+.popover-not-vacant .popover-header {
+  background-color: #ff4b2b; /* Red color for not vacant */
+  color: white;
+}
+
+.popover-vacant .popover-body,
+.popover-not-vacant .popover-body {
+  color: #000; /* Default text color for the body */
+}
+

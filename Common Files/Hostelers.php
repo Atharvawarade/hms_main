@@ -185,7 +185,7 @@
                         }
 
                         // SQL query to fetch data
-                        $sql = "SELECT EN, Fullname, YOS, branch, allotment_id FROM student";
+                        $sql = "SELECT EN, Fullname, YOS, branch, room_id FROM student";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -194,7 +194,7 @@
                                 echo '<td>' . $row["Fullname"] . '</td>';
                                 echo '<td>' . $row["YOS"] . '</td>';
                                 echo '<td>' . $row["branch"] . '</td>';
-                                echo '<td>' . $row["allotment_id"] . '</td>';
+                                echo '<td>' . $row["room_id"] . '</td>';
                                 echo '<td class="profile_button"><button class="btn btn-primary view-profile-btn" data-en="' . $row["EN"] . '" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa fa-arrow-right"></i></button></td>';
                                 echo '</tr>';
                             }
