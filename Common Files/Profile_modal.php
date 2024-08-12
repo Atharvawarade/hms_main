@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Get the EN from the query string
-$studentEN = $_GET['EN'];
+$studentEN = en;
 
 // Fetch student details based on EN
 $sql = "SELECT * FROM student WHERE EN = ?";
