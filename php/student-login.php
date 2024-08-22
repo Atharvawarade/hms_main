@@ -23,15 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $stored_password = $row['EN']; // Assuming EN is the stored password
         $status = $row['status'];
-        $allotment_id = $row['allotment_id'];
+        $room_id = $row['room_id'];
 
         // Check if status is "Paid and Approved" and allotment is not null
-        if ($status === "paid and approved" && !is_null($allotment_id)) {
+        if ($status === "paid and approved" && !is_null($room_id)) {
             // Validate PRN only if the email exists in the database
             if ($entered_password == $stored_password) {
                 // Passwords match, login successful
-                $_SESSION['loggedin'] = true;
+                $_SESSION['student_loggedin'] = true;
                 $_SESSION['EN'] = $entered_password;
+                $_SESSION['email'] = $entered_email; // Store email in session
                 header("Location: ../Stakeholders/Student/Main_dashboard.php");
                 exit;
             } else {
