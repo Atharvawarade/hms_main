@@ -14,7 +14,8 @@ if ($conn->connect_error) {
 }
 
 // Get the EN from the query string
-$studentEN = en;
+$studentEN = $_GET['EN'];
+
 
 // Fetch student details based on EN
 $sql = "SELECT * FROM student WHERE EN = ?";
@@ -97,7 +98,7 @@ $conn->close();
                         <h5 class="card-head"><?php echo $student['Fullname']; ?></h5>
                         <p class="card-text"><strong>EN : </strong><?php echo $student['EN']; ?></p>
                         <p class="card-text"><strong>Email : </strong><?php echo $student['email']; ?></p>
-                        <p class="card-text"><strong>Room No. : </strong><?php echo $student['allotment_id']; ?></p>
+                        <p class="card-text"><strong>Room No. : </strong><?php echo $student['room_id']; ?></p>
                     </div>
                 </div>
             </div>
@@ -165,12 +166,9 @@ $conn->close();
                     <table>
                         <tr>
                             <th>Hostel Room</th>
-                            <td><?php echo $student['hostel_room']; ?></td>
+                            <td><?php echo $student['room_id']; ?></td>
                         </tr>
-                        <tr>
-                            <th>Allotment ID</th>
-                            <td><?php echo $student['allotment_id']; ?></td>
-                        </tr>
+                       
                     </table>
                 </div>
             </div>
@@ -178,3 +176,4 @@ $conn->close();
     </div>
 </body>
 </html>
+

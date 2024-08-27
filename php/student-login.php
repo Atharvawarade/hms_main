@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['student_loggedin'] = true;
                 $_SESSION['EN'] = $entered_password;
                 $_SESSION['email'] = $entered_email; // Store email in session
-                header("Location: ../Stakeholders/Student/Main_dashboard.php");
+                header("Location: ../Stakeholders/Student/Student_dashboard.php");
                 exit;
             } else {
                 $_SESSION['error'] = "Incorrect password!";

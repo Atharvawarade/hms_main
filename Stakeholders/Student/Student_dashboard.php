@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warden Dashboard</title>
-  <link rel="stylesheet" href="../../css/Warden-Dashboard.css" />
+  <title>Student Dashboard</title>
+  <!-- <link rel="stylesheet" href="../../css/Warden-Dashboard.css" /> -->
   <link rel="stylesheet" href="../../css/Student_dashboard.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -13,8 +13,7 @@
 </head>
 
 <body>
-
-  <?php
+<?php
     session_start();
 
     if (!isset($_SESSION['student_loggedin']) || $_SESSION['student_loggedin'] !== true) {
@@ -30,16 +29,33 @@
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
+        $student_name = $row['Fullname']; // Assuming the student's name is stored in a 'name' column
         $photo = $row['photo'];
         $photo_path = "../../uploads/" . $photo;
     } else {
         // Set a default image if photo is not found
         $photo_path = "../../assets/default-profile.png";
+        $student_name = "Student"; // Default name if not found
     }
 
-    // include '../../php/connection/break.php';
+    // Get the current time
+    date_default_timezone_set('Asia/Kolkata'); // Set the correct timezone
+    $current_hour = date('H');
+    $current_time = date('h:i A'); // Time without seconds, JavaScript will handle the rest
+    $today_date = date('l, F j, Y'); // E.g., "Monday, August 26, 2024"
 
+
+    // Determine the greeting message based on the time of day
+    if ($current_hour < 12) {
+        $greeting = "Good Morning";
+    } elseif ($current_hour < 18) {
+        $greeting = "Good Afternoon";
+    } else {
+        $greeting = "Good Evening";
+    }
   ?>
+
+  
 
   <div class="Student_Dashboard">
     <div class="centraldiv">
@@ -60,7 +76,7 @@
         </div>
 
         <ul class="list-unstyled components">
-          <li>
+          <li type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <a href="#">
               <i class="fa fa-user"></i>
               Profile
@@ -77,17 +93,21 @@
       </nav>
 
       <div id="content">
-        <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg">
           <button type="button" id="sidebarCollapse" class="btn btn-info">
             <img src="../../assets/Menu.png" alt="Toggle Sidebar" />
           </button>
 
-        
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".nav_buttons_container"
-            aria-controls="nav_buttons_container" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <div class="ml-auto d-flex align-items-center w-100">
+            <div class="greeting-message">
+              <h5><?php echo "$greeting, $student_name"; ?> !!😇</h5>
+              <h6>Welcome back!</h6>
+            </div>
+            <div class="date-time text-right">
+              <h6><?php echo "$today_date"; ?></h6> 
+              <h6 id="current-time"><?php echo "$current_time "; ?></h6> 
+            </div>
+          </div>
         </nav>
 
         <div class="content_heading">
@@ -202,6 +222,16 @@
     </div>
   </div>
 
+  <!-- Modal Codes Starts Here -->
+
+  <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <?php include 'Profile_modal.php';?>
+    </div>
+  </div>
+
+  <!-- Modal Codes Ends Here -->
+
   <!-- jQuery CDN - Slim version (=without AJAX) -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -211,15 +241,42 @@
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
     crossorigin="anonymous"></script>
   <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-    integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-    crossorigin="anonymous"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 
   <script src="../scripts/async_script.js"></script>
   <script src="../scripts/toggle_sidebar.js"></script>
+
+
+
+<script>
+  function updateTime() {
+    const timeElement = document.getElementById('current-time');
+    let currentTime = new Date();
+
+    let hours = currentTime.getHours();
+    let minutes = currentTime.getMinutes();
+    let seconds = currentTime.getSeconds();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    const timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    timeElement.textContent = timeString;
+  }
+
+  // Update the time every second
+  setInterval(updateTime, 1000);
+
+  // Initialize the time when the page loads
+  updateTime();
+</script>
+
   
 </body>
 
